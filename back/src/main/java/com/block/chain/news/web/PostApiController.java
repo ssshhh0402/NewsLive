@@ -19,6 +19,7 @@ public class PostApiController {
     }
     @GetMapping("/api/v1/posts/{postId}")
     public PostResponseDto findById(@PathVariable Long postId){
+
         return postService.findById(postId);
     }
 
