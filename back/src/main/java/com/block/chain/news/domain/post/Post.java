@@ -1,6 +1,8 @@
 package com.block.chain.news.domain.post;
 
 import com.block.chain.news.domain.BaseTimeEntity;
+import com.block.chain.news.domain.selected.Selected;
+import com.block.chain.news.domain.selected.SelectedRepository;
 import com.block.chain.news.domain.topic.Topic;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Builder;
@@ -18,7 +20,6 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 public class Post extends BaseTimeEntity {
-
     @Id
     private Long postId;
 
@@ -37,19 +38,28 @@ public class Post extends BaseTimeEntity {
     @JsonBackReference
     private List<Topic> topic = new ArrayList<>();
 
+    @OneToMany(mappedBy="post")
+    @JsonBackReference
+    private List<Topic> selected = new ArrayList<>();
+
     @Builder
-    public Post(String title, String author, String content, String state, List<Topic> topic){
+    public Post(String title, String author, String content, String state){
         this.title = title;
         this.author = author;
         this.content=content;
         this.state=  state;
-        this.topic = topic;
+    }
 
-    }
-    public void updateTopic(List<Topic> topic){
-        this.topic = topic;
-    }
-    public void updateState(){
+    public void updateState(Post post, String [][] selected) {
         this.state = "Started";
+        //여기서 입력받은 selected 저장?
+        for (String [] one : selected){
+            Selected selected_one = Selected.builder()
+                    .content(one[0])
+                    .similarity(Double.parseDouble(one[1]))
+                    .post(post)
+                    .build();
+            SelectedRepository.save(selected_one);
+        }
     }
 }

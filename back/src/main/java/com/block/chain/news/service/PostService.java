@@ -41,17 +41,14 @@ public class PostService {
     public PostListResponseDto findById(Long postId){
         Post post = postRepository.findById(postId)
                 .orElseThrow( () -> new IllegalArgumentException("잘못된 기사를 선택하셨습니다"));
-        List<PostListResponseDto> postResponseDto = new LinkedList<>();
         List<Topic> topics = topicRepository.findByPostsDesc(post);
-        PostListResponseDto responseDto = new PostListResponseDto(post, topics);
-        return responseDto;
+        return new PostListResponseDto(post, topics);
     }
 
     @Transactional
     public Long save(PostSaveRequestDto requestDto) throws Exception{
         User user= userRepository.findByEmail(requestDto.getAuthor())
                 .orElseThrow(() -> new IllegalArgumentException("해당 회원 존재 X"));
-
         Post post = requestDto.toEntity();
         Long postId = postRepository.save(post).getPostId();
         PostList postList = PostList.builder()
@@ -64,10 +61,10 @@ public class PostService {
     }
 
     @Transactional
-    public Long deploy(Long postId){
+    public Long deploy(Long postId, String [][] selected){
         Post post = postRepository.findById(postId)
                 .orElseThrow( () -> new IllegalArgumentException("잘못된 기사를 선택 하셨습니다"));
-        post.updateState();
+        post.updateState(post, selected);
         return postId;
     }
 
