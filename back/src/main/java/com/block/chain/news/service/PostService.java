@@ -59,10 +59,7 @@ public class PostService {
                 .postId(postId)
                 .build();
         postListRepository.save(postList);
-        List<Topic> topics = requestDto.getWords();
-        for (Topic topic : topics){
-            Topic
-        }
+        requestDto.Extracting(requestDto.getContent(), postId);
         return postId;
     }
 
