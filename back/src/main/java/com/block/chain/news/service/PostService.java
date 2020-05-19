@@ -59,19 +59,18 @@ public class PostService {
                 .postId(postId)
                 .build();
         postListRepository.save(postList);
-        requestDto.Extracting(requestDto.getContent(), postId);
+        //requestDto.Extracting(requestDto.getContent(), postId);
         return postId;
     }
 
     @Transactional
-    public Long deploy(Long postId, String [][] selected){
+    public Long deploy(Long postId, String [] selected){
         Post post = postRepository.findById(postId)
                 .orElseThrow( () -> new IllegalArgumentException("잘못된 기사를 선택 하셨습니다"));
         post.updateState();
-        for (String[] one : selected){
+        for (String one : selected){
             Tags tag = Tags.builder()
-                    .content(one[0])
-                    .similarity(Double.parseDouble(one[1]))
+                    .content(one)
                     .post(post)
                     .build();
             tagsRepository.save(tag);
@@ -79,5 +78,11 @@ public class PostService {
         return postId;
     }
 
+    @Transactional
+    public void delete(Long postId){
+        Post post = postRepository.findById(postId)
+                .orElseThrow(() -> new IllegalArgumentException("잘못된 신청입니다"));
+        postRepository.delete(post);
+    }
 
 }

@@ -19,17 +19,17 @@ public class Tags {
 
     @Column(columnDefinition="TEXT", nullable=false)
     private String content;
-    @Column(columnDefinition="DOUBLE", nullable=false)
-    private Double similarity;
+
+//    @Column(columnDefinition="DOUBLE", nullable=false)
+//    private Double similarity;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JsonManagedReference
     private Post post;
 
     @Builder
-    public Tags(String content, Double similarity, Post post){
+    public Tags(String content,Post post){
         this.content = content;
-        this.similarity = similarity;
         this.post= post;
     }
 }
