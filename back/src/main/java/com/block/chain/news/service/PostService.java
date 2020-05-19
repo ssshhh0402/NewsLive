@@ -4,6 +4,8 @@ import com.block.chain.news.domain.PostList.PostList;
 import com.block.chain.news.domain.PostList.PostListRepository;
 import com.block.chain.news.domain.post.Post;
 import com.block.chain.news.domain.post.PostRepository;
+import com.block.chain.news.domain.tags.Tags;
+import com.block.chain.news.domain.tags.TagsRepository;
 import com.block.chain.news.domain.topic.Topic;
 import com.block.chain.news.domain.topic.TopicRepository;
 import com.block.chain.news.domain.user.User;
@@ -25,6 +27,7 @@ public class PostService {
     private final UserRepository userRepository;
     private final PostListRepository postListRepository;
     private final TopicRepository topicRepository;
+    private final TagsRepository tagsRepository;
 
     @Transactional(readOnly = true)
     public List<PostListResponseDto> findAllDesc(){
@@ -64,7 +67,15 @@ public class PostService {
     public Long deploy(Long postId, String [][] selected){
         Post post = postRepository.findById(postId)
                 .orElseThrow( () -> new IllegalArgumentException("잘못된 기사를 선택 하셨습니다"));
-        post.updateState(post, selected);
+        post.updateState();
+        for (String[] one : selected){
+            Tags tag = Tags.builder()
+                    .content(one[0])
+                    .similarity(Double.parseDouble(one[1]))
+                    .post(post)
+                    .build();
+            tagsRepository.save(tag);
+        }
         return postId;
     }
 

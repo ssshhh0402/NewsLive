@@ -1,18 +1,17 @@
-package com.block.chain.news.domain.selected;
+package com.block.chain.news.domain.tags;
 
 import com.block.chain.news.domain.post.Post;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 
 @NoArgsConstructor
 @Getter
 @Entity
-public class Selected {
+public class Tags {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -28,7 +27,7 @@ public class Selected {
     private Post post;
 
     @Builder
-    public Selected(String content, Double similarity, Post post){
+    public Tags(String content, Double similarity, Post post){
         this.content = content;
         this.similarity = similarity;
         this.post= post;

@@ -1,8 +1,8 @@
 package com.block.chain.news.domain.post;
 
 import com.block.chain.news.domain.BaseTimeEntity;
-import com.block.chain.news.domain.selected.Selected;
-import com.block.chain.news.domain.selected.SelectedRepository;
+import com.block.chain.news.domain.tags.Tags;
+import com.block.chain.news.domain.tags.TagsRepository;
 import com.block.chain.news.domain.topic.Topic;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Builder;
@@ -50,16 +50,8 @@ public class Post extends BaseTimeEntity {
         this.state=  state;
     }
 
-    public void updateState(Post post, String [][] selected) {
+    public void updateState() {
         this.state = "Started";
-        //여기서 입력받은 selected 저장?
-        for (String [] one : selected){
-            Selected selected_one = Selected.builder()
-                    .content(one[0])
-                    .similarity(Double.parseDouble(one[1]))
-                    .post(post)
-                    .build();
-            SelectedRepository.save(selected_one);
         }
     }
-}
+
