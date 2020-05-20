@@ -5,8 +5,12 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    isSigned: false
   },
   mutations: {
+    setIsSigned(state, isSigned) {
+      state.isSigned = isSigned;
+    }
   },
   actions: {
   },
