@@ -3,6 +3,7 @@ package com.block.chain.news.web;
 import com.block.chain.news.service.PostService;
 import com.block.chain.news.web.dto.posts.PostListResponseDto;
 import com.block.chain.news.web.dto.posts.PostResponseDto;
+import com.block.chain.news.web.dto.posts.PostSaveRequestDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -18,9 +19,9 @@ public class PostApiController {
     private final PostService postService;
 
     @GetMapping("/api/v1/posts")
-    public List<PostListResponseDto> getList(){
+    public ResponseEntity<List<PostListResponseDto>> getList(){
         log.info("getList");
-        return postService.findAllDesc();
+        return new ResponseEntity<List<PostListResponseDto>>(postService.findAllDesc(),HttpStatus.OK);
     }
 
 //    @GetMapping("/api/v1/posts/{postId}")
@@ -28,22 +29,38 @@ public class PostApiController {
 //        log.info("findById : {}", postId);
 //        return postService.findById(postId);
 //    }
+
     @GetMapping("/api/v1/posts/{postId}")
-    public ResponseEntity<PostListResponseDto> findById(@PathVariable Long postId){
+    public ResponseEntity<PostResponseDto> findById(@PathVariable Long postId){
         log.info("findById : {}", postId);
-        return new ResponseEntity<PostListResponseDto>(postService.findById(postId), HttpStatus.OK);
+        return new ResponseEntity<PostResponseDto>(postService.findById(postId), HttpStatus.OK);
+    }
+
+    @PostMapping("/api/v1/posts")
+    public ResponseEntity<Long> save(@RequestParam(value="title") String title,
+                     @RequestParam(value="content") String content,
+                     @RequestParam(value="author") String author,
+                     @RequestParam(value="words") String [][] words) throws Exception{
+        PostSaveRequestDto postSaveRequestDto = PostSaveRequestDto.builder()
+                .title(title)
+                .content(content)
+                .author(author)
+                .words(words)
+                .build();
+        return new ResponseEntity<Long>(postService.save(postSaveRequestDto),HttpStatus.OK);
     }
 
     @PutMapping("/api/v1/posts/{postId}")
-    public Long deploy(@PathVariable Long postId,
+    public ResponseEntity<Long> deploy(@PathVariable Long postId,
                        @RequestParam(value="selected") String [] selected) throws Exception{
-        return postService.deploy(postId, selected);
+        return new ResponseEntity<Long>(postService.deploy(postId, selected),HttpStatus.OK);
     }
 
+
     @DeleteMapping("/api/v1/posts/{postId}")
-    public Long delete(@PathVariable Long postId){
+    public ResponseEntity<Long> delete(@PathVariable Long postId){
         postService.delete(postId);
-        return postId;
+        return new ResponseEntity<Long>(postId,HttpStatus.OK);
     }
 
 }

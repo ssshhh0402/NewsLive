@@ -5,11 +5,10 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 
-@RequiredArgsConstructor
+@NoArgsConstructor
 @Getter
 @Entity
 public class Topic {
@@ -27,6 +26,7 @@ public class Topic {
     @JsonManagedReference
     private Post post;
 
+    @Builder
     public Topic(String content, Double similarity, Post post){
         this.content = content;
         this.similarity = similarity;

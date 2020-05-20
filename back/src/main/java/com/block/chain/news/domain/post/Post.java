@@ -38,16 +38,20 @@ public class Post extends BaseTimeEntity {
     @JsonBackReference
     private List<Topic> topic = new ArrayList<>();
 
+    @Column(nullable=false)
+    private String topics;
+
     @OneToMany(mappedBy="post")
     @JsonBackReference
     private List<Topic> selected = new ArrayList<>();
 
     @Builder
-    public Post(String title, String author, String content, String state){
+    public Post(String title, String author, String content, String state, String topics){
         this.title = title;
         this.author = author;
         this.content=content;
         this.state=  state;
+        this.topics = topics;
     }
 
     public void updateState() {
