@@ -16,20 +16,22 @@ public class PostSaveRequestDto {
     private String title;
     private String content;
     private String author;
-    private List<Topic> words;
+    private List<String> words;
 
     @Builder
     public PostSaveRequestDto(String title,String content, String author){
         this.title = title;
         this.content = content;
         this.author = author;
+        // this.words = 밑의함수(프론트에서 받아온아이)
     }
 
-    public void Extracting(String content,Long postId){
-        List<Topic> words = new LinkedList<>();
+//    public void Extracting(String content,Long postId){
+//        List<Topic> words = new LinkedList<>();
         //words.add(new Topic("abc",0.23));
         //여기에 대윤씨가 만든 코드(서버)로 content보내서 함축단어 리스트 받고 받은 아이들 For문 돌려서 서버에서 받은 데이터와 id 사용해서 Topic 저장
-    }
+    //} // 일단 String 한줄로 Join해서 저장하기
+    // List<String> 받아서 이걸 StringBuilder로 String을 ㅗ변환해서 반환하는 함수
     public Post toEntity(){
         return Post.builder()
                 .title(title)
