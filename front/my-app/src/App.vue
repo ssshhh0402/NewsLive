@@ -2,6 +2,7 @@
   <v-app>
    <NewsNav ></NewsNav>
     <v-content>
+    <router-view />
     </v-content>
   </v-app>
 </template>
