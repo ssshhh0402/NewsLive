@@ -6,7 +6,7 @@ LABEL name "puppeteraas"
 MAINTAINER Dae Yoon <sensecodevalue@gmail.com>
 
 # /app 디렉토리 생성
-
+# http://www.hardkoded.com/blog/puppeteer-sharp-docker 참고
 # npm install 을 실행
 RUN apt-get update && apt-get install -yq libgconf-2-4
 
