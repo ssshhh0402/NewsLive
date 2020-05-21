@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-
+import News from '../views/News.vue'
 Vue.use(VueRouter)
 
   const routes = [
@@ -10,6 +10,18 @@ Vue.use(VueRouter)
     name: 'Home',
     component: Home
   },
+  {
+    path: "/news",
+    name: "news",
+    component: News,
+    children: [
+      {
+        path: "newscreate",
+        component: () => import("../components/news/NewsCreate.vue")
+      }
+    ]
+  }
+  ,
   {
     path: '/about',
     name: 'About',

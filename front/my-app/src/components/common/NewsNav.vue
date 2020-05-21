@@ -12,7 +12,8 @@
             <v-divider vertical="vertical"></v-divider>
 
             <v-btn text="text">
-                Blog
+                <router-link class="nav-contents highlight" to="/news">Write
+                            </router-link>
             </v-btn>
             <v-divider vertical="vertical"></v-divider>
             <v-btn text="text"
