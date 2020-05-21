@@ -56,6 +56,7 @@ export default {
     }
   },
   mounted: function () {
+    console.log("what?");
     const scriptId = 'kakao_login'
     const isExist = !!document.getElementById(scriptId)
     if (!isExist) {
