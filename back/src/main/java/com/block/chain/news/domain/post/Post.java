@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -45,6 +46,10 @@ public class Post extends BaseTimeEntity {
     @JsonBackReference
     private List<Topic> selected = new ArrayList<>();
 
+    @Column(nullable=false)
+    @ColumnDefault("")
+    private String select;
+
     @Builder
     public Post(String title, String author, String content, String state, String topics){
         this.title = title;
@@ -54,8 +59,10 @@ public class Post extends BaseTimeEntity {
         this.topics = topics;
     }
 
-    public void updateState() {
+    public void updateState(String select) {
+        this.select = select;
         this.state = "Started";
         }
     }
+
 

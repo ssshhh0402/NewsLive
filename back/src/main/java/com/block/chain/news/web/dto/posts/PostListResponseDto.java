@@ -1,9 +1,6 @@
 package com.block.chain.news.web.dto.posts;
 
 import com.block.chain.news.domain.post.Post;
-import com.block.chain.news.domain.topic.Topic;
-
-import java.util.List;
 
 public class PostListResponseDto {
     private Long id;

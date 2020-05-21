@@ -65,14 +65,17 @@ public class PostService {
     public Long deploy(Long postId, String [] selected){
         Post post = postRepository.findById(postId)
                 .orElseThrow( () -> new IllegalArgumentException("잘못된 기사를 선택 하셨습니다"));
-        post.updateState();
+        StringBuilder sb = new StringBuilder();
         for (String one : selected){
-            Tags tag = Tags.builder()
-                    .content(one)
-                    .post(post)
-                    .build();
-            tagsRepository.save(tag);
+//            Tags tag = Tags.builder()
+//                    .content(one)
+//                    .post(post)
+//                    .build();
+//            tagsRepository.save(tag);
+            sb.append(one);
+            sb.append(',');
         }
+        post.updateState(sb.toString());
         return postId;
     }
 

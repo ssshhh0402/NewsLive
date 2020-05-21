@@ -56,7 +56,6 @@ public class PostApiController {
         return new ResponseEntity<Long>(postService.deploy(postId, selected),HttpStatus.OK);
     }
 
-
     @DeleteMapping("/api/v1/posts/{postId}")
     public ResponseEntity<Long> delete(@PathVariable Long postId){
         postService.delete(postId);
