@@ -90,8 +90,8 @@
 </template>
 <script>
     import KakaoLogin from 'vue-kakao-login' 
-    import axios from "axios";
-    import { API_BASE_URL } from '../../config'
+    // import axios from "axios";
+    // import { API_BASE_URL } from '../../config'
     import {login} from "../../api/user.js";
     import EventBus from "../../EventBus"
     // import { mapState } from "vuex";
@@ -121,20 +121,21 @@
                 console.log(data.access_token) 
                 localStorage.setItem("access_token1", data.access_token)
                 // data.token은 카카오에서 받은것. 
-                axios
-                .get(API_BASE_URL+"/api/kakao/login", {
-                    headers: {
-                        "jwt-auth-token":data.access_token
-                    }
-                })
-                 .then(response => {
-                    console.log("정원",response);
-                    alert("카카오 로그인에 성공하셨습니다.")
-                    localStorage.setItem("access_token", response.data)
-                     scope
-                        .$store
-                        .dispatch("getMemberInfo")
-                 }); 
+                // axios
+                // .get(API_BASE_URL+"/api/kakao/login", {
+                //     headers: {
+                //         "jwt-auth-token":data.access_token
+                //     }
+                // })
+                //  .then(response => {
+                //     console.log("정원",response);
+                //     alert("카카오 로그인에 성공하셨습니다.")
+                //     localStorage.setItem("access_token", response.data)
+                //      scope
+                //         .$store
+                //         .dispatch("getMemberInfo")
+                //  }); 
+                scope.$store.dispatch("getMemberInfo");
                 scope.dialog.login = false;
             },
             onFailure(data) {
