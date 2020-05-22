@@ -19,7 +19,10 @@ Vue.use(VueRouter)
         path: "newscreate",
         component: () => import("../components/news/NewsCreate.vue")
       }
-    ]
+    ],
+    redirect: () => {
+      return "/news/newscreate";
+    }
   }
   ,
   {
