@@ -34,18 +34,17 @@ public class PostService {
         List<Post> postList =postRepository.findAllDesc();
         List<PostListResponseDto> postResponseDto = new LinkedList<>();
         for (Post post : postList){
-            List<Topic> topics = topicRepository.findByPostsDesc(post);
-            PostListResponseDto postDto = new PostListResponseDto(post, topics);
+            PostListResponseDto postDto = new PostListResponseDto(post);
             postResponseDto.add(postDto);
         }
         return postResponseDto;
     }
 
-    public PostListResponseDto findById(Long postId){
+    public PostResponseDto findById(Long postId){
         Post post = postRepository.findById(postId)
                 .orElseThrow( () -> new IllegalArgumentException("잘못된 기사를 선택하셨습니다"));
         List<Topic> topics = topicRepository.findByPostsDesc(post);
-        return new PostListResponseDto(post, topics);
+        return new PostResponseDto(post, topics);
     }
 
     @Transactional
@@ -59,7 +58,6 @@ public class PostService {
                 .postId(postId)
                 .build();
         postListRepository.save(postList);
-        //requestDto.Extracting(requestDto.getContent(), postId);
         return postId;
     }
 
@@ -67,14 +65,18 @@ public class PostService {
     public Long deploy(Long postId, String [] selected){
         Post post = postRepository.findById(postId)
                 .orElseThrow( () -> new IllegalArgumentException("잘못된 기사를 선택 하셨습니다"));
-        post.updateState();
+        StringBuilder sb = new StringBuilder();
         for (String one : selected){
-            Tags tag = Tags.builder()
-                    .content(one)
-                    .post(post)
-                    .build();
-            tagsRepository.save(tag);
+//            Tags tag = Tags.builder()
+//                    .content(one)
+//                    .post(post)
+//                    .build();
+//            tagsRepository.save(tag);
+            sb.append(one);
+            sb.append(',');
         }
+        post.updateState("Started");
+        post.updateSelect(sb.toString());
         return postId;
     }
 
