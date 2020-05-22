@@ -8,8 +8,8 @@
 
 ##### User
 
-- Id - Long
-- Nickname - String
+- id - Long
+- nickname - String
 - email - String
 - profile picture - String
 
@@ -17,5 +17,11 @@
 
 ##### Post
 
-
+- postId - Long
+- title - String
+- author - String
+- content - String
+- image - String
+- state - String
+- topic - Topic
 
