@@ -59,10 +59,12 @@ public class Post extends BaseTimeEntity {
         this.topics = topics;
     }
 
-    public void updateState(String select) {
-        this.select = select;
-        this.state = "Started";
+    public void updateState(String state) {
+        this.state = state;
         }
+    public void updateSelect(String select){
+        this.select = select;
+    }
     }
 
 

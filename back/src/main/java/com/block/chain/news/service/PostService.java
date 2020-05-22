@@ -75,7 +75,8 @@ public class PostService {
             sb.append(one);
             sb.append(',');
         }
-        post.updateState(sb.toString());
+        post.updateState("Started");
+        post.updateSelect(sb.toString());
         return postId;
     }
 
