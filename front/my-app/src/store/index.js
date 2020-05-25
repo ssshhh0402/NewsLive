@@ -14,9 +14,8 @@ export default new Vuex.Store({
     setIsSigned(state, isSigned) {
       state.isSigned = isSigned;
     },
-    setIsManaged(state, isManager)
-        {
-            state.isManager = isManager;          
+    setIsManaged(state, isManager){
+      state.isManager = isManager;          
     }
   },
   actions: {
@@ -24,7 +23,6 @@ export default new Vuex.Store({
       let token = localStorage.getItem("access_token1")
       console.log("token(getMember)="+ token)
       if (!token) {
-        //console.log("token(getMember)=hi");
         return;   
       }
       else{
