@@ -62,6 +62,19 @@ public class PostService {
                 .postId(postId)
                 .build();
         postListRepository.save(postList);
+        String topics = post.getSelect();
+        Subject subject = subjectRepository.findByTitle(topics);
+        //여기서 subject 있는지 없는지 어떻게 판단해야하지..?
+        if (subject){
+            List<Post> lists = new LinkedList<>();
+            lists.add(post);
+            Subject.builder()
+                    .posts(lists)
+                    .title(topics)
+                    .build();
+        }else{
+            subject.addPost(post);
+        }
         return postId;
     }
     
@@ -90,7 +103,6 @@ public class PostService {
                 .orElseThrow(() -> new IllegalArgumentException("잘못된 신청입니다"));
         postRepository.delete(post);
     }
-
 
     //SubjectListReponseDto 만들고
     //그 안에 SubjectResponseDto 하나씩 추가

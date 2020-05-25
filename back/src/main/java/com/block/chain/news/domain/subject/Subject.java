@@ -34,4 +34,10 @@ public class Subject extends BaseTimeEntity {
         this.title = title;
         this.posts = posts;
     }
+
+    public void addPost(Post post){
+        List<Post> newPosts = this.posts;
+        newPosts.add(post);
+        this.posts = newPosts;
+    }
 }
