@@ -4,6 +4,8 @@ import com.block.chain.news.domain.PostList.PostList;
 import com.block.chain.news.domain.PostList.PostListRepository;
 import com.block.chain.news.domain.post.Post;
 import com.block.chain.news.domain.post.PostRepository;
+import com.block.chain.news.domain.subject.Subject;
+import com.block.chain.news.domain.subject.SubjectRepository;
 import com.block.chain.news.domain.tags.Tags;
 import com.block.chain.news.domain.tags.TagsRepository;
 import com.block.chain.news.domain.topic.Topic;
@@ -13,6 +15,7 @@ import com.block.chain.news.domain.user.UserRepository;
 import com.block.chain.news.web.dto.posts.PostListResponseDto;
 import com.block.chain.news.web.dto.posts.PostResponseDto;
 import com.block.chain.news.web.dto.posts.PostSaveRequestDto;
+import com.block.chain.news.web.dto.posts.SubjectListResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,6 +31,7 @@ public class PostService {
     private final PostListRepository postListRepository;
     private final TopicRepository topicRepository;
     private final TagsRepository tagsRepository;
+    private final SubjectRepository subjectRepository;
 
     @Transactional(readOnly = true)
     public List<PostListResponseDto> findAllDesc(){
@@ -60,7 +64,7 @@ public class PostService {
         postListRepository.save(postList);
         return postId;
     }
-
+    
     @Transactional
     public Long deploy(Long postId, String [] selected){
         Post post = postRepository.findById(postId)
@@ -85,6 +89,25 @@ public class PostService {
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> new IllegalArgumentException("잘못된 신청입니다"));
         postRepository.delete(post);
+    }
+
+
+    //SubjectListReponseDto 만들고
+    //그 안에 SubjectResponseDto 하나씩 추가
+    @Transactional
+    public List<SubjectListResponseDto> getSubject(){
+        List<Subject> subjects = subjectRepository.findAll();
+        List<SubjectListResponseDto> subjectListResponseDto = new LinkedList<>();
+        if (subjects.isEmpty()){
+            return subjectListResponseDto;
+        }
+        else {
+            for (Subject subject : subjects) {
+                SubjectListResponseDto listResponseDto= new SubjectListResponseDto(subject.getTitle(), subject.getPosts());
+                subjectListResponseDto.add(listResponseDto);
+            }
+            return subjectListResponseDto;
+        }
     }
 
 }
