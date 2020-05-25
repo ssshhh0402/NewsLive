@@ -21,6 +21,20 @@
                 </v-col>
             </v-row>
         </v-img>
+        <div class="world">
+            <div class="stage">
+                <div class="house">
+                    <section class="news news-a">안녕</section>
+                    <section class="news news-b">안녕</section>
+                    <section class="news news-c">ㅇㅇ</section>
+                </div>
+            </div>
+            <div>
+                <footer>
+                ㅇㅇㅇㅇ
+                </footer>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -41,5 +55,54 @@
 .font-weight-bold {
   font-weight: 700 !important;
 }
+
+.world {
+    display: flex;
+    flex-direction: column;
+    position: static;
+    /* left: -100%;
+    top: 31vh; */
+    width: 300vw;
+    height: 50vh;
+    perspective: 1000px;
+}
+
+.stage {
+    position: static;
+    width : 300vw;
+    height : 50vh;
+    transform-style: preserve-3d;
+}
+
+.house {
+    width: 300vw;
+    height: 50vh;
+    transform: translateX(-100vw);
+    transform-style: preserve-3d;
+}
+
+.news {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 300vw;
+    height: 50vh;
+}
+
+.news-a {
+    transform: translateX(0vw);
+    background: dodgerblue;
+}
+
+.news-b {
+    transform: translateX(200vw);
+    background: firebrick;
+}
+
+.news-c {
+    transform: translateX(300vw);
+    background: forestgreen;
+}
+
 
 </style>

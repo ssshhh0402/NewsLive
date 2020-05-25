@@ -136,6 +136,7 @@
                 //         .dispatch("getMemberInfo")
                 //  }); 
                 scope.$store.dispatch("getMemberInfo");
+                console.log(this.$store.state.isSigned);
                 scope.dialog.login = false;
             },
             onFailure(data) {
