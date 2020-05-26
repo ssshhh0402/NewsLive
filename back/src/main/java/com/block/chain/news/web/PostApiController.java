@@ -4,6 +4,7 @@ import com.block.chain.news.service.PostService;
 import com.block.chain.news.web.dto.posts.PostListResponseDto;
 import com.block.chain.news.web.dto.posts.PostResponseDto;
 import com.block.chain.news.web.dto.posts.PostSaveRequestDto;
+import com.block.chain.news.web.dto.posts.SubjectListResponseDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -60,6 +61,12 @@ public class PostApiController {
     public ResponseEntity<Long> delete(@PathVariable Long postId){
         postService.delete(postId);
         return new ResponseEntity<Long>(postId,HttpStatus.OK);
+    }
+
+    // 이거 나중에 SubjectResponseEntity 새로 만들어야합니다.
+    @GetMapping("/api/v1/posts/subject")
+    public List<SubjectListResponseDto> getSubject(){
+        return postService.getSubject();
     }
 
 }
