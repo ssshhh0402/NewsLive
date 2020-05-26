@@ -24,4 +24,12 @@
 - image - String
 - state - String
 - topic - Topic
+- subject_id
+
+
+
+##### Subject
+
+- subject_id - Long
+- keyword?
 
