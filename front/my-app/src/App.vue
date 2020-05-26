@@ -4,7 +4,7 @@
     <v-content>
     <router-view />
     </v-content>
-    <NewsFooter v-if="this.$route.name !=='news'"/>
+    <NewsFooter v-if="$route.name !=='newscreate'"/>
   </v-app>
 </template>
 
@@ -16,7 +16,7 @@ export default {
   name: 'App',
   components: {
     NewsNav,
-    NewsFooter
+    NewsFooter,
   },
   data: () => ({
     //

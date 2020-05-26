@@ -17,6 +17,7 @@ Vue.use(VueRouter)
     children: [
       {
         path: "newscreate",
+        name: 'newscreate',
         component: () => import("../components/news/NewsCreate.vue")
       }
     ],
