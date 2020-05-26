@@ -78,7 +78,35 @@ public class PostService {
         }
         return postId;
     }
-    
+
+    //이거 리턴하는 리스트(suggestions)안에 Post를 넣을것인가? 그래야 할것 같긴한데
+    @Transactional
+    public List<Post> suggestion(Long postId) throws Exception{
+        String target = postRepository.getOne(postId).getSelect();
+        String [] targetList = target.split(",");
+        List<Post> suggestions = new LinkedList<>();
+        List<Subject> subjects = new LinkedList<>();
+        for (String targetOne : targetList){                                                    // 일단 이부분 보류
+            List<Subject> find = subjectRepository.findAllByTitleContaining(targetOne);
+            for (Subject one : find){
+                if (!subjects.contains(one)){
+                    subjects.add(one);
+                }
+            }
+        }
+        for (Subject subject : subjects){
+            if (getSimilarity(subject.getTitle(),target)){
+                for (Post post : subject.getPosts()){
+                    suggestions.add(post);
+                }
+            }
+        }
+        return suggestions;
+    }
+    //여기서 유사도 비교해서 특정 기준 이상히면 true, 아니면 false 반환하도록 하면될거같은데데
+   public boolean getSimilarity(String a, String b){
+        return a.equals(b);
+    }
     @Transactional
     public Long deploy(Long postId, String [] selected){
         Post post = postRepository.findById(postId)
