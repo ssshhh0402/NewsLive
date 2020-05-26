@@ -22,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -63,17 +64,17 @@ public class PostService {
                 .build();
         postListRepository.save(postList);
         String topics = post.getSelect();
-        Subject subject = subjectRepository.findByTitle(topics);
+        Optional<Subject> subject = subjectRepository.findByTitle(topics);
         //여기서 subject 있는지 없는지 어떻게 판단해야하지..?
-        if (subject){
+        if (subject.isPresent()){
+            subject.get().addPost(post);
+        }else{
             List<Post> lists = new LinkedList<>();
             lists.add(post);
             Subject.builder()
                     .posts(lists)
                     .title(topics)
                     .build();
-        }else{
-            subject.addPost(post);
         }
         return postId;
     }
