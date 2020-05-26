@@ -9,12 +9,46 @@
             @blur="onEditorBlur($event)"
             @focus="onEditorFocus($event)"
             @ready="onEditorReady($event)"
+            useCustomImageHandler 
+            @imageAdded="handleImageAdded"
         />
         <!--완성된 기사 미리 보기로 설정하기.  
-            <div class="output ql-snow">
-        <div class="ql-editor" v-html="content"></div>
-        </div> -->
+             -->
+        <v-footer
+        absolute="absolute"
+        class="font-weight-medium">
+        <v-row>
+        <v-col class="text-left" cols="6">
+            <v-btn text @click.stop="dialog.preview = true">
+                <v-icon>mdi-history</v-icon>
+                <strong>미리보기</strong>
+            </v-btn>
+            &nbsp;
+            <v-btn text >
+                <v-icon>mdi-message-text</v-icon>
+                <strong>맞춤법 검사</strong>
+            </v-btn>
+        </v-col>
+        <v-col class="text-right" cols="6">
+         <v-btn class="mr-4" rounded color="black" dark>Complete</v-btn>
+        </v-col>
+        </v-row>
+    </v-footer>
+        <v-dialog v-model="dialog.preview" max-width="1000">
+            <v-card>
+                <v-row>
+                <v-spacer></v-spacer>
+                    <v-btn icon="icon" dark="dark" @click="previewBack()" class ="mr-6">
+                        <v-icon color="black darken-2">mdi-close</v-icon>
+                    </v-btn>
+                </v-row>
+                <div class="output ql-snow">
+                    <div class="ql-editor" v-html="content"></div>
+                </div>
+            </v-card>
+        </v-dialog>
     </div>
+
 </template>
 <script>
     import axios from "axios";
@@ -31,7 +65,11 @@
             quillEditor
         },
         data() {
-            return {    
+            return {  
+                dialog: {
+                    preview: false,
+                    Grammer: false
+                },  
                 description : "<h2>Editor 1 Starting Content</h2>",
                 editorOption: {
                     modules: {
@@ -94,9 +132,12 @@
         }
         ,
         methods: {
-             onEditorChange: debounce(function(value) {
+            onEditorChange: debounce(function(value) {
              this.content = value.html
             },  466),
+            previewBack(){
+                this.dialog.preview = false;    
+            },
             onEditorBlur(editor) {
                 console.log('editor blur!', editor)
             },
@@ -105,12 +146,11 @@
             },
             onEditorReady(editor) {
                 console.log('editor ready!', editor)
-            }
-                ,
-                handleImageAdded: function(file, Editor, cursorLocation) {
+            },
+            handleImageAdded: function(file, Editor, cursorLocation) {
                     var formData = new FormData();
                     formData.append("image", file);
-                    console.log(file)
+                    console.log("시발",file)
                     axios({
                         url: 'https://api.imgur.com/3/image',
                         method: 'POST',
@@ -129,6 +169,7 @@
                     })
                 }
             }
+            
         }
 </script>
 <style>
