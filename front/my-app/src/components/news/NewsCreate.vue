@@ -1,17 +1,9 @@
 <template>
     <div>
-        <quill-editor
-            class="editor"
-            ref="myTextEditor"
-            :value="content"
-            :options="editorOption"
-            @change="onEditorChange"
-            @blur="onEditorBlur($event)"
-            @focus="onEditorFocus($event)"
-            @ready="onEditorReady($event)"
-            useCustomImageHandler 
-            @imageAdded="handleImageAdded"
-        />
+        <vue-editor id="editor"
+            useCustomImageHandler
+            @image-added="handleImageAdded" v-model="content">
+        </vue-editor>
         <!--완성된 기사 미리 보기로 설정하기.  
              -->
         <v-footer
@@ -52,17 +44,12 @@
 </template>
 <script>
     import axios from "axios";
-    import { quillEditor } from 'vue-quill-editor'
-    import 'quill/dist/quill.core.css'
-    import 'quill/dist/quill.snow.css'
     import dedent from 'dedent'
-    import hljs from 'highlight.js'
-    import debounce from 'lodash/debounce'
-    
+    import { VueEditor  } from "vue2-editor";
     export default {
         name:"newscreate",
         components : {
-            quillEditor
+            VueEditor,
         },
         data() {
             return {  
@@ -70,42 +57,14 @@
                     preview: false,
                     Grammer: false
                 },  
-                description : "<h2>Editor 1 Starting Content</h2>",
-                editorOption: {
-                    modules: {
-                        toolbar: [
-                        ['bold', 'italic', 'underline', 'strike'],
-                        ['blockquote', 'code-block'],
-                        [{ 'header': 1 }, { 'header': 2 }],
-                        [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-                        [{ 'script': 'sub' }, { 'script': 'super' }],
-                        [{ 'indent': '-1' }, { 'indent': '+1' }],
-                        [{ 'direction': 'rtl' }],
-                        [{ 'size': ['small', false, 'large', 'huge'] }],
-                        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-                        [{ 'font': [] }],
-                        [{ 'color': [] }, { 'background': [] }],
-                        [{ 'align': [] }],
-                        ['clean'],
-                        ['link', 'image', 'video']
-                        ],
-                        syntax: {
-                        highlight: text => hljs.highlightAuto(text).value
-                        }
-                    }
-                },
                 //<strong class="ql-font-serif ql-size-large" style="color: rgb(230, 0, 0);">always</strong>
                 //<p><span class="ql-font-serif" style="color: gray" >*아래에 기사 내용을 작성해주세요.</span></p><p><br></p>
                 content: dedent`
                 <h1 class="ql-align-center"><span class="ql-font-serif" style="background-color: rgb(240, 102, 102); color: rgb(255, 255, 255);"> News Title </span></h1>
                 <p><br></p><p><strong class="ql-font-serif ql-size-large" style="background-color: gray; color: rgb(255, 255, 255)">News SubTitle 입력</strong></p><p><br></p>
-                <p><br></p><p><strong class=" ql-size-middle">CONTENTS 작성란입니다. </strong><u style="color:gray"> (*영상 및 사진 첨부 가능)</u> </p>
+                <p><strong class=" ql-size-middle">CONTENTS 작성란입니다. </strong><u style="color:gray"> (*영상 및 사진 첨부 가능)</u> </p>
                 <p class="ql-font-serif" style="color: rgb(230, 0, 0);"></p>
-                
-                <p><br></p>
-                <p><br></p>
-                <p><br></p>
-                <p><br></p>
+                <p><br></p><p><br></p><p><br></p><p><br></p>
                 <p><br></p>
                 <p><span class="ql-font-serif" style="color: gray" >*소 속 : </span></p>
                 <p><span class="ql-font-serif" style="color: gray">*이메일 : </span></p>
@@ -116,41 +75,19 @@
         },
         watch:
         {
-            description : function () {
-                console.log("hi")
-                console.log(this.description)
-                this.description = this.description.replace("img src", "img style='height:250px;' src")
-            }
-        },
-        computed: {
-            editor() {
-                return this.$refs.myTextEditor.quill
-            },
-            contentCode() {
-                return hljs.highlightAuto(this.content).value
+            content : function () {
+                this.content = this.content.replace("img src", "img style='height:250px;' src")
             }
         }
         ,
         methods: {
-            onEditorChange: debounce(function(value) {
-             this.content = value.html
-            },  466),
             previewBack(){
                 this.dialog.preview = false;    
             },
-            onEditorBlur(editor) {
-                console.log('editor blur!', editor)
-            },
-            onEditorFocus(editor) {
-                console.log('editor focus!', editor)
-            },
-            onEditorReady(editor) {
-                console.log('editor ready!', editor)
-            },
             handleImageAdded: function(file, Editor, cursorLocation) {
+                    console.log("왜")
                     var formData = new FormData();
                     formData.append("image", file);
-                    console.log("시발",file)
                     axios({
                         url: 'https://api.imgur.com/3/image',
                         method: 'POST',
@@ -169,10 +106,13 @@
                     })
                 }
             }
+            
         }
 </script>
 <style>
-    .ql-editor { min-height:680px}
+    #editor {
+        height: 680px;
+    }
     .ql-snow .ql-editor img {
         height: 250px;
     }
