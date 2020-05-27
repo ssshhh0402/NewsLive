@@ -10,8 +10,5 @@ import java.util.Optional;
 public interface SubjectRepository extends JpaRepository<Subject, Long> {
 
     Optional<Subject> findByTitle(String title);
-//    @Query("SELECT c FROM Subject c WHERE title like '%?1%' ")
-//    List<Subject> findSomething(String string);
-//
     List<Subject> findAllByTitleContaining(String title);
 }

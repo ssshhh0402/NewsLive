@@ -104,8 +104,29 @@ public class PostService {
         return suggestions;
     }
     //여기서 유사도 비교해서 특정 기준 이상히면 true, 아니면 false 반환하도록 하면될거같은데데
-   public boolean getSimilarity(String a, String b){
-        return a.equals(b);
+    //아니 시발 이걸 어떻게 해야하지?
+    // 일단 이거 임시다 무조건 수저앻야한다.
+   public boolean getSimilarity(String s1, String s2){
+       int longStrLen = s1.length() + 1;
+       int shortStrLen = s2.length() + 1;
+       int[] cost = new int[longStrLen];
+       int[] newcost = new int[longStrLen];
+       for (int i = 0; i < longStrLen; i++) { cost[i] = i; }
+       for (int j = 1; j < shortStrLen; j++) {
+           newcost[0] = j;
+           for (int i = 1; i < longStrLen; i++) {
+               int match = 0;
+               if (s1.charAt(i - 1) != s2.charAt(j - 1)) {
+                   match = 1;
+               }
+               int replace = cost[i - 1] + match;
+               int insert = cost[i] + 1;
+               int delete = newcost[i - 1] + 1;
+               newcost[i] = Math.min(Math.min(insert, delete), replace);
+           }
+           int[] temp = cost; cost = newcost; newcost = temp;
+       }
+       return cost[longStrLen -1] >= 0.5;
     }
     @Transactional
     public Long deploy(Long postId, String [] selected){
