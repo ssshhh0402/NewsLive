@@ -7,6 +7,9 @@ import vuetify from './plugins/vuetify';
 Vue.config.productionTip = false
 
 new Vue({
+  beforeCreate() {
+    this.$store.dispatch("getMemberInfo");
+  },
   router,
   store,
   vuetify,
