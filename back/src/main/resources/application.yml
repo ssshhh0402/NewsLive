@@ -4,7 +4,12 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+        globally_quoted_identifiers: true
+    hibernate:
+      ddl-auto: update
 
-  h2:
-    console:
-      enabled: true
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://k02b2041.p.ssafy.io:3306/newslive?serverTimezone=UTC&characterEncoding=UTF-8
+    username: ssafy
+    password: ssafy

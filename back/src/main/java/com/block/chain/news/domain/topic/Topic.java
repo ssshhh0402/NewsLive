@@ -19,6 +19,7 @@ public class Topic {
 
     @Column(columnDefinition="TEXT", nullable=false)
     private String content;
+
     @Column(columnDefinition="DOUBLE", nullable=false)
     private Double similarity;
 
