@@ -1,4 +1,4 @@
-package com.block.chain.news.domain.PostList;
+package com.block.chain.news.domain.postList;
 
 import com.block.chain.news.domain.user.User;
 import com.fasterxml.jackson.annotation.JsonManagedReference;

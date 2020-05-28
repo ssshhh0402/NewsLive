@@ -8,11 +8,10 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@NoArgsConstructor
 @Getter
+@NoArgsConstructor
 @Entity
 public class Topic {
-
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long topicId;

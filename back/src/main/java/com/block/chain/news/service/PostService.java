@@ -1,12 +1,11 @@
 package com.block.chain.news.service;
 
-import com.block.chain.news.domain.PostList.PostList;
-import com.block.chain.news.domain.PostList.PostListRepository;
+import com.block.chain.news.domain.postList.PostList;
+import com.block.chain.news.domain.postList.PostListRepository;
 import com.block.chain.news.domain.post.Post;
 import com.block.chain.news.domain.post.PostRepository;
 import com.block.chain.news.domain.subject.Subject;
 import com.block.chain.news.domain.subject.SubjectRepository;
-import com.block.chain.news.domain.tags.Tags;
 import com.block.chain.news.domain.tags.TagsRepository;
 import com.block.chain.news.domain.topic.Topic;
 import com.block.chain.news.domain.topic.TopicRepository;
