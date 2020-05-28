@@ -36,7 +36,8 @@ public class PostService {
 
     @Transactional(readOnly = true)
     public List<PostListResponseDto> findAllDesc(){
-        List<Post> postList =postRepository.findAllDesc();
+        List<Post> postList =postRepository.findAll();
+
         List<PostListResponseDto> postResponseDto = new LinkedList<>();
         for (Post post : postList){
             PostListResponseDto postDto = new PostListResponseDto(post);

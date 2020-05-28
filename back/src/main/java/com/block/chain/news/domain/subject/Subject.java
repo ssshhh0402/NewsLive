@@ -7,10 +7,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.OneToMany;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +17,7 @@ import java.util.List;
 @Entity
 public class Subject extends BaseTimeEntity {
     @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long SubjectId;
 
     @Column(nullable=false)
