@@ -63,7 +63,7 @@ public class PostService {
                 .postId(postId)
                 .build();
         postListRepository.save(postList);
-        String topics = post.getSelect();
+        String topics = post.getSelects();
         Optional<Subject> subject = subjectRepository.findByTitle(topics);
         //여기서 subject 있는지 없는지 어떻게 판단해야하지..?
         if (subject.isPresent()){
@@ -79,61 +79,67 @@ public class PostService {
         return postId;
     }
 
-    @Transactional
+    @Transactional              //이게 유사한 기사 추천해주는 부분
     public List<Post> suggestion(Long postId) throws Exception {
-        String target = postRepository.getOne(postId).getSelect();
-        String[] targetList = target.split(",");
+        String target = postRepository.getOne(postId).getSelects();                             //찾고자 하는 기사의 형태소 가져와서
+        String[] targetList = target.split(",");                                           // 배열로 만들고
         List<Post> suggestions = new LinkedList<>();
         List<Subject> subjects = new LinkedList<>();
-        for (String targetOne : targetList) {                                                    // 일단 이부분 보류 여기에 동적쿼리 적용할수 있ㄴ으면 적용하기
-            List<Subject> find = subjectRepository.findAllByTitleContaining(targetOne);
-            for (Subject one : find) {
-                if (!subjects.contains(one)) {
-                    subjects.add(one);
+        for (String targetOne : targetList) {                                                    // 이 기사에서 target(형태소 10개) 하나씩 돌아가면서 뽑아오고
+            List<Subject> find = subjectRepository.findAllByTitleContaining(targetOne);             // Subject들 중에서 title에 해당 형태소(뽑아온 아이) 가지고 있는 얘 검색
+            for (Subject one : find) {                                                               //subject 가지고 있는 아이들 중에서
+                if (!subjects.contains(one)) {                                                                  // 추가 안 되어 있으면
+                    subjects.add(one);                                                                          //Subjects에 추가
                 }
             }
         }
-        Subject input_target = null;
-        int min_value = 1;
-        for (Subject subject : subjects) {
-            int current = getSimilarity(subject.getTitle(), target);
-            if (current == 0) {
-                input_target = subject;
-                break;
-            } else {
-                if (current < min_value) {
-                    min_value = current;
-                    input_target = subject;
-                }
-            }
-        }
+        Subject input_target = subjects.get(0);
+        for (int idx = 0; idx < subjects.size(); idx ++) {                                      //이것도 : 가 아닌 idx 사용하도록
+            int current = getSimilarity(target,subjects.get(idx).getTitle());            //유사도 계산해서
+                                                                                // Array에 다 넣고(index, current값)
+                                                                                // 정렬해서
+                                                                                // current낮은 순으로 3개 뽑아서
+                                                                                // 그 3개의 idx에 대하여 subjects[idx] 넣기
+        }                                                                       // 그리고 이 3개의 Subject 넣어주면 되는거잖아?
         for (Post post : input_target.getPosts()) {
             suggestions.add(post);
         }
         return suggestions;
     }
-    //일단 String 2개 입력받아서 그거의 유사도 계산하기 0 >> 좋은거 높을수록 안좋은거.
+    //일단 String 2개 입력받아서 그거의 유사도 계산하기 0 >> 좋은거 높을수록 안좋은거. 이거 수정 Contain으로 확인해서 Contain 갯수 확인
+    // 이거 일단 일단 보류
+//    public int getSimilarity(String s1, String s2){
+//       int longStrLen = s1.length() + 1;
+//       int shortStrLen = s2.length() + 1;
+//       int[] cost = new int[longStrLen];
+//       int[] newcost = new int[longStrLen];
+//       for (int i = 0; i < longStrLen; i++) { cost[i] = i; }
+//       for (int j = 1; j < shortStrLen; j++) {
+//           newcost[0] = j;
+//           for (int i = 1; i < longStrLen; i++) {
+//               int match = 0;
+//               if (s1.charAt(i - 1) != s2.charAt(j - 1)) {
+//                   match = 1;
+//               }
+//               int replace = cost[i - 1] + match;
+//               int insert = cost[i] + 1;
+//               int delete = newcost[i - 1] + 1;
+//               newcost[i] = Math.min(Math.min(insert, delete), replace);
+//           }
+//           int[] temp = cost; cost = newcost; newcost = temp;
+//       }
+//       return cost[longStrLen -1];
+//    }
+    //쉽게 생각해서 s1의 각 값들이 s2에 몇개나 들어가 있나 count => 유사도
     public int getSimilarity(String s1, String s2){
-       int longStrLen = s1.length() + 1;
-       int shortStrLen = s2.length() + 1;
-       int[] cost = new int[longStrLen];
-       int[] newcost = new int[longStrLen];
-       for (int i = 0; i < longStrLen; i++) { cost[i] = i; }
-       for (int j = 1; j < shortStrLen; j++) {
-           newcost[0] = j;
-           for (int i = 1; i < longStrLen; i++) {
-               int match = 0;
-               if (s1.charAt(i - 1) != s2.charAt(j - 1)) {
-                   match = 1;
-               }
-               int replace = cost[i - 1] + match;
-               int insert = cost[i] + 1;
-               int delete = newcost[i - 1] + 1;
-               newcost[i] = Math.min(Math.min(insert, delete), replace);
-           }
-           int[] temp = cost; cost = newcost; newcost = temp;
-       }
-       return cost[longStrLen -1];
+        String [] target = s1.split(",");
+        int result = 0;
+        for (String s : target){
+            if (s2.contains(s)){
+                result += 1;
+            }
+        }
+        return result;
     }
     @Transactional
     public Long deploy(Long postId, String [] selected){

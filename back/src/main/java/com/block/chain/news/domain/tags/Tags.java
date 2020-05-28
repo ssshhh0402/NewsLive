@@ -17,13 +17,13 @@ public class Tags {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long SelectedId;
 
-//    @Column(columnDefinition="TEXT", nullable=false)
-//    private String content;
-    @Column(length=300, nullable=false)
+    @Column(columnDefinition="TEXT", nullable=false)
     private String content;
+//    @Column(length=300, nullable=false)
+//    private String content;
 
-//    @Column(columnDefinition="DOUBLE", nullable=false)
-//    private Double similarity;
+    @Column(columnDefinition="DOUBLE", nullable=false)
+    private Double similarity;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JsonManagedReference

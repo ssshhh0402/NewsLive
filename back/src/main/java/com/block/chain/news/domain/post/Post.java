@@ -29,9 +29,10 @@ public class Post extends BaseTimeEntity {
     @Column(nullable=false)
     private String author;
 
-
     @Column(nullable=false, columnDefinition = "TEXT")
     private String content;
+//    @Column(nullable=false, length=255)
+//    private String content;
 
     @Column(length=100, nullable=false)
     private String state;
@@ -52,7 +53,7 @@ public class Post extends BaseTimeEntity {
     private List<Topic> selected = new ArrayList<>();
 
     @Column(nullable=true)
-    private String select;
+    private String selects;
 
     @Builder
     public Post(String title, String author, String content, String state, String topics){
@@ -67,7 +68,7 @@ public class Post extends BaseTimeEntity {
         this.state = state;
     }
     public void updateSelect(String select){
-        this.select = select;
+        this.selects = select;
     }
 
 }

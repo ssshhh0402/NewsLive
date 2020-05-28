@@ -21,10 +21,10 @@ public class Topic {
     @Column(length=300, nullable=false)
     private String content;
 
-//    @Column(columnDefinition="DOUBLE", nullable=false)
-//    private Double similarity;
-    @Column(nullable=false)
+    @Column(columnDefinition="DOUBLE", nullable=false)
     private Double similarity;
+//    @Column(nullable=false)
+//    private Double similarity;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JsonManagedReference
