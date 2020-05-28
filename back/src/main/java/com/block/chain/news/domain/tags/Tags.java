@@ -8,8 +8,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@NoArgsConstructor
 @Getter
+@NoArgsConstructor
 @Entity
 public class Tags {
 

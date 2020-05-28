@@ -1,4 +1,4 @@
-package com.block.chain.news.domain.PostList;
+package com.block.chain.news.domain.postList;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
