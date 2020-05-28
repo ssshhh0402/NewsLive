@@ -80,7 +80,6 @@ public class PostService {
         return postId;
     }
 
-    //이거 리턴하는 리스트(suggestions)안에 Post를 넣을것인가? 그래야 할것 같긴한데
     @Transactional
     public List<Post> suggestion(Long postId) throws Exception {
         String target = postRepository.getOne(postId).getSelect();
@@ -114,9 +113,8 @@ public class PostService {
         }
         return suggestions;
     }
-
     //일단 String 2개 입력받아서 그거의 유사도 계산하기 0 >> 좋은거 높을수록 안좋은거.
-   public int getSimilarity(String s1, String s2){
+    public int getSimilarity(String s1, String s2){
        int longStrLen = s1.length() + 1;
        int shortStrLen = s2.length() + 1;
        int[] cost = new int[longStrLen];
@@ -144,11 +142,6 @@ public class PostService {
                 .orElseThrow( () -> new IllegalArgumentException("잘못된 기사를 선택 하셨습니다"));
         StringBuilder sb = new StringBuilder();
         for (String one : selected){
-//            Tags tag = Tags.builder()
-//                    .content(one)
-//                    .post(post)
-//                    .build();
-//            tagsRepository.save(tag);
             sb.append(one);
             sb.append(',');
         }

@@ -21,15 +21,18 @@ import java.util.List;
 @Entity
 public class Post extends BaseTimeEntity {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long postId;
 
+    @Column(nullable=false)
     private String title;
 
     @Column(nullable=false)
     private String author;
 
-    @Column(nullable=false, columnDefinition="TEXT")
+//
+//    @Column(nullable=false, columnDefinition = "TEXT")
+//    private String content;
+    @Column(nullable=false, length=300)
     private String content;
 
     @Column(length=100, nullable=false)
@@ -50,8 +53,7 @@ public class Post extends BaseTimeEntity {
     @JsonBackReference
     private List<Topic> selected = new ArrayList<>();
 
-    @Column(nullable=false)
-    @ColumnDefault("")
+    @Column(nullable=true)
     private String select;
 
     @Builder
