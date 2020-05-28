@@ -105,8 +105,7 @@
                         console.log(err);
                     })
                 }
-            }
-            
+            }        
         }
 </script>
 <style>
