@@ -5,7 +5,7 @@
         <span class="subheading" @click = goHome(); >My Home</span>
         <v-spacer></v-spacer>
         <v-toolbar-items class="hidden-sm-and-down">
-            <v-btn text="text"> 
+            <v-btn text="text" @click = goNewsList()> 
                 News
             </v-btn>
 
@@ -15,17 +15,20 @@
             </v-btn>
             <v-divider vertical="vertical"></v-divider>
             <v-btn v-if="!$store.state.isSigned" text="text">
-                <KakaoLogin
+                <KakaoLogin 
                 image="kakao_login_btn_medium_ov"
                 api-key="d067985a2434ec54d14813168409e137"
                 :on-success=onSuccess
                 :on-failure=onFailure
                 />
             </v-btn>
-            <v-btn v-else text="text" @click = goMypage(); >
+            <v-btn v-if="$store.state.isSigned" text="text" @click = goMypage(); >
                 MyPage
             </v-btn>
             <v-divider vertical="vertical"></v-divider>
+            <v-btn v-if="$store.state.isSigned" text="text" @click = goLogout(); >
+                Logout
+            </v-btn>
         </v-toolbar-items>
         <v-app-bar-nav-icon></v-app-bar-nav-icon>
     </v-toolbar>
@@ -35,7 +38,6 @@
     // import axios from "axios";
     // import { API_BASE_URL } from '../../config'
     import {login} from "../../api/user.js";
-    import EventBus from "../../EventBus"
     // import { mapState } from "vuex";
     export default {
         components: {
@@ -54,13 +56,10 @@
         methods: {
             onSuccess(data) {
                 const scope = this;
-                console.log(data)
-                console.log("success")
-                console.log(data.access_token) 
+                console.log("fe",data)
+                console.log("fe",data.scope)
                 localStorage.setItem("access_token1", data.access_token)
                 scope.$store.dispatch("getMemberInfo");
-                console.log(this.$store.state.isSigned);
-                scope.dialog.login = false;
             },
             onFailure(data) {
                 console.log(data)
@@ -76,19 +75,22 @@
             {   
                 this.$router.push({path:'/mypage'})
             },
+            goNewsList()
+            {   
+                this.$router.push({path:'/newsList'})
+            },
+            goLogout()
+            {   
+                this.$router.push({path:'/logout'})
+            },
             login: function () {
                 const scope = this;
                 login(scope.user.email, scope.user.password, function (response) {
                     let token = response.data.auth_token;
-
                     localStorage.setItem("access_token", token)
                     scope
                         .$store
                         .dispatch("getMemberInfo")
-
-                    EventBus.$emit("login-success");
-
-                    scope.dialog.login = false;
                 }, function (error) {
                     scope.user.login_fail = true;
                     console.error(error);

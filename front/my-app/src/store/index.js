@@ -15,7 +15,13 @@ export default new Vuex.Store({
     },
     setIsManaged(state, isManager){
       state.isManager = isManager;          
+    },
+    logout(state) {
+      state.isManager = false;
+      state.isSigned = false;
+      localStorage.clear()
     }
+
   },
   actions: {
     getMemberInfo({ commit }) {

@@ -1,32 +1,82 @@
 <template>
-    <div style="padding: 80px 0px 0px 0px">
-        <v-container>
-            <h2>내 정보
-                <v-btn class="ma-2" outlined="outlined" large="large" fab="fab" width="40px"
-                    height="40px" style="color: #00AAB3;">
-                    <v-icon @click="goUserModifyPage">mdi-pencil</v-icon>
-                </v-btn>
-            </h2>
-            <v-row class="mb-4">
-                <v-col>
-                    <user-detail :userInfo="userInfo" v-if="userInfo" />
-                </v-col>
-            </v-row>
-            <v-row>
-                <v-icon>star</v-icon>
-                <span>&nbsp;스크랩 공고</span>
-            </v-row>
-            <v-row class="mb-4">
-                <v-col v-if="userInfo" class="px-0">
-                    <user-recruit :userInfo="userInfo" v-on:update="update" />
-                </v-col>
-            </v-row>
-        </v-container>
+    <div>
+        <h2 class= "mt-3 text-center">내 정보
+        </h2>
+        <v-row>
+            <v-col cols="4" >
+            <v-card class="mx-auto " max-width="434" tile="tile">
+                <v-img
+                    height="100%"
+                    src="https://cdn.vuetifyjs.com/images/cards/server-room.jpg">
+                    <v-row align="end" class="fill-height">
+                        <v-col align-self="start" class="pa-0" cols="12">
+                            <v-avatar class="profile" color="grey" size="164" tile="tile">
+                                <v-img src="https://postfiles.pstatic.net/MjAyMDA1MjhfNDgg/MDAxNTkwNjQxODI2MDcy.HEkAfaUwM375cpxm_k_KK1nRbUSmLeYsw6IEiGuLZ68g.rOLbtyQkI1gMk0o5RgRCj-RzQgJWfSXmwEmlL0xXMM8g.PNG.koo_m/image.png?type=w966"></v-img>
+                            </v-avatar>
+                        </v-col>
+                        <v-col class="py-0">
+                            <v-list-item color="rgba(0, 0, 0, .4)" dark="dark">
+                                <v-list-item-content>
+                                    <v-list-item-title class="title">이름:
+                                        {{user.name}}
+                                    </v-list-item-title>
+                                    <v-list-item-subtitle>이메일:
+                                        {{user.email}}
+                                    </v-list-item-subtitle>
+                                </v-list-item-content>
+                            </v-list-item>
+                        </v-col>
+                    </v-row>
+                </v-img>
+            </v-card>
+            </v-col>
+        </v-row>
+    <div class="fff" style="background:rgb(200, 9, 200); height:570px">
+       
+          <v-avatar color="white" size="100">
+            <v-avatar color="rgb(127, 212, 217)" size="250">
+              <v-avatar color="white" size="245">
+                <p class="black--text h1">{{participate}} 명</p>
+              </v-avatar>
+            </v-avatar>
+          </v-avatar>
+                    <v-avatar color="white" size="100">
+            <v-avatar color="rgb(127, 212, 217)" size="250">
+              <v-avatar color="white" size="245">
+                <p class="black--text h1">{{participate}} 명</p>
+              </v-avatar>
+            </v-avatar>
+          </v-avatar>
+                      <v-avatar color="white" size="100">
+            <v-avatar color="rgb(127, 212, 217)" size="250">
+              <v-avatar color="white" size="245">
+                <p class="black--text h1">{{participate}} 명</p>
+              </v-avatar>
+            </v-avatar>
+          </v-avatar>
+
+    </div>
     </div>
 </template>
 <script>
     export default {
-        name: "userdetail",
-        props: {userInfo:{type: Object}},
+        data() {
+            return {
+                user: {
+                    name: "김정원",
+                    email: "koo_m@naver.com",
+                    money: 0
+                }
+            }
+        }
+        // name: "userdetail", props: {userInfo:{type: Object}},
     }
 </script>
+<style>
+ .fff{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+</style>

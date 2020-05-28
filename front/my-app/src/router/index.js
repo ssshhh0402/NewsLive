@@ -1,8 +1,11 @@
 import Vue from 'vue'
+import store from "../store";
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import News from '../views/News.vue'
 import Mypage from '../views/Mypage.vue'
+import NewsList from '../views/NewsList.vue'
+
 Vue.use(VueRouter)
   // const rejectAuthUser = (to, from, next) => {
   //   let token = localStorage.getItem("access_token")
@@ -18,6 +21,11 @@ Vue.use(VueRouter)
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/newsList',
+    name: 'newsList',
+    component: NewsList
   },
   {
     name: "mypage",
@@ -37,6 +45,15 @@ Vue.use(VueRouter)
     }
   },
   {
+    path: "/logout",
+    name: "logout",
+    beforeEnter(to, from, next) {
+      store.commit("logout");
+      alert("로그아웃 되었습니다.");
+      next("/");
+    }
+  },
+  {
     path: "/news",
     name: "news",
     component: News,
@@ -51,15 +68,7 @@ Vue.use(VueRouter)
       return "/news/newscreate";
     }
   }
-  ,
-  {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  }
+  
 ]
 
 const router = new VueRouter({
