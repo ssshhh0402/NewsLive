@@ -81,32 +81,41 @@ public class PostService {
 
     //이거 리턴하는 리스트(suggestions)안에 Post를 넣을것인가? 그래야 할것 같긴한데
     @Transactional
-    public List<Post> suggestion(Long postId) throws Exception{
+    public List<Post> suggestion(Long postId) throws Exception {
         String target = postRepository.getOne(postId).getSelect();
-        String [] targetList = target.split(",");
+        String[] targetList = target.split(",");
         List<Post> suggestions = new LinkedList<>();
         List<Subject> subjects = new LinkedList<>();
-        for (String targetOne : targetList){                                                    // 일단 이부분 보류
+        for (String targetOne : targetList) {                                                    // 일단 이부분 보류 여기에 동적쿼리 적용할수 있ㄴ으면 적용하기
             List<Subject> find = subjectRepository.findAllByTitleContaining(targetOne);
-            for (Subject one : find){
-                if (!subjects.contains(one)){
+            for (Subject one : find) {
+                if (!subjects.contains(one)) {
                     subjects.add(one);
                 }
             }
         }
-        for (Subject subject : subjects){
-            if (getSimilarity(subject.getTitle(),target)){
-                for (Post post : subject.getPosts()){
-                    suggestions.add(post);
+        Subject input_target = null;
+        int min_value = 1;
+        for (Subject subject : subjects) {
+            int current = getSimilarity(subject.getTitle(), target);
+            if (current == 0) {
+                input_target = subject;
+                break;
+            } else {
+                if (current < min_value) {
+                    min_value = current;
+                    input_target = subject;
                 }
             }
         }
+        for (Post post : input_target.getPosts()) {
+            suggestions.add(post);
+        }
         return suggestions;
     }
-    //여기서 유사도 비교해서 특정 기준 이상히면 true, 아니면 false 반환하도록 하면될거같은데데
-    //아니 시발 이걸 어떻게 해야하지?
-    // 일단 이거 임시다 무조건 수저앻야한다.
-   public boolean getSimilarity(String s1, String s2){
+
+    //일단 String 2개 입력받아서 그거의 유사도 계산하기 0 >> 좋은거 높을수록 안좋은거.
+   public int getSimilarity(String s1, String s2){
        int longStrLen = s1.length() + 1;
        int shortStrLen = s2.length() + 1;
        int[] cost = new int[longStrLen];
@@ -126,7 +135,7 @@ public class PostService {
            }
            int[] temp = cost; cost = newcost; newcost = temp;
        }
-       return cost[longStrLen -1] >= 0.5;
+       return cost[longStrLen -1];
     }
     @Transactional
     public Long deploy(Long postId, String [] selected){
