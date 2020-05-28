@@ -17,7 +17,7 @@
             <v-btn v-if="!$store.state.isSigned" text="text">
                 <KakaoLogin 
                 image="kakao_login_btn_medium_ov"
-                api-key="d067985a2434ec54d14813168409e137"
+                api-key="8ed60517a6ddc7531af7f7fd4740b174"
                 :on-success=onSuccess
                 :on-failure=onFailure
                 />
