@@ -36,10 +36,10 @@ export default new Vuex.Store({
             } else {
                 commit("setIsSigned", true);
                 window.Kakao.API.request({
-                  url: '/v2/user/me',
+                  url: '/v1/api/talk/profile',
+                  // url: '/v2/user/me',
                     success: function (response) {
                     console.log(response);
-                      console.log(response.kaccount_email)
                   },
                   fail: function (error) {
                     console.log(error);

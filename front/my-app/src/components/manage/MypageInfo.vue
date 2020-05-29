@@ -40,6 +40,66 @@
               </v-avatar>
             </v-avatar>
           </v-avatar>
+          
+          <v-avatar color="white" size="100">
+            <v-avatar color="rgb(127, 212, 217)" size="250">
+              <v-avatar color="white" size="245">
+                <p class="black--text h1">{{participate}} 명</p>
+              </v-avatar>
+            </v-avatar>
+          </v-avatar>
+       
+       
+          <v-avatar color="white" size="100">
+            <v-avatar color="rgb(127, 212, 217)" size="250">
+              <v-avatar color="white" size="245">
+                <p class="black--text h1">{{participate}} 명</p>
+              </v-avatar>
+            </v-avatar>
+          </v-avatar>
+       
+       
+          <v-avatar color="white" size="100">
+            <v-avatar color="rgb(127, 212, 217)" size="250">
+              <v-avatar color="white" size="245">
+                <p class="black--text h1">{{participate}} 명</p>
+              </v-avatar>
+            </v-avatar>
+          </v-avatar>
+       
+          <v-avatar color="white" size="100">
+            <v-avatar color="rgb(127, 212, 217)" size="250">
+              <v-avatar color="white" size="245">
+                <p class="black--text h1">{{participate}} 명</p>
+              </v-avatar>
+            </v-avatar>
+          </v-avatar>
+       
+       
+          <v-avatar color="white" size="100">
+            <v-avatar color="rgb(127, 212, 217)" size="250">
+              <v-avatar color="white" size="245">
+                <p class="black--text h1">{{participate}} 명</p>
+              </v-avatar>
+            </v-avatar>
+          </v-avatar>
+       
+          <v-avatar color="white" size="100">
+            <v-avatar color="rgb(127, 212, 217)" size="250">
+              <v-avatar color="white" size="245">
+                <p class="black--text h1">{{participate}} 명</p>
+              </v-avatar>
+            </v-avatar>
+          </v-avatar>
+       
+          <v-avatar color="white" size="100">
+            <v-avatar color="rgb(127, 212, 217)" size="250">
+              <v-avatar color="white" size="245">
+                <p class="black--text h1">{{participate}} 명</p>
+              </v-avatar>
+            </v-avatar>
+          </v-avatar>
+       
                     <v-avatar color="white" size="100">
             <v-avatar color="rgb(127, 212, 217)" size="250">
               <v-avatar color="white" size="245">
