@@ -22,6 +22,8 @@ public class QUser extends EntityPathBase<User> {
 
     public final com.block.chain.news.domain.QBaseTimeEntity _super = new com.block.chain.news.domain.QBaseTimeEntity(this);
 
+    public final ListPath<com.block.chain.news.domain.advertisement.Advertisement, com.block.chain.news.domain.advertisement.QAdvertisement> advertisements = this.<com.block.chain.news.domain.advertisement.Advertisement, com.block.chain.news.domain.advertisement.QAdvertisement>createList("advertisements", com.block.chain.news.domain.advertisement.Advertisement.class, com.block.chain.news.domain.advertisement.QAdvertisement.class, PathInits.DIRECT2);
+
     //inherited
     public final DateTimePath<java.time.LocalDateTime> createDate = _super.createDate;
 
@@ -38,7 +40,7 @@ public class QUser extends EntityPathBase<User> {
 
     public final StringPath picture = createString("picture");
 
-    public final EnumPath<Role> role = createEnum("role", Role.class);
+    public final StringPath role = createString("role");
 
     public final NumberPath<Long> userId = createNumber("userId", Long.class);
 

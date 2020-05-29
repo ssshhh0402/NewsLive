@@ -1,7 +1,9 @@
 package com.block.chain.news.domain.user;
 
 import com.block.chain.news.domain.BaseTimeEntity;
+import com.block.chain.news.domain.advertisement.Advertisement;
 import com.block.chain.news.domain.follow.Follow;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,20 +26,27 @@ public class User extends BaseTimeEntity {
 
     private String picture;
 
-    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Role role;
+    private String role;
 
     @OneToMany(mappedBy = "fromUser")
+    @JsonBackReference
     private List<Follow> follower;
 
     @OneToMany(mappedBy = "toUser")
+    @JsonBackReference
     private List<Follow> following;
 
+    @OneToMany(mappedBy = "user")
+    @JsonBackReference
+    private List<Advertisement> advertisements;
+
     @Builder
-    public User(String name, String email, String picture){
+    public User(Long userId, String name, String email, String picture, String role){
+        this.userId = userId;
         this.name = name;
         this.email = email;
         this.picture = picture;
+        this.role = role;
     }
 }
