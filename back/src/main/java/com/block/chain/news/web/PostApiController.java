@@ -41,7 +41,7 @@ public class PostApiController {
     public ResponseEntity<Long> save(@RequestParam(value="title") String title,
                      @RequestParam(value="content") String content,
                      @RequestParam(value="author") String author,
-                     @RequestParam(value="words") String [][] words) throws Exception{
+                     @RequestParam(value="words") String words) throws Exception{
         PostSaveRequestDto postSaveRequestDto = PostSaveRequestDto.builder()
                 .title(title)
                 .content(content)
@@ -53,17 +53,16 @@ public class PostApiController {
 
     @PutMapping("/api/v1/posts/{postId}")
     public ResponseEntity<Long> deploy(@PathVariable Long postId,
-                       @RequestParam(value="selected") String [] selected) throws Exception{
-        return new ResponseEntity<Long>(postService.deploy(postId, selected),HttpStatus.OK);
+                       @RequestParam(value="selected") String [] selected,
+                                       @RequestParam(value="subjectId") Long subjectId) throws Exception{
+        return new ResponseEntity<Long>(postService.deploy(postId, selected, subjectId),HttpStatus.OK);
     }
 
     @DeleteMapping("/api/v1/posts/{postId}")
     public ResponseEntity<Long> delete(@PathVariable Long postId){
-        postService.delete(postId);
         return new ResponseEntity<Long>(postId,HttpStatus.OK);
     }
 
-    // 이거 나중에 SubjectResponseEntity 새로 만들어야합니다.
     @GetMapping("/api/v1/posts/subject")
     public List<SubjectListResponseDto> getSubject(){
         return postService.getSubject();

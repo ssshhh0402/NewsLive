@@ -1,7 +1,9 @@
 package com.block.chain.news.web.dto.posts;
 
 import com.block.chain.news.domain.post.Post;
+import lombok.Getter;
 
+@Getter
 public class PostListResponseDto {
     private Long id;
     private String title;

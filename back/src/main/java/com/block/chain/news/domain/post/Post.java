@@ -20,7 +20,9 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 public class Post extends BaseTimeEntity {
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long postId;
 
     @Column(nullable=false)

@@ -11,6 +11,7 @@ import com.block.chain.news.domain.topic.Topic;
 import com.block.chain.news.domain.topic.TopicRepository;
 import com.block.chain.news.domain.user.User;
 import com.block.chain.news.domain.user.UserRepository;
+import com.block.chain.news.web.dto.SuggestionList;
 import com.block.chain.news.web.dto.posts.PostListResponseDto;
 import com.block.chain.news.web.dto.posts.PostResponseDto;
 import com.block.chain.news.web.dto.posts.PostSaveRequestDto;
@@ -19,6 +20,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -36,7 +38,6 @@ public class PostService {
     @Transactional(readOnly = true)
     public List<PostListResponseDto> findAllDesc(){
         List<Post> postList =postRepository.findAll();
-
         List<PostListResponseDto> postResponseDto = new LinkedList<>();
         for (Post post : postList){
             PostListResponseDto postDto = new PostListResponseDto(post);
@@ -48,9 +49,14 @@ public class PostService {
     public PostResponseDto findById(Long postId){
         Post post = postRepository.findById(postId)
                 .orElseThrow( () -> new IllegalArgumentException("잘못된 기사를 선택하셨습니다"));
-        List<Topic> topics = topicRepository.findByPostsDesc(post);
-        return new PostResponseDto(post, topics);
+        //List<Topic> topics = topicRepository.findByPostsDesc(post);     //=> 이거 스트링 값으로 바꿔야 한다
+        List<Subject> suggestions = new LinkedList<>();
+        if (post.getState().equals("SAVE")){
+            suggestions = suggestion(postId);
+        }
+        return new PostResponseDto(post, suggestions);
     }
+
 
     @Transactional
     public Long save(PostSaveRequestDto requestDto) throws Exception{
@@ -63,27 +69,27 @@ public class PostService {
                 .postId(postId)
                 .build();
         postListRepository.save(postList);
-        String topics = post.getSelects();
-        Optional<Subject> subject = subjectRepository.findByTitle(topics);
-        //여기서 subject 있는지 없는지 어떻게 판단해야하지..?
-        if (subject.isPresent()){
-            subject.get().addPost(post);
-        }else{
-            List<Post> lists = new LinkedList<>();
-            lists.add(post);
-            Subject.builder()
-                    .posts(lists)
-                    .title(topics)
-                    .build();
-        }
+//        String topics = post.getSelects();
+//        Optional<Subject> subject = subjectRepository.findByTitle(topics);
+//        //여기서 subject 있는지 없는지 어떻게 판단해야하지..?
+//        if (subject.isPresent()){
+//            subject.get().addPost(post);
+//        }else{
+//            List<Post> lists = new LinkedList<>();
+//            lists.add(post);
+//            Subject.builder()
+//                    .posts(lists)
+//                    .title(topics)
+//                    .build();
+//        }
         return postId;
     }
 
     @Transactional              //이게 유사한 기사 추천해주는 부분
-    public List<Post> suggestion(Long postId) throws Exception {
-        String target = postRepository.getOne(postId).getSelects();                             //찾고자 하는 기사의 형태소 가져와서
+    public List<Subject> suggestion(Long postId) {
+        String target = postRepository.getOne(postId).getTopics();                             //찾고자 하는 기사의 형태소 가져와서
         String[] targetList = target.split(",");                                           // 배열로 만들고
-        List<Post> suggestions = new LinkedList<>();
+        List<Subject> suggestions = new LinkedList<>();
         List<Subject> subjects = new LinkedList<>();
         for (String targetOne : targetList) {                                                    // 이 기사에서 target(형태소 10개) 하나씩 돌아가면서 뽑아오고
             List<Subject> find = subjectRepository.findAllByTitleContaining(targetOne);             // Subject들 중에서 title에 해당 형태소(뽑아온 아이) 가지고 있는 얘 검색
@@ -93,16 +99,15 @@ public class PostService {
                 }
             }
         }
-        Subject input_target = subjects.get(0);
-        for (int idx = 0; idx < subjects.size(); idx ++) {                                      //이것도 : 가 아닌 idx 사용하도록
-            int current = getSimilarity(target,subjects.get(idx).getTitle());            //유사도 계산해서
-                                                                                // Array에 다 넣고(index, current값)
-                                                                                // 정렬해서
-                                                                                // current낮은 순으로 3개 뽑아서
-                                                                                // 그 3개의 idx에 대하여 subjects[idx] 넣기
-        }                                                                       // 그리고 이 3개의 Subject 넣어주면 되는거잖아?
-        for (Post post : input_target.getPosts()) {
-            suggestions.add(post);
+        List<SuggestionList> Similarities = new LinkedList<>();
+        for (Subject subject: subjects) {
+            int current = getSimilarity(target, subject.getTitle());            //유사도 계산해서
+            SuggestionList newOne = new SuggestionList(subject, current);                                                                    // Array에 다 넣고(index, current값)
+            Similarities.add(newOne);                                           // 정렬해서
+        }                                                                       // current낮은 순으로 3개 뽑아서
+        Collections.sort(Similarities);
+        for(int idx = 0 ; idx < 3;idx++){
+            suggestions.add(Similarities.get(idx).getSubject());
         }
         return suggestions;
     }
@@ -142,7 +147,7 @@ public class PostService {
         return result;
     }
     @Transactional
-    public Long deploy(Long postId, String [] selected){
+    public Long deploy(Long postId, String [] selected, Long subjectId){
         Post post = postRepository.findById(postId)
                 .orElseThrow( () -> new IllegalArgumentException("잘못된 기사를 선택 하셨습니다"));
         StringBuilder sb = new StringBuilder();
@@ -152,6 +157,17 @@ public class PostService {
         }
         post.updateState("Started");
         post.updateSelect(sb.toString());
+        if (subjectId != -1){
+            subjectRepository.getOne(subjectId).addPost(post);
+        }else{
+            List<Post> lists = new LinkedList<>();
+            lists.add(post);
+            Subject newOne = Subject.builder()
+                            .posts(lists)
+                            .title(post.getTopics())
+                            .build();
+            subjectRepository.save(newOne);
+        }
         return postId;
     }
 

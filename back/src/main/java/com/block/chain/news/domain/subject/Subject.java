@@ -15,7 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Entity
-public class Subject extends BaseTimeEntity {
+public class Subject extends BaseTimeEntity{
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long SubjectId;
@@ -38,4 +38,5 @@ public class Subject extends BaseTimeEntity {
         newPosts.add(post);
         this.posts = newPosts;
     }
+
 }
