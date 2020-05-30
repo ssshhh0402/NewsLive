@@ -106,7 +106,13 @@ public class PostService {
             Similarities.add(newOne);                                           // 정렬해서
         }                                                                       // current낮은 순으로 3개 뽑아서
         Collections.sort(Similarities);
-        for(int idx = 0 ; idx < 3;idx++){
+        int limits = 0;
+        if (Similarities.size() >= 3){
+            limits = 3;
+        }else{
+            limits = Similarities.size();
+        }
+        for(int idx = 0 ; idx < limits;idx++){
             suggestions.add(Similarities.get(idx).getSubject());
         }
         return suggestions;
@@ -157,25 +163,28 @@ public class PostService {
         }
         post.updateState("Started");
         post.updateSelect(sb.toString());
-        if (subjectId != -1){
-            subjectRepository.getOne(subjectId).addPost(post);
-        }else{
+        if (subjectId == -1){
             List<Post> lists = new LinkedList<>();
             lists.add(post);
             Subject newOne = Subject.builder()
-                            .posts(lists)
-                            .title(post.getTopics())
-                            .build();
+                    .posts(lists)
+                    .title(post.getTopics())
+                    .build();
             subjectRepository.save(newOne);
+        }else{
+            Subject subject = subjectRepository.findById(subjectId)
+                    .orElseThrow(() -> new IllegalArgumentException("해당 Subject가 존재하지 않습니다"));
+            subject.addPost(post);
         }
         return postId;
     }
 
     @Transactional
-    public void delete(Long postId){
+    public Long delete(Long postId){
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> new IllegalArgumentException("잘못된 신청입니다"));
         postRepository.delete(post);
+        return postId;
     }
 
     //SubjectListReponseDto 만들고
@@ -190,7 +199,9 @@ public class PostService {
         else {
             for (Subject subject : subjects) {
                 SubjectListResponseDto listResponseDto= new SubjectListResponseDto(subject.getTitle(), subject.getPosts());
-                subjectListResponseDto.add(listResponseDto);
+                if (listResponseDto.getPosts().size() != 0){
+                    subjectListResponseDto.add(listResponseDto);
+                }
             }
             return subjectListResponseDto;
         }

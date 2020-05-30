@@ -55,12 +55,13 @@ public class PostApiController {
     public ResponseEntity<Long> deploy(@PathVariable Long postId,
                        @RequestParam(value="selected") String [] selected,
                                        @RequestParam(value="subjectId") Long subjectId) throws Exception{
+        log.info("subjectId : {}", subjectId);
         return new ResponseEntity<Long>(postService.deploy(postId, selected, subjectId),HttpStatus.OK);
     }
 
     @DeleteMapping("/api/v1/posts/{postId}")
     public ResponseEntity<Long> delete(@PathVariable Long postId){
-        return new ResponseEntity<Long>(postId,HttpStatus.OK);
+        return new ResponseEntity<Long>(postService.delete(postId),HttpStatus.OK);
     }
 
     @GetMapping("/api/v1/posts/subject")

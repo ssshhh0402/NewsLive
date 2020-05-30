@@ -36,8 +36,6 @@ public class QPost extends EntityPathBase<Post> {
 
     public final NumberPath<Long> postId = createNumber("postId", Long.class);
 
-    public final ListPath<com.block.chain.news.domain.topic.Topic, com.block.chain.news.domain.topic.QTopic> selected = this.<com.block.chain.news.domain.topic.Topic, com.block.chain.news.domain.topic.QTopic>createList("selected", com.block.chain.news.domain.topic.Topic.class, com.block.chain.news.domain.topic.QTopic.class, PathInits.DIRECT2);
-
     public final StringPath selects = createString("selects");
 
     public final StringPath state = createString("state");
@@ -45,8 +43,6 @@ public class QPost extends EntityPathBase<Post> {
     public final com.block.chain.news.domain.subject.QSubject subject;
 
     public final StringPath title = createString("title");
-
-    public final ListPath<com.block.chain.news.domain.topic.Topic, com.block.chain.news.domain.topic.QTopic> topic = this.<com.block.chain.news.domain.topic.Topic, com.block.chain.news.domain.topic.QTopic>createList("topic", com.block.chain.news.domain.topic.Topic.class, com.block.chain.news.domain.topic.QTopic.class, PathInits.DIRECT2);
 
     public final StringPath topics = createString("topics");
 
