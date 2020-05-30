@@ -20,23 +20,28 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 public class Post extends BaseTimeEntity {
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long postId;
 
+    @Column(nullable=false)
     private String title;
 
     @Column(nullable=false)
     private String author;
 
-    @Column(columnDefinition = "TEXT", nullable = false)
+    @Column(nullable=false, columnDefinition = "TEXT")
     private String content;
+//    @Column(nullable=false, length=255)
+//    private String content;
 
     @Column(length=100, nullable=false)
     private String state;
 
-    @OneToMany(mappedBy = "post")
-    @JsonBackReference
-    private List<Topic> topic = new ArrayList<>();
+//    @OneToMany(mappedBy = "post")
+//    @JsonBackReference
+//    private List<Topic> topic = new ArrayList<>();
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JsonManagedReference
@@ -45,13 +50,12 @@ public class Post extends BaseTimeEntity {
     @Column(nullable=false)
     private String topics;
 
-    @OneToMany(mappedBy="post")
-    @JsonBackReference
-    private List<Topic> selected = new ArrayList<>();
+//    @OneToMany(mappedBy="post")
+//    @JsonBackReference
+//    private List<Topic> selected = new ArrayList<>();
 
-    @Column(nullable=false)
-    @ColumnDefault("")
-    private String select;
+    @Column(nullable=true)
+    private String selects;
 
     @Builder
     public Post(String title, String author, String content, String state, String topics){
@@ -66,7 +70,7 @@ public class Post extends BaseTimeEntity {
         this.state = state;
     }
     public void updateSelect(String select){
-        this.select = select;
+        this.selects = select;
     }
 
 }

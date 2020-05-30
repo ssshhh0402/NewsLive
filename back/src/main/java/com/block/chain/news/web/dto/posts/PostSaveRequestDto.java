@@ -19,24 +19,24 @@ public class PostSaveRequestDto {
     private String words;
 
     @Builder
-    public PostSaveRequestDto(String title,String content, String author, String [][] words){
+    public PostSaveRequestDto(String title,String content, String author, String words){
         this.title = title;
         this.content = content;
         this.author = author;
-        this.words = stringify(words);
+        this.words = words;
     }
-    public String stringify(String [][] words){
-        StringBuilder sb = new StringBuilder();
-        for (String [] idx : words){
-            StringBuilder sb2 = new StringBuilder();
-            sb2.append(idx[0]);
-            sb2.append("|");
-            sb2.append(idx[1]);
-            sb2.append(",");
-            sb.append(sb2.toString());
-        }
-        return sb.toString();
-    }
+//    public String stringify(String [][] words){
+//        StringBuilder sb = new StringBuilder();
+//        for (String [] idx : words){
+//            StringBuilder sb2 = new StringBuilder();
+//            sb2.append(idx[0]);
+//            sb2.append("|");
+//            sb2.append(idx[1]);
+//            sb2.append(",");
+//            sb.append(sb2.toString());
+//        }
+//        return sb.toString();
+//    }
 //    public void Extracting(String content,Long postId){
 //        List<Topic> words = new LinkedList<>();
         //words.add(new Topic("abc",0.23));

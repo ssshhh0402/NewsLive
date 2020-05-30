@@ -7,10 +7,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.OneToMany;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,12 +15,14 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Entity
-public class Subject extends BaseTimeEntity {
+public class Subject extends BaseTimeEntity{
     @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long SubjectId;
 
     @Column(nullable=false)
     private String title;
+
 
     @OneToMany(mappedBy = "subject")
     @JsonBackReference
@@ -40,4 +39,5 @@ public class Subject extends BaseTimeEntity {
         newPosts.add(post);
         this.posts = newPosts;
     }
+
 }

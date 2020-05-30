@@ -28,6 +28,8 @@ public class QTags extends EntityPathBase<Tags> {
 
     public final NumberPath<Long> SelectedId = createNumber("SelectedId", Long.class);
 
+    public final NumberPath<Double> similarity = createNumber("similarity", Double.class);
+
     public QTags(String variable) {
         this(Tags.class, forVariable(variable), INITS);
     }
