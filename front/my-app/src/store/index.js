@@ -42,7 +42,7 @@ export default new Vuex.Store({
                         commit("setIsSigned", true);
                     },
                     fail: function (error) {
-                        alert(JSON.stringify(error));
+                        console.log(JSON.stringify(error));
                     }
                 });
                 // axios({
