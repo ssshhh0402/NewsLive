@@ -43,11 +43,16 @@
     export default {
         name: 'Home',
         components: {},
+        data() {
+            return {
+                search: null
+                };
+        },
         methods: {
             goSearch(content) {
                 console.log(content)
             }
-        }
+        },
     }
 </script>
 <style>
