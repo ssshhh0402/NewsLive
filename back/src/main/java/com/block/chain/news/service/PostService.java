@@ -63,12 +63,14 @@ public class PostService {
 
     @Transactional              //이게 유사한 기사 추천해주는 부분
     public List<Subject> suggestion(Long postId) {
-        String target = postRepository.getOne(postId).getTopics();                             //찾고자 하는 기사의 형태소 가져와서
+        String target = postRepository.findById(postId)
+                .orElseThrow(() -> new IllegalArgumentException( "잘못 보냄!"))
+                .getTopics();                             //찾고자 하는 기사의 형태소 가져와서
         String[] targetList = target.split(",");                                           // 배열로 만들고
         List<Subject> suggestions = new LinkedList<>();
         List<Subject> subjects = new LinkedList<>();
         for (String targetOne : targetList) {                                                    // 이 기사에서 target(형태소 10개) 하나씩 돌아가면서 뽑아오고
-            List<Subject> find = subjectRepository.findAllByTitleContaining(targetOne);             // Subject들 중에서 title에 해당 형태소(뽑아온 아이) 가지고 있는 얘 검색
+            List<Subject> find = subjectRepository.findAllByTitleContaining(targetOne);             // Subject들 중에서 title에 해당 형태소(뽑아온 아이) 가지고 있는 얘 검색 => 이거 여기서 오류 뜬다
             for (Subject one : find) {                                                               //subject 가지고 있는 아이들 중에서
                 if (!subjects.contains(one)) {                                                                  // 추가 안 되어 있으면
                     subjects.add(one);                                                                          //Subjects에 추가
