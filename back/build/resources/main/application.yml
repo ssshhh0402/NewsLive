@@ -5,10 +5,20 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
+
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 200MB
+      max-request-size: 215MB
 
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
+<<<<<<< HEAD
     url: jdbc:mariadb://k02b2041.p.ssafy.io:3306/test_jungwoo?serverTimezone=UTC&characterEncoding=UTF-8
+=======
+    url: jdbc:mariadb://k02b2041.p.ssafy.io:3306/test_woojin?serverTimezone=UTC&characterEncoding=UTF-8
+>>>>>>> feature/광고CRUD
     username: ssafy
     password: ssafy

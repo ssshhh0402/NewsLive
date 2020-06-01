@@ -54,8 +54,13 @@ public class Post extends BaseTimeEntity {
 //    @JsonBackReference
 //    private List<Topic> selected = new ArrayList<>();
 
+<<<<<<< HEAD
     @Column(nullable=true)
     private String selects;
+=======
+    @Column(nullable=false)
+    private String select;
+>>>>>>> feature/광고CRUD
 
     @Builder
     public Post(String title, String author, String content, String state, String topics){
