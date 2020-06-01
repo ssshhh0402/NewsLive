@@ -6,6 +6,8 @@ import com.block.chain.news.domain.post.Post;
 import com.block.chain.news.domain.post.PostRepository;
 import com.block.chain.news.domain.subject.Subject;
 import com.block.chain.news.domain.subject.SubjectRepository;
+import com.block.chain.news.domain.subjectList.SubjectList;
+import com.block.chain.news.domain.subjectList.SubjectListRepository;
 import com.block.chain.news.domain.tags.TagsRepository;
 import com.block.chain.news.domain.topic.TopicRepository;
 import com.block.chain.news.domain.user.User;
@@ -22,6 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -32,6 +35,7 @@ public class PostService {
     private final TopicRepository topicRepository;
     private final TagsRepository tagsRepository;
     private final SubjectRepository subjectRepository;
+    private final SubjectListRepository subjectListRepository;
 
     @Transactional(readOnly = true)
     public List<PostListResponseDto> findAllDesc(){
@@ -162,17 +166,16 @@ public class PostService {
         post.updateState("Started");
         post.updateSelect(sb.toString());
         if (subjectId == -1){
-            List<Post> lists = new LinkedList<>();
-            lists.add(post);
+            List<Post> posts = new LinkedList<>();
+            posts.add(post);
             Subject newOne = Subject.builder()
-                    .posts(lists)
                     .title(post.getTopics())
+                    .posts(posts)
                     .build();
             subjectRepository.save(newOne);
         }else{
-            Subject subject = subjectRepository.findById(subjectId)
-                    .orElseThrow(() -> new IllegalArgumentException("해당 Subject가 존재하지 않습니다"));
-            subject.addPost(post);
+            Subject oldOne = subjectRepository.findById(subjectId).orElseThrow(() -> new IllegalArgumentException("잘못된 호출"));
+            oldOne.addPost(post);
         }
         return postId;
     }
@@ -190,6 +193,7 @@ public class PostService {
     @Transactional
     public List<SubjectListResponseDto> getSubject(){
         List<Subject> subjects = subjectRepository.findAll();
+        List<Post> postLists = new LinkedList<>();
         List<SubjectListResponseDto> subjectListResponseDto = new LinkedList<>();
         if (subjects.isEmpty()){
             return subjectListResponseDto;

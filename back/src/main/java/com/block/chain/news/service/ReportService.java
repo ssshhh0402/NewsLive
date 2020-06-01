@@ -30,13 +30,6 @@ public class ReportService {
         Report report = Report.builder()
                 .post(post)
                 .build();
-        Long reportId= reportRepository.save(report).getReportId();
-        ReportList reportList = ReportList.builder()
-                .user(user)
-                .reportId(reportId)
-                .decision(-1)
-                .build();
-        reportListRepository.save(reportList);
         return postId;
     }
 

@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.util.Date;
 
 @Getter
 @NoArgsConstructor
@@ -24,27 +26,27 @@ public class Report extends BaseTimeEntity {
 
     @Column
     @ColumnDefault("0")
-    private int total;
+    private int disagree;
 
     @Column
     @ColumnDefault("0")
     private int agree;
 
+    @Column
+    private LocalDate endDate;
+
     @Builder
     public Report(Post post){
         this.post = post;
-        this.total = 0;
+        this.disagree = 0;
         this.agree = 0;
+        this.endDate = LocalDate.now().plusMonths(1);
     }
 
     public void agree(){
-        int next = this.total + 1;
-        int agreed = this.agree + 1;
-        this.total = next;
-        this.agree= agreed;
+        this.agree += 1;
     }
     public void disagree(){
-        int next = this.total + 1;
-        this.total = next;
+        this.disagree += 1;
     }
 }
