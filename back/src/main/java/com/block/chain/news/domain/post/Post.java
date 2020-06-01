@@ -50,7 +50,6 @@ public class Post extends BaseTimeEntity {
     private List<Topic> selected = new ArrayList<>();
 
     @Column(nullable=false)
-    @ColumnDefault("")
     private String select;
 
     @Builder

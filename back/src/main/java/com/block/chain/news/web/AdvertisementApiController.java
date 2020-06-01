@@ -18,18 +18,21 @@ import org.springframework.web.multipart.MultipartFile;
 public class AdvertisementApiController {
     private final AdvertisementService advertisementService;
 
-//    @PostMapping("/api/v1/advertisement")
-//    public ResponseEntity<Long> save(@RequestParam(value = "content") String content,
-//                                     @RequestParam(value = "image") MultipartFile image,
-//                                     @RequestParam(value = "price") int price,
-//                                     @RequestParam(value = "months") int months,
-//                                     @RequestParam(value = "userEmail") String userEmail){
-//
-//        log.info("Advertisement save");
-//        AdvertisementSaveRequestDto requestDto = AdvertisementSaveRequestDto.builder()
-//                .content(content)
-//
-//                .build();
-//        return new ResponseEntity<Long>(advertisementService.support(requestDto), HttpStatus.OK);
-//    }
+    @PostMapping("/api/v1/advertisement")
+    public ResponseEntity<Long> save(@RequestParam(value = "content") String content,
+                                     @RequestParam(value = "image") MultipartFile image,
+                                     @RequestParam(value = "price") int price,
+                                     @RequestParam(value = "months") int months,
+                                     @RequestParam(value = "userEmail") String userEmail) throws Exception{
+
+        log.info("Advertisement save");
+        AdvertisementSaveRequestDto requestDto = AdvertisementSaveRequestDto.builder()
+                .content(content)
+                .price(price)
+                .months(months)
+                .userEmail(userEmail)
+                .build();
+
+        return new ResponseEntity<Long>(advertisementService.support(requestDto, image), HttpStatus.OK);
+    }
 }
