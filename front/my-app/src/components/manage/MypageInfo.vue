@@ -2,8 +2,7 @@
     <div>
         <h2 class= "mt-3 text-center">내 정보
         </h2>
-        <v-row>
-            <v-col cols="4" >
+        <v-row class ="mb-3">
             <v-card class="mx-auto " max-width="434" tile="tile">
                 <v-img
                     height="100%"
@@ -18,10 +17,11 @@
                             <v-list-item color="rgba(0, 0, 0, .4)" dark="dark">
                                 <v-list-item-content>
                                     <v-list-item-title class="title">이름:
-                                        {{user.name}}
+                                       {{user.kakao_account.profile.nickname}}
                                     </v-list-item-title>
                                     <v-list-item-subtitle>이메일:
-                                        {{user.email}}
+                                       {{user.kakao_account.email}}<br> 
+                                       성별: {{user.kakao_account.gender}}
                                     </v-list-item-subtitle>
                                 </v-list-item-content>
                             </v-list-item>
@@ -29,88 +29,13 @@
                     </v-row>
                 </v-img>
             </v-card>
-            </v-col>
         </v-row>
     <div class="fff" style="background:rgb(200, 9, 200); height:570px">
        
           <v-avatar color="white" size="100">
             <v-avatar color="rgb(127, 212, 217)" size="250">
               <v-avatar color="white" size="245">
-                <p class="black--text h1">{{participate}} 명</p>
-              </v-avatar>
-            </v-avatar>
-          </v-avatar>
-          
-          <v-avatar color="white" size="100">
-            <v-avatar color="rgb(127, 212, 217)" size="250">
-              <v-avatar color="white" size="245">
-                <p class="black--text h1">{{participate}} 명</p>
-              </v-avatar>
-            </v-avatar>
-          </v-avatar>
-       
-       
-          <v-avatar color="white" size="100">
-            <v-avatar color="rgb(127, 212, 217)" size="250">
-              <v-avatar color="white" size="245">
-                <p class="black--text h1">{{participate}} 명</p>
-              </v-avatar>
-            </v-avatar>
-          </v-avatar>
-       
-       
-          <v-avatar color="white" size="100">
-            <v-avatar color="rgb(127, 212, 217)" size="250">
-              <v-avatar color="white" size="245">
-                <p class="black--text h1">{{participate}} 명</p>
-              </v-avatar>
-            </v-avatar>
-          </v-avatar>
-       
-          <v-avatar color="white" size="100">
-            <v-avatar color="rgb(127, 212, 217)" size="250">
-              <v-avatar color="white" size="245">
-                <p class="black--text h1">{{participate}} 명</p>
-              </v-avatar>
-            </v-avatar>
-          </v-avatar>
-       
-       
-          <v-avatar color="white" size="100">
-            <v-avatar color="rgb(127, 212, 217)" size="250">
-              <v-avatar color="white" size="245">
-                <p class="black--text h1">{{participate}} 명</p>
-              </v-avatar>
-            </v-avatar>
-          </v-avatar>
-       
-          <v-avatar color="white" size="100">
-            <v-avatar color="rgb(127, 212, 217)" size="250">
-              <v-avatar color="white" size="245">
-                <p class="black--text h1">{{participate}} 명</p>
-              </v-avatar>
-            </v-avatar>
-          </v-avatar>
-       
-          <v-avatar color="white" size="100">
-            <v-avatar color="rgb(127, 212, 217)" size="250">
-              <v-avatar color="white" size="245">
-                <p class="black--text h1">{{participate}} 명</p>
-              </v-avatar>
-            </v-avatar>
-          </v-avatar>
-       
-                    <v-avatar color="white" size="100">
-            <v-avatar color="rgb(127, 212, 217)" size="250">
-              <v-avatar color="white" size="245">
-                <p class="black--text h1">{{participate}} 명</p>
-              </v-avatar>
-            </v-avatar>
-          </v-avatar>
-                      <v-avatar color="white" size="100">
-            <v-avatar color="rgb(127, 212, 217)" size="250">
-              <v-avatar color="white" size="245">
-                <p class="black--text h1">{{participate}} 명</p>
+                <p class="black--text h1"></p>
               </v-avatar>
             </v-avatar>
           </v-avatar>
@@ -122,12 +47,12 @@
     export default {
         data() {
             return {
-                user: {
-                    name: "김정원",
-                    email: "koo_m@naver.com",
-                    money: 0
-                }
+                user: {},
             }
+        }
+        ,created() {
+            this.user = this.$store.state.UserInfo
+            console.log("qudtls",this.user);
         }
         // name: "userdetail", props: {userInfo:{type: Object}},
     }

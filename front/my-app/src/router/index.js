@@ -48,7 +48,7 @@ Vue.use(VueRouter)
     path: "/logout",
     name: "logout",
     beforeEnter(to, from, next) {
-      store.commit("logout");
+      store.dispatch("getKakaoLogout");
       alert("로그아웃 되었습니다.");
       next("/");
     }

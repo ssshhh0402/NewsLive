@@ -35,10 +35,6 @@
 </template>
 <script>
     import KakaoLogin from 'vue-kakao-login' 
-    // import axios from "axios";
-    // import { API_BASE_URL } from '../../config'
-    import {login} from "../../api/user.js";
-    // import { mapState } from "vuex";
     export default {
         components: {
             KakaoLogin
@@ -56,8 +52,6 @@
         methods: {
             onSuccess(data) {
                 const scope = this;
-                console.log("fe",data)
-                console.log("fe",data.scope)
                 localStorage.setItem("access_token1", data.access_token)
                 scope.$store.dispatch("getMemberInfo");
             },
@@ -82,19 +76,6 @@
             goLogout()
             {   
                 this.$router.push({path:'/logout'})
-            },
-            login: function () {
-                const scope = this;
-                login(scope.user.email, scope.user.password, function (response) {
-                    let token = response.data.auth_token;
-                    localStorage.setItem("access_token", token)
-                    scope
-                        .$store
-                        .dispatch("getMemberInfo")
-                }, function (error) {
-                    scope.user.login_fail = true;
-                    console.error(error);
-                });
             },
 
             loginClear() {
