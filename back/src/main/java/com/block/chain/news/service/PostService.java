@@ -18,6 +18,7 @@ import com.block.chain.news.web.dto.posts.PostResponseDto;
 import com.block.chain.news.web.dto.posts.PostSaveRequestDto;
 import com.block.chain.news.web.dto.posts.SubjectListResponseDto;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,6 +27,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class PostService {
@@ -57,34 +59,6 @@ public class PostService {
             suggestions = suggestion(postId);
         }
         return new PostResponseDto(post, suggestions);
-    }
-
-
-    @Transactional
-    public Long save(PostSaveRequestDto requestDto) throws Exception{
-        User user= userRepository.findByEmail(requestDto.getAuthor())
-                .orElseThrow(() -> new IllegalArgumentException("해당 회원 존재 X"));
-        Post post = requestDto.toEntity();
-        Long postId = postRepository.save(post).getPostId();
-        PostList postList = PostList.builder()
-                .user(user)
-                .postId(postId)
-                .build();
-        postListRepository.save(postList);
-//        String topics = post.getSelects();
-//        Optional<Subject> subject = subjectRepository.findByTitle(topics);
-//        //여기서 subject 있는지 없는지 어떻게 판단해야하지..?
-//        if (subject.isPresent()){
-//            subject.get().addPost(post);
-//        }else{
-//            List<Post> lists = new LinkedList<>();
-//            lists.add(post);
-//            Subject.builder()
-//                    .posts(lists)
-//                    .title(topics)
-//                    .build();
-//        }
-        return postId;
     }
 
     @Transactional              //이게 유사한 기사 추천해주는 부분
@@ -119,30 +93,7 @@ public class PostService {
         }
         return suggestions;
     }
-    //일단 String 2개 입력받아서 그거의 유사도 계산하기 0 >> 좋은거 높을수록 안좋은거. 이거 수정 Contain으로 확인해서 Contain 갯수 확인
-    // 이거 일단 일단 보류
-//    public int getSimilarity(String s1, String s2){
-//       int longStrLen = s1.length() + 1;
-//       int shortStrLen = s2.length() + 1;
-//       int[] cost = new int[longStrLen];
-//       int[] newcost = new int[longStrLen];
-//       for (int i = 0; i < longStrLen; i++) { cost[i] = i; }
-//       for (int j = 1; j < shortStrLen; j++) {
-//           newcost[0] = j;
-//           for (int i = 1; i < longStrLen; i++) {
-//               int match = 0;
-//               if (s1.charAt(i - 1) != s2.charAt(j - 1)) {
-//                   match = 1;
-//               }
-//               int replace = cost[i - 1] + match;
-//               int insert = cost[i] + 1;
-//               int delete = newcost[i - 1] + 1;
-//               newcost[i] = Math.min(Math.min(insert, delete), replace);
-//           }
-//           int[] temp = cost; cost = newcost; newcost = temp;
-//       }
-//       return cost[longStrLen -1];
-//    }
+
     //쉽게 생각해서 s1의 각 값들이 s2에 몇개나 들어가 있나 count => 유사도
     public int getSimilarity(String s1, String s2){
         String [] target = s1.split(",");
@@ -154,6 +105,34 @@ public class PostService {
         }
         return result;
     }
+
+    @Transactional
+    public Long save(PostSaveRequestDto requestDto) throws Exception{
+        User user= userRepository.findByEmail(requestDto.getAuthor())
+                .orElseThrow(() -> new IllegalArgumentException("해당 회원 존재 X"));
+        Post post = requestDto.toEntity();
+        Long postId = postRepository.save(post).getPostId();
+        PostList postList = PostList.builder()
+                .user(user)
+                .postId(postId)
+                .build();
+        postListRepository.save(postList);
+//        String topics = post.getSelects();
+//        Optional<Subject> subject = subjectRepository.findByTitle(topics);
+//        //여기서 subject 있는지 없는지 어떻게 판단해야하지..?
+//        if (subject.isPresent()){
+//            subject.get().addPost(post);
+//        }else{
+//            List<Post> lists = new LinkedList<>();
+//            lists.add(post);
+//            Subject.builder()
+//                    .posts(lists)
+//                    .title(topics)
+//                    .build();
+//        }
+        return postId;
+    }
+
     @Transactional
     public Long deploy(Long postId, String [] selected, Long subjectId){
         Post post = postRepository.findById(postId)
@@ -166,16 +145,18 @@ public class PostService {
         post.updateState("Started");
         post.updateSelect(sb.toString());
         if (subjectId == -1){
-            List<Post> posts = new LinkedList<>();
-            posts.add(post);
+            List<Post> newLists = new LinkedList<>();
+            newLists.add(post);
             Subject newOne = Subject.builder()
                     .title(post.getTopics())
-                    .posts(posts)
+                    .posts(newLists)
                     .build();
             subjectRepository.save(newOne);
+            post.updateSubject(newOne);
         }else{
             Subject oldOne = subjectRepository.findById(subjectId).orElseThrow(() -> new IllegalArgumentException("잘못된 호출"));
             oldOne.addPost(post);
+            post.updateSubject(oldOne);
         }
         return postId;
     }
@@ -188,14 +169,13 @@ public class PostService {
         return postId;
     }
 
-    //SubjectListReponseDto 만들고
-    //그 안에 SubjectResponseDto 하나씩 추가
+
     @Transactional
     public List<SubjectListResponseDto> getSubject(){
         List<Subject> subjects = subjectRepository.findAll();
         List<Post> postLists = new LinkedList<>();
         List<SubjectListResponseDto> subjectListResponseDto = new LinkedList<>();
-        if (subjects.isEmpty()){
+            if (subjects.isEmpty()){
             return subjectListResponseDto;
         }
         else {

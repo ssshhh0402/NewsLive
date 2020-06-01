@@ -3,6 +3,7 @@ package com.block.chain.news.domain.subject;
 import com.block.chain.news.domain.BaseTimeEntity;
 import com.block.chain.news.domain.post.Post;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,7 +23,6 @@ public class Subject extends BaseTimeEntity{
 
     @Column(nullable=false)
     private String title;
-
 
     @OneToMany(mappedBy = "subject")
     @JsonBackReference

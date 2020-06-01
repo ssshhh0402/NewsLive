@@ -33,26 +33,16 @@ public class Post extends BaseTimeEntity {
 
     @Column(nullable=false, columnDefinition = "TEXT")
     private String content;
-//    @Column(nullable=false, length=255)
-//    private String content;
 
     @Column(length=100, nullable=false)
     private String state;
 
-//    @OneToMany(mappedBy = "post")
-//    @JsonBackReference
-//    private List<Topic> topic = new ArrayList<>();
-
     @ManyToOne(cascade = CascadeType.ALL)
-    @JsonManagedReference
+    @JsonBackReference
     private Subject subject;
 
     @Column(nullable=false)
     private String topics;
-
-//    @OneToMany(mappedBy="post")
-//    @JsonBackReference
-//    private List<Topic> selected = new ArrayList<>();
 
     @Column(nullable=true)
     private String selects;
@@ -72,7 +62,9 @@ public class Post extends BaseTimeEntity {
     public void updateSelect(String select){
         this.selects = select;
     }
-
+    public void updateSubject(Subject subject){
+        this.subject = subject;
+    }
 }
 
 

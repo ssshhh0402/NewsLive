@@ -29,14 +29,16 @@ public class QReport extends EntityPathBase<Report> {
     //inherited
     public final DateTimePath<java.time.LocalDateTime> createDate = _super.createDate;
 
+    public final NumberPath<Integer> disagree = createNumber("disagree", Integer.class);
+
+    public final DatePath<java.time.LocalDate> endDate = createDate("endDate", java.time.LocalDate.class);
+
     //inherited
     public final DateTimePath<java.time.LocalDateTime> modifiedDate = _super.modifiedDate;
 
     public final com.block.chain.news.domain.post.QPost post;
 
     public final NumberPath<Long> reportId = createNumber("reportId", Long.class);
-
-    public final NumberPath<Integer> total = createNumber("total", Integer.class);
 
     public QReport(String variable) {
         this(Report.class, forVariable(variable), INITS);

@@ -7,6 +7,7 @@ import com.querydsl.core.types.dsl.*;
 import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
+import com.querydsl.core.types.dsl.PathInits;
 
 
 /**
@@ -26,6 +27,8 @@ public class QSubject extends EntityPathBase<Subject> {
 
     //inherited
     public final DateTimePath<java.time.LocalDateTime> modifiedDate = _super.modifiedDate;
+
+    public final ListPath<com.block.chain.news.domain.post.Post, com.block.chain.news.domain.post.QPost> posts = this.<com.block.chain.news.domain.post.Post, com.block.chain.news.domain.post.QPost>createList("posts", com.block.chain.news.domain.post.Post.class, com.block.chain.news.domain.post.QPost.class, PathInits.DIRECT2);
 
     public final NumberPath<Long> SubjectId = createNumber("SubjectId", Long.class);
 
