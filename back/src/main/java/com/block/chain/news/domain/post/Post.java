@@ -31,7 +31,7 @@ public class Post extends BaseTimeEntity {
     private String state;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JsonManagedReference
+    @JsonBackReference
     private Subject subject;
 
     @Column(nullable=false)
@@ -55,7 +55,9 @@ public class Post extends BaseTimeEntity {
     public void updateSelect(String select){
         this.selects = select;
     }
-
+    public void updateSubject(Subject subject){
+        this.subject = subject;
+    }
 }
 
 
