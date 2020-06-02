@@ -30,22 +30,72 @@ export default new Vuex.Store({
     actions: {
         getMemberInfo({commit}) {
             let token = localStorage.getItem("access_token1");
-            console.log("token(getMember)=" + token);
+            console.log("token=" , token);
             if (!token) {
                 return;
             } else {
-                commit("setIsSigned", true);
                 window.Kakao.API.request({
-                  url: '/v1/api/talk/profile',
-                  // url: '/v2/user/me',
-                    success: function (response) {
-                    console.log(response);
-                  },
-                  fail: function (error) {
-                    console.log(error);
-                  }
-              });
+                    url: '/v2/user/me',
+                    success: function (res) {
+                        console.log(res);
+                        commit("setUserInfo", res);
+                        commit("setIsSigned", true);
+                    },
+                    fail: function (error) {
+                        console.log(JSON.stringify(error));
+                    }
+                });
+                // axios({
+                //     url: 'https://kapi.kakao.com/v2/user/me',
+                //     method: 'GET',
+                //     headers: {
+                //         'Authorization': ' KakaoAK  {' + token + '}'
+                //     },
+                // })
+                // .then((result) => {
+                //     console.log(result)
+                // })
+                // .catch((err) => {
+                //     console.log(err);
+                // })
+                //kakao.api.request 'authorization' : 'bearer {' + accesstoken + '}',
+            //     window.Kakao.API.request({
+            //       url: '/v2/user/me',
+            //       // url: '/v2/user/me',
+            //         success: function (response) {
+            //         console.log(response);
+            //       },
+            //       fail: function (error) {
+            //         console.log(error);
+            //       }
+            //   });
             }
+        }
+        , getKakaoLogout({ commit }) {
+            commit("logout");
+            window.Kakao.API.request({
+                url: '/v1/user/unlink',
+                success: function (response) {
+                    console.log(response);
+                },
+                fail: function (error) {
+                    console.log(error);
+                },
+            });
+            if (!window.Kakao.Auth.getAccessToken()) {
+                console.log('Not logged in.');
+                return;
+            }
+            window.Kakao.Auth.logout(function () {
+
+            });
+            // window.Kakao.Auth.logout({
+            //     success: function (authObj) {
+            //         window.Kakao.init('/');
+            //         window.Kakao.API.request({url: '/v1/user/unlink'});
+            //         console.log(authObj)
+            //     }
+            // })
         }
     },
     modules: {}

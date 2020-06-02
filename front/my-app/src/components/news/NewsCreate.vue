@@ -85,7 +85,6 @@
                 this.dialog.preview = false;    
             },
             handleImageAdded: function(file, Editor, cursorLocation) {
-                    console.log("왜")
                     var formData = new FormData();
                     formData.append("image", file);
                     axios({

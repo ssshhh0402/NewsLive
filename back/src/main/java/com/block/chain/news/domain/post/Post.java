@@ -2,19 +2,12 @@ package com.block.chain.news.domain.post;
 
 import com.block.chain.news.domain.BaseTimeEntity;
 import com.block.chain.news.domain.subject.Subject;
-import com.block.chain.news.domain.tags.Tags;
-import com.block.chain.news.domain.tags.TagsRepository;
-import com.block.chain.news.domain.topic.Topic;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Getter
 @NoArgsConstructor
