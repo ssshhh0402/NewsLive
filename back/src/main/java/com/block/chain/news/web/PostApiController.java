@@ -1,10 +1,8 @@
 package com.block.chain.news.web;
 
+import com.block.chain.news.domain.post.Post;
 import com.block.chain.news.service.PostService;
-import com.block.chain.news.web.dto.posts.PostListResponseDto;
-import com.block.chain.news.web.dto.posts.PostResponseDto;
-import com.block.chain.news.web.dto.posts.PostSaveRequestDto;
-import com.block.chain.news.web.dto.posts.SubjectListResponseDto;
+import com.block.chain.news.web.dto.posts.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -37,16 +35,23 @@ public class PostApiController {
         return new ResponseEntity<PostResponseDto>(postService.findById(postId), HttpStatus.OK);
     }
 
+    @GetMapping("/api/v1/posts/kinds")
+    public ResponseEntity<List<KindsResponseDto>> getKinds(){
+        return new ResponseEntity<List<KindsResponseDto>>(postService.findAllByKinds(), HttpStatus.OK);
+    }
+
     @PostMapping("/api/v1/posts")
     public ResponseEntity<Long> save(@RequestParam(value="title") String title,
-                     @RequestParam(value="content") String content,
-                     @RequestParam(value="author") String author,
-                     @RequestParam(value="words") String words) throws Exception{
+                                     @RequestParam(value="content") String content,
+                                     @RequestParam(value="author") String author,
+                                     @RequestParam(value="words") String words,
+                                     @RequestParam(value="kinds") int kinds) throws Exception{
         PostSaveRequestDto postSaveRequestDto = PostSaveRequestDto.builder()
                 .title(title)
                 .content(content)
                 .author(author)
                 .words(words)
+                .kinds(kinds)
                 .build();
         return new ResponseEntity<Long>(postService.save(postSaveRequestDto),HttpStatus.OK);
     }

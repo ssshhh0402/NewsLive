@@ -1,20 +1,18 @@
 package com.block.chain.news.domain.post;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
-import org.springframework.stereotype.Repository;
+import lombok.RequiredArgsConstructor;
 
-import static com.block.chain.news.domain.post.QPost.post;
 import java.util.List;
 
-@Repository
-public class PostRepositorySupport extends QuerydslRepositorySupport {
-    public final JPAQueryFactory queryFactory;
+import static com.block.chain.news.domain.post.QPost.post;
 
-    public PostRepositorySupport(JPAQueryFactory queryFactory){
-        super(Post.class);
-        this.queryFactory = queryFactory;
-    }
+@RequiredArgsConstructor
+public class PostRepositoryImpl implements PostRepositoryCustom{
+
+    private final JPAQueryFactory queryFactory;
+
+    @Override
     public List<Post> findByTopics(String topics){
         String [] target = topics.split(",");
         return queryFactory.selectDistinct(post)
@@ -24,5 +22,4 @@ public class PostRepositorySupport extends QuerydslRepositorySupport {
                 .where(post.topics.contains(target[2]))
                 .fetch();
     }
-
 }

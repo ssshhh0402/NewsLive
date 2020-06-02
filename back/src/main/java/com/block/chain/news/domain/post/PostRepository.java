@@ -11,13 +11,11 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 
-public interface PostRepository extends JpaRepository<Post, Long>{
+public interface PostRepository extends JpaRepository<Post, Long>, PostRepositoryCustom{
 
     @Query("SELECT p FROM  Post p ORDER BY p.postId DESC")
     List<Post> findAllDesc();
 
-
-
-
+    List<Post> findAllByKindsEquals(int kinds);
 }
 
