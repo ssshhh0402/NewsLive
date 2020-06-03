@@ -4,7 +4,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import News from '../views/News.vue'
 import Mypage from '../views/Mypage.vue'
-import NewsList from '../views/NewsList.vue'
+import SnsNews from '../views/SnsNews.vue'
 
 Vue.use(VueRouter)
   // const rejectAuthUser = (to, from, next) => {
@@ -23,9 +23,9 @@ Vue.use(VueRouter)
     component: Home
   },
   {
-    path: '/newsList',
-    name: 'newsList',
-    component: NewsList
+    path: '/SnsNews',
+    name: 'SnsNews',
+    component: SnsNews
   },
   {
     name: "mypage",
@@ -41,7 +41,7 @@ Vue.use(VueRouter)
       },
     ],
     redirect: () => {
-      return "/mypage/mypage_info";
+      return "../mypage/mypage_info";
     }
   },
   {

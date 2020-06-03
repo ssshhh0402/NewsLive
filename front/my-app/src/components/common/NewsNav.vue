@@ -6,11 +6,11 @@
         <v-spacer></v-spacer>
         <v-toolbar-items class="hidden-sm-and-down">
             <v-btn text="text" @click = goNewsList()> 
-                News
+                SNS News
             </v-btn>
 
             <v-divider vertical="vertical"></v-divider>
-            <v-btn text="text" @click = goWrite();>
+            <v-btn text="text" v-if="$store.state.isSigned" @click = goWrite();>
                 Write
             </v-btn>
             <v-divider vertical="vertical"></v-divider>
@@ -71,7 +71,7 @@
             },
             goNewsList()
             {   
-                this.$router.push({path:'/newsList'})
+                this.$router.push({path:'/SnsNews'})
             },
             goLogout()
             {   
