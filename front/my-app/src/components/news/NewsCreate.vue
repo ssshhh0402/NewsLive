@@ -18,7 +18,7 @@
             &nbsp;
             <v-btn text >
                 <v-icon>mdi-message-text</v-icon>
-                <strong>맞춤법 검사</strong>
+                <strong>임시 저장</strong>
             </v-btn>
         </v-col>
         <v-col class="text-right" cols="6">

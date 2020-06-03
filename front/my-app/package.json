@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve --port 8080 --open",
+    "serve": "vue-cli-service serve --port 8081 --open",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
@@ -15,7 +15,9 @@
     "quill-image-drop-module": "^1.0.3",
     "quill-image-resize-module": "^3.0.0",
     "vue": "^2.6.11",
+    "vue-facebook-page": "^1.0.1",
     "vue-formio": "^4.0.2",
+    "vue-icon": "^2.1.2",
     "vue-kakao-login": "^1.0.5",
     "vue-material-design-icons": "^4.6.0",
     "vue-quill-editor": "^3.0.6",
