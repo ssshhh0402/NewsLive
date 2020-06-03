@@ -6,6 +6,7 @@ import com.block.chain.news.domain.post.Post;
 import com.block.chain.news.domain.post.PostRepository;
 import com.block.chain.news.domain.subject.Subject;
 import com.block.chain.news.domain.subject.SubjectRepository;
+import com.block.chain.news.domain.subjectList.SubjectListRepository;
 
 import com.block.chain.news.domain.user.User;
 import com.block.chain.news.domain.user.UserRepository;
@@ -13,7 +14,6 @@ import com.block.chain.news.web.dto.SuggestionList;
 import com.block.chain.news.web.dto.posts.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,7 +29,7 @@ public class PostService {
     private final UserRepository userRepository;
     private final PostListRepository postListRepository;
     private final SubjectRepository subjectRepository;
-
+    private final SubjectListRepository subjectListRepository;
 
     @Transactional(readOnly = true)
     public List<PostListResponseDto> findAllDesc(){
@@ -60,22 +60,21 @@ public class PostService {
                 .getTopics();                             //찾고자 하는 기사의 형태소 가져와서
         String[] targetList = target.split(",");                                           // 배열로 만들고
         List<Subject> suggestions = new LinkedList<>();
-//        List<Subject> subjects = new LinkedList<>();
-//        for (String targetOne : targetList) {                                                    // 이 기사에서 target(형태소 10개) 하나씩 돌아가면서 뽑아오고
-//            List<Subject> find = subjectRepository.findAllByTitleContaining(targetOne);             // Subject들 중에서 title에 해당 형태소(뽑아온 아이) 가지고 있는 얘 검색 => 이거 여기서 오류 뜬다
-//            for (Subject one : find) {                                                               //subject 가지고 있는 아이들 중에서
-//                if (!subjects.contains(one)) {                                                                  // 추가 안 되어 있으면
-//                    subjects.add(one);                                                                          //Subjects에 추가
-//                }
-//            }
-//        }
-        List<Subject> subjects = subjectRepository.findByTopics(target);
-        List<SuggestionList> Similarities = new LinkedList<>();
-        for (Subject subject: subjects){
-            int current = getSimilarity(target, subject.getTitle());
-            SuggestionList newOne = new SuggestionList(subject, current);
-            Similarities.add(newOne);
+        List<Subject> subjects = new LinkedList<>();
+        for (String targetOne : targetList) {                                                    // 이 기사에서 target(형태소 10개) 하나씩 돌아가면서 뽑아오고
+            List<Subject> find = subjectRepository.findAllByTitleContaining(targetOne);             // Subject들 중에서 title에 해당 형태소(뽑아온 아이) 가지고 있는 얘 검색 => 이거 여기서 오류 뜬다
+            for (Subject one : find) {                                                               //subject 가지고 있는 아이들 중에서
+                if (!subjects.contains(one)) {                                                                  // 추가 안 되어 있으면
+                    subjects.add(one);                                                                          //Subjects에 추가
+                }
+            }
         }
+        List<SuggestionList> Similarities = new LinkedList<>();
+        for (Subject subject: subjects) {
+            int current = getSimilarity(target, subject.getTitle());            //유사도 계산해서
+            SuggestionList newOne = new SuggestionList(subject, current);                                                                    // Array에 다 넣고(index, current값)
+            Similarities.add(newOne);                                           // 정렬해서
+        }                                                                       // current낮은 순으로 3개 뽑아서
         Collections.sort(Similarities);
         int limits = 0;
         if (Similarities.size() >= 3){
