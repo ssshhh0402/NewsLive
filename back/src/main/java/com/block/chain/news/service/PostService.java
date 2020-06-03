@@ -71,11 +71,6 @@ public class PostService {
 //        }
         List<Subject> subjects = subjectRepository.findByTopics(target);
         List<SuggestionList> Similarities = new LinkedList<>();
-//        for (Subject subject: subjects) {
-//            int current = getSimilarity(target, subject.getTitle());            //유사도 계산해서
-//            SuggestionList newOne = new SuggestionList(subject, current);                                                                    // Array에 다 넣고(index, current값)
-//            Similarities.add(newOne);                                           // 정렬해서
-//        }                                                                       // current낮은 순으로 3개 뽑아서
         for (Subject subject: subjects){
             int current = getSimilarity(target, subject.getTitle());
             SuggestionList newOne = new SuggestionList(subject, current);
@@ -199,4 +194,14 @@ public class PostService {
         }
     }
 
+    public List<PostListResponseDto> findByUserId(Long userId) {
+        User user=userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("잘못된 요청입니다"));
+        List<Post> posts = postRepository.findAllByAuthor(user.getEmail());
+        List<PostListResponseDto> result = new LinkedList<>();
+        for (Post post : posts){
+            PostListResponseDto postListResponseDto = new PostListResponseDto(post);
+            result.add(postListResponseDto);
+        }
+        return result;
+    }
 }

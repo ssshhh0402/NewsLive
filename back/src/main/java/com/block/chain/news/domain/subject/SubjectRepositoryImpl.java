@@ -4,9 +4,10 @@ import com.block.chain.news.domain.post.Post;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import static com.block.chain.news.domain.subject.QSubject.subject;
+
+import java.util.LinkedList;
 import java.util.List;
 
-import static com.block.chain.news.domain.post.QPost.post;
 
 @RequiredArgsConstructor
 public class SubjectRepositoryImpl implements SubjectRepositoryCustom{
@@ -15,10 +16,19 @@ public class SubjectRepositoryImpl implements SubjectRepositoryCustom{
     @Override
     public List<Subject> findByTopics(String topics){
         String [] target = topics.split(",");
-        return queryFactory.selectDistinct(subject)
-                .from(subject)
-                .where(post.topics.contains(target[0]))
-                .where(post.topics.contains(target[1]))
-                .where(post.topics.contains(target[2]))
-                .fetch();
-    }}
+        List<Subject> resultSet = new LinkedList<>();
+
+        for (String idx : target){
+            List<Subject> newOne = queryFactory.selectDistinct(subject)
+                    .from(subject)
+                    .where((subject.title).contains(idx))
+                    .fetch();
+            for (Subject subject : newOne){
+                if (!resultSet.contains(subject)){
+                    resultSet.add(subject);
+                }
+            }
+        }
+        return resultSet;
+    }
+}

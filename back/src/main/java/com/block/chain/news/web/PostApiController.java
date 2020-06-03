@@ -28,7 +28,10 @@ public class PostApiController {
 //        log.info("findById : {}", postId);
 //        return postService.findById(postId);
 //    }
-
+    @GetMapping("/api/v1/posts/user/{userId}")
+    public ResponseEntity<List<PostListResponseDto>>findAllByUser(@PathVariable Long userId){
+        return new ResponseEntity<List<PostListResponseDto>>(postService.findByUserId(userId), HttpStatus.OK);
+    }
     @GetMapping("/api/v1/posts/{postId}")
     public ResponseEntity<PostResponseDto> findById(@PathVariable Long postId){
         log.info("findById : {}", postId);
