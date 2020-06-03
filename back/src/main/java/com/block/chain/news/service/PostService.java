@@ -6,13 +6,7 @@ import com.block.chain.news.domain.post.Post;
 import com.block.chain.news.domain.post.PostRepository;
 import com.block.chain.news.domain.subject.Subject;
 import com.block.chain.news.domain.subject.SubjectRepository;
-<<<<<<< HEAD
-import com.block.chain.news.domain.subjectList.SubjectList;
 import com.block.chain.news.domain.subjectList.SubjectListRepository;
-import com.block.chain.news.domain.tags.TagsRepository;
-import com.block.chain.news.domain.topic.TopicRepository;
-=======
->>>>>>> e2182a10237b8c3e3995962492216305f02bab08
 import com.block.chain.news.domain.user.User;
 import com.block.chain.news.domain.user.UserRepository;
 import com.block.chain.news.web.dto.SuggestionList;
