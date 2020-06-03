@@ -7,13 +7,11 @@ import com.block.chain.news.domain.post.PostRepository;
 import com.block.chain.news.domain.subject.Subject;
 import com.block.chain.news.domain.subject.SubjectRepository;
 import com.block.chain.news.domain.subjectList.SubjectListRepository;
+
 import com.block.chain.news.domain.user.User;
 import com.block.chain.news.domain.user.UserRepository;
 import com.block.chain.news.web.dto.SuggestionList;
-import com.block.chain.news.web.dto.posts.PostListResponseDto;
-import com.block.chain.news.web.dto.posts.PostResponseDto;
-import com.block.chain.news.web.dto.posts.PostSaveRequestDto;
-import com.block.chain.news.web.dto.posts.SubjectListResponseDto;
+import com.block.chain.news.web.dto.posts.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -128,7 +126,17 @@ public class PostService {
 //        }
         return postId;
     }
-
+    @Transactional
+    public List<KindsResponseDto> findAllByKinds(){
+        String [] kind = {"정치","연애","IT","경제"};
+        List<KindsResponseDto> resultSet = new LinkedList<>();
+        for (int idx = 0; idx < kind.length; idx++){
+            List<Post> lists = postRepository.findAllByKindsEquals(idx);
+            KindsResponseDto kindsResponseDto = new KindsResponseDto(kind[idx],lists);
+            resultSet.add(kindsResponseDto);
+        }
+        return resultSet;
+    }
     @Transactional
     public Long deploy(Long postId, String [] selected, Long subjectId){
         Post post = postRepository.findById(postId)
@@ -171,7 +179,7 @@ public class PostService {
         List<Subject> subjects = subjectRepository.findAll();
         List<Post> postLists = new LinkedList<>();
         List<SubjectListResponseDto> subjectListResponseDto = new LinkedList<>();
-            if (subjects.isEmpty()){
+        if (subjects.isEmpty()){
             return subjectListResponseDto;
         }
         else {
@@ -185,4 +193,14 @@ public class PostService {
         }
     }
 
+    public List<PostListResponseDto> findByUserId(Long userId) {
+        User user=userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("잘못된 요청입니다"));
+        List<Post> posts = postRepository.findAllByAuthor(user.getEmail());
+        List<PostListResponseDto> result = new LinkedList<>();
+        for (Post post : posts){
+            PostListResponseDto postListResponseDto = new PostListResponseDto(post);
+            result.add(postListResponseDto);
+        }
+        return result;
+    }
 }
