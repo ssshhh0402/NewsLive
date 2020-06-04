@@ -14,7 +14,7 @@ import java.util.List;
 @Slf4j
 @RequiredArgsConstructor
 @RestController
-public class ReportController {
+public class ReportApiController {
     private final ReportService reportService;
 
     @GetMapping("/api/v1/report/{postId}/{userId}")

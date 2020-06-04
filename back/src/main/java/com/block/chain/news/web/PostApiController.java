@@ -1,5 +1,6 @@
 package com.block.chain.news.web;
 
+import com.block.chain.news.service.NaverAPIService;
 import com.block.chain.news.service.PostService;
 import com.block.chain.news.service.RestTemplateService;
 import com.block.chain.news.web.dto.follow.FollowingPostResponseDto;
@@ -19,6 +20,7 @@ import java.util.List;
 public class PostApiController {
     private final PostService postService;
     private final RestTemplateService restTemplateService;
+    private final NaverAPIService naverAPIService;
 
     @GetMapping("/api/v1/posts")
     public ResponseEntity<List<PostListResponseDto>> getList(){
@@ -90,5 +92,13 @@ public class PostApiController {
     @GetMapping("/api/v1/posts/following/{email}")
     public ResponseEntity<List<FollowerPostResponseDto>> getFollowers(@PathVariable String email){
         return new ResponseEntity<List<FollowerPostResponseDto>>(postService.getFollowersGroup(email), HttpStatus.OK);
+    }
+
+    @PostMapping("/api/v1/posts/translation")
+    public ResponseEntity<String> translation(@RequestBody String text){
+        log.info("Translation .......");
+        String inputLanguage = "ko";
+        String outputLanguage = "en";
+        return new ResponseEntity<String>(naverAPIService.translation(text, inputLanguage, outputLanguage), HttpStatus.OK);
     }
 }

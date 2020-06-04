@@ -21,6 +21,7 @@ export default new Vuex.Store({
             state.isManager = false;
             state.isSigned = false;
             localStorage.clear()
+            // console.log("클리어 되었습니다.")
         },
         setUserInfo(state,sGet)
         {
@@ -45,30 +46,6 @@ export default new Vuex.Store({
                         console.log(JSON.stringify(error));
                     }
                 });
-                // axios({
-                //     url: 'https://kapi.kakao.com/v2/user/me',
-                //     method: 'GET',
-                //     headers: {
-                //         'Authorization': ' KakaoAK  {' + token + '}'
-                //     },
-                // })
-                // .then((result) => {
-                //     console.log(result)
-                // })
-                // .catch((err) => {
-                //     console.log(err);
-                // })
-                //kakao.api.request 'authorization' : 'bearer {' + accesstoken + '}',
-            //     window.Kakao.API.request({
-            //       url: '/v2/user/me',
-            //       // url: '/v2/user/me',
-            //         success: function (response) {
-            //         console.log(response);
-            //       },
-            //       fail: function (error) {
-            //         console.log(error);
-            //       }
-            //   });
             }
         }
         , getKakaoLogout({ commit }) {
@@ -76,7 +53,8 @@ export default new Vuex.Store({
             window.Kakao.API.request({
                 url: '/v1/user/unlink',
                 success: function (response) {
-                    console.log(response);
+                    console.log("vl/user/unlink",response);
+                    // window.Kakao.Auth.logout(function () { });
                 },
                 fail: function (error) {
                     console.log(error);
@@ -86,9 +64,7 @@ export default new Vuex.Store({
                 console.log('Not logged in.');
                 return;
             }
-            window.Kakao.Auth.logout(function () {
-
-            });
+            
             // window.Kakao.Auth.logout({
             //     success: function (authObj) {
             //         window.Kakao.init('/');
