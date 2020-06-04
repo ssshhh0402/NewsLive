@@ -1,5 +1,5 @@
 <template>
-    <div class="mb-3">
+    <div class="mb-3 back">
         <v-hover v-slot:default="{ hover }">
             <v-container>
                 <v-card
@@ -277,7 +277,9 @@
         props: ["CardList"],
         data() {
             return {
-               dialog: false
+               dialog: false,
+               selected: false,
+               includeFiles:''
             }
         },
         methods: {
@@ -290,3 +292,8 @@
         
     };
 </script>
+<style>
+.back {
+    background-image: url('/assets/BackNews.JPG');
+    }
+</style>
