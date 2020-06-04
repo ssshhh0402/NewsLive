@@ -1,12 +1,8 @@
 <template>
   <div >
-      <div class="mt-5 font-weight-bold text-center" style="font-size:29px;">  뉴스 피드
+      <div class="mt-2 font-weight-bold text-center" style="font-size:29px;">  뉴스 피드
       </div>
-      <v-row>
-        <v-col>
           <NewsFeed></NewsFeed>
-        </v-col>
-      </v-row>
       </div>
 </template>
 
