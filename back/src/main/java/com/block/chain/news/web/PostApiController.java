@@ -58,10 +58,9 @@ public class PostApiController {
 
     @PutMapping("/api/v1/posts/{postId}")
     public ResponseEntity<Long> deploy(@PathVariable Long postId,
-                       @RequestParam(value="selected") String [] selected,
-                                       @RequestParam(value="subjectId") Long subjectId) throws Exception{
-        log.info("subjectId : {}", subjectId);
-        return new ResponseEntity<Long>(postService.deploy(postId, selected, subjectId),HttpStatus.OK);
+                                       @RequestBody PostDeployRequestDto postDeployRequestDto) throws Exception{
+        log.info("subjectId : {}", postDeployRequestDto.getSubjectId());
+        return new ResponseEntity<Long>(postService.deploy(postId, postDeployRequestDto.getSelected(), postDeployRequestDto.getSubjectId()),HttpStatus.OK);
     }
 
     @DeleteMapping("/api/v1/posts/{postId}")
