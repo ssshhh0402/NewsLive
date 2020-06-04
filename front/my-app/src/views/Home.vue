@@ -16,7 +16,7 @@
                             solo-inverted="solo-inverted"
                             hide-details="hide-details"
                             background-color="white"
-                            label="뉴스 검색"
+                            label="뉴스 검색 및 유저 검색"
                             @keyup.enter="goSearch(search)"></v-text-field>
                     </div>
                 </v-col>

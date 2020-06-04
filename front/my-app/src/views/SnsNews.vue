@@ -1,9 +1,7 @@
 <template>
   <div >
-      <br>
-      <div class="font-weight-bold text-center" style="font-size:34px;">  뉴스 피드
+      <div class="mt-5 font-weight-bold text-center" style="font-size:29px;">  뉴스 피드
       </div>
-      <br>
       <v-row>
         <v-col>
           <NewsFeed></NewsFeed>
