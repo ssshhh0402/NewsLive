@@ -44,7 +44,7 @@ dependencies {
 
     compile 'org.jsoup:jsoup:1.13.1' // Jsoup용!
 
-    implementation('org.apache.httpcomponents:httpclient:4.5') //RestTemplate용 httpclient
+    compile 'org.apache.httpcomponents:httpclient:4.5' //RestTemplate용 httpclient
 
     testCompile('org.springframework.boot:spring-boot-starter-test:')
 }

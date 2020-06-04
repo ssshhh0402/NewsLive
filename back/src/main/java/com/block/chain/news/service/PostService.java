@@ -11,7 +11,9 @@ import com.block.chain.news.domain.subjectList.SubjectListRepository;
 import com.block.chain.news.domain.user.User;
 import com.block.chain.news.domain.user.UserRepository;
 import com.block.chain.news.web.dto.SuggestionList;
+import com.block.chain.news.web.dto.follow.FollowingPostResponseDto;
 import com.block.chain.news.web.dto.posts.*;
+import com.block.chain.news.web.dto.follow.FollowResponseDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -30,7 +32,7 @@ public class PostService {
     private final PostListRepository postListRepository;
     private final SubjectRepository subjectRepository;
     private final SubjectListRepository subjectListRepository;
-
+    private final FollowService followService;
     @Transactional(readOnly = true)
     public List<PostListResponseDto> findAllDesc(){
         List<Post> postList =postRepository.findAll();
@@ -202,5 +204,17 @@ public class PostService {
             result.add(postListResponseDto);
         }
         return result;
+    }
+
+    public List<FollowingPostResponseDto> getFollowers(String email){
+        User user = userRepository.findByEmail(email).orElseThrow(() -> new IllegalArgumentException("잘못된 요청입니닫닫"));
+        List<FollowingPostResponseDto> resultSet = new LinkedList<>();
+        List<String> followResponseDto = new FollowResponseDto(user).getFollowing();
+        for (String userEmail : followResponseDto){
+            List<Post> posts = postRepository.findAllByAuthor(userEmail);
+            FollowingPostResponseDto followingListResponseDto = new FollowingPostResponseDto(userEmail,posts);
+            resultSet.add(followingListResponseDto);
+        }
+        return resultSet;
     }
 }
