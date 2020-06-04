@@ -1,7 +1,6 @@
 <template>
-    <div>
+    <v-container>
         <v-hover v-slot:default="{ hover }">
-            <v-container>
                 <v-card
                     height="500"
                     width="870"
@@ -9,6 +8,12 @@
                     align-center="align-center"
                     :elevation="hover ? 16 : 2"
                     class="mx-auto">
+                     <v-img
+                 class="white--text align-end"
+                 height="500px"
+                 src= "../../../assets/backnews.jpg"
+                >
+                
                     <v-list-item>
                         <v-list-item-avatar color="yellow">Best</v-list-item-avatar>
                         <v-list-item-content>
@@ -46,11 +51,13 @@
                             <v-icon>mdi-share-variant</v-icon>
                         </v-btn>
                     </v-card-actions>
+                    </v-img>
                 </v-card>
-            </v-container>
         </v-hover>
-        <v-dialog v-model="dialog"  scrollable max-width="430px">
+        <v-dialog v-model="dialog"  max-width="440px">
             <v-card >
+               
+                <v-container>
                 <v-row>
                 <v-list-item class="text-center bold ">
                     <v-list-item-title >
@@ -78,17 +85,18 @@
                         <v-checkbox
                             v-model="includeFiles"
                             hide-details="hide-details"
-                            class="shrink mr-2 mt-0"></v-checkbox>
-                        <v-text-field label="기타" class="mr-2"></v-text-field>
+                            class="shrink mr-1 mt-1 "></v-checkbox>
+                        <v-text-field class="mr-2" label="기타" ></v-text-field>
                     </v-row>
                 </v-card-text>
                 <v-divider></v-divider>
                 <v-card-actions class="justify-center">
-                    <v-btn class="mr-4 " rounded="rounded" color="black" dark="dark">신 고 하 기</v-btn>
+                    <v-btn rounded="rounded" color="black" dark="dark">신 고 하 기</v-btn>
                 </v-card-actions>
+                </v-container>
             </v-card>
         </v-dialog>
-    </div>
+    </v-container>
 </template>
 <script>
     import axios from "axios"; 
