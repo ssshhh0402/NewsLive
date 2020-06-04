@@ -42,9 +42,11 @@ dependencies {
     compile("com.querydsl:querydsl-apt") // querydsl
     compile('commons-io:commons-io:2.4')
 
-    compile 'org.jsoup:jsoup:1.13.1' // Jsoup용!
+    compile('org.jsoup:jsoup:1.13.1') // Jsoup용!
 
-    compile 'org.apache.httpcomponents:httpclient:4.5' //RestTemplate용 httpclient
+    compile('org.json:json:20160810')
+
+    compile('org.apache.httpcomponents:httpclient:4.5') //RestTemplate용 httpclient
 
     testCompile('org.springframework.boot:spring-boot-starter-test:')
 }
