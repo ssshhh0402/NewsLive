@@ -80,11 +80,15 @@ public class PostApiController {
 
     @GetMapping("/api/v1/posts/subject")
     public ResponseEntity<List<SubjectListResponseDto>> getSubject(){
-
         return new ResponseEntity<List<SubjectListResponseDto>>(postService.getSubject(), HttpStatus.OK);
     }
+//    @GetMapping("/api/v1/posts/following/{email}")
+//    public ResponseEntity<List<FollowingPostResponseDto>> getFollowers(@PathVariable String email){
+//        return new ResponseEntity<List<FollowingPostResponseDto>>(postService.getFollowers(email),HttpStatus.OK);
+//    }
+
     @GetMapping("/api/v1/posts/following/{email}")
-    public ResponseEntity<List<FollowingPostResponseDto>> getFollowers(@PathVariable String email){
-        return new ResponseEntity<List<FollowingPostResponseDto>>(postService.getFollowers(email),HttpStatus.OK);
+    public ResponseEntity<List<FollowerPostResponseDto>> getFollowers(@PathVariable String email){
+        return new ResponseEntity<List<FollowerPostResponseDto>>(postService.getFollowersGroup(email), HttpStatus.OK);
     }
 }
