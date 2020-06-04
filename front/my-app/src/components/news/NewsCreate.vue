@@ -62,6 +62,7 @@
                     preview: false,
                     Grammer: false
                 },
+                picture: null,
                 Title: " ",
                 Email: " ",
                 // <strong class="ql-font-serif ql-size-large" style="color: rgb(230, 0,
@@ -131,6 +132,10 @@
                         .link
                         Editor
                         .insertEmbed(cursorLocation, 'image', url);
+                    if(this.picture== null)
+                    {
+                        this.picture = url;
+                    }
                 })
                 .catch((err) => {
                     console.log(err);

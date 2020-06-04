@@ -38,7 +38,6 @@ export default new Vuex.Store({
                 window.Kakao.API.request({
                     url: '/v2/user/me',
                     success: function (res) {
-                        commit("setUserInfo", res);
                         commit("setIsSigned", true);
                         var mail = res.kakao_account.email
                         var id1 = res.id 
@@ -48,10 +47,13 @@ export default new Vuex.Store({
                         if (res.kakao_account.profile.profile_image_url) {
                             picture2 = res.kakao_account.profile.profile_image_url;
                         }
-                        console.log("카카오 아이디res", res)
-                        console.log("카카오 id", res.id)
-                        console.log("카카오 id", id1)
-
+                        else
+                        {
+                            picture2 ="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/450px-No_image_available.svg.png";
+                            res.kakao_account.profile.profile_image_url = picture2;
+                        }
+                        commit("setUserInfo", res);
+       
                         axios.post(API_BASE_URL + "/api/v1/user", {
                             email: mail,
                             id: id1,

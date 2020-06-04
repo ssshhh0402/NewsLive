@@ -65,13 +65,7 @@
                         </v-list-item-icon>
                         <v-list-item-title @click="allarticle()" >모든 기사보기</v-list-item-title>
                     </v-list-item>
-                    <v-divider></v-divider>
-                    <v-list-item class="mb-2">
-                        <v-list-item-icon>
-                        <v-icon>mdi-history</v-icon>
-                        </v-list-item-icon>
-                        <v-list-item-title>카테고리별 기사보기</v-list-item-title>
-                    </v-list-item>
+                   
                     <v-divider></v-divider>
                 </v-list>
         </v-col>
@@ -82,7 +76,7 @@
                 <!--주제별 기사 -->
                 <!--유저 기사 -->
             <Article v-if="count !=1" :CardList="CardList" :count="count"></Article>
-            <AllNews v-else></AllNews>x
+            <AllNews v-else></AllNews>
             </div>
         </v-col>
         <v-col cols="2">

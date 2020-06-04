@@ -11,7 +11,7 @@ html {
 	font-size: 14px;
 }
 body {
-	overflow: hidden;
+	/* overflow: hidden; */
 	font-family: 'Playfair Display', serif;
 	background: url(images/tablewood.jpg);
 	/* background-size: auto 130px; */
@@ -25,6 +25,7 @@ body {
 	width: 30px;
 }
 .hand img {
+	transform: scale(0.3);
 	transform-origin: left top;
 	transition: 1s;
 }

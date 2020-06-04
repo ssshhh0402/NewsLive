@@ -1,6 +1,6 @@
 <template>
-	<div>
-      <div class="home">
+	<div >
+      <div class=" home">
         <v-img src="../assets/Main_banner.png" id="desk" :aspect-ratio="1520/270">
             <v-row justify="center">
                 <v-col align="center">
@@ -27,7 +27,7 @@
         <div class="hand">
 			<img src="images/hand.png" alt="손">
 		</div>
-			<div class="leaflet" >
+			<div class=" leaflet" >
 				<div class="page" data-page="1">
 					<div class="page-face cover-page">
 						<p>News Card</p>

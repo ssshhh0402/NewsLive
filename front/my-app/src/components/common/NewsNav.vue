@@ -5,6 +5,9 @@
         <span class="subheading" @click = goHome(); >My Home</span>
         <v-spacer></v-spacer>
         <v-toolbar-items class="hidden-sm-and-down">
+            
+            <v-divider vertical="vertical"></v-divider>
+
             <v-btn text="text" @click = goNewsList()> 
                 SNS News
             </v-btn>
@@ -14,6 +17,7 @@
                 Write
             </v-btn>
             <v-divider vertical="vertical"></v-divider>
+            
             <v-btn v-if="!$store.state.isSigned" text="text">
                 <KakaoLogin 
                 image="kakao_login_btn_medium_ov"
@@ -22,8 +26,13 @@
                 :on-failure=onFailure
                 />
             </v-btn>
+            
             <v-btn v-if="$store.state.isSigned" text="text" @click = goMypage(); >
                 MyPage
+            </v-btn>
+            <v-divider vertical="vertical"></v-divider>
+            <v-btn text="text" v-if="$store.state.isSigned" @click = goAd();>
+                AdPage
             </v-btn>
             <v-divider vertical="vertical"></v-divider>
             <v-btn v-if="$store.state.isSigned" text="text" @click = goLogout(); >
@@ -68,6 +77,9 @@
             goMypage()
             {   
                 this.$router.push({path:'/mypage'})
+            },
+            goAd(){
+                this.$router.push({path:'/advertisement'})    
             },
             goNewsList()
             {   
