@@ -2,9 +2,12 @@ package com.block.chain.news.web;
 
 import com.block.chain.news.domain.post.Post;
 import com.block.chain.news.service.PostService;
+import com.block.chain.news.service.RestTemplateService;
 import com.block.chain.news.web.dto.posts.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +19,7 @@ import java.util.List;
 @RestController
 public class PostApiController {
     private final PostService postService;
+    private final RestTemplateService restTemplateService;
 
     @GetMapping("/api/v1/posts")
     public ResponseEntity<List<PostListResponseDto>> getList(){
@@ -47,13 +51,14 @@ public class PostApiController {
     public ResponseEntity<Long> save(@RequestParam(value="title") String title,
                                      @RequestParam(value="content") String content,
                                      @RequestParam(value="author") String author,
-                                     @RequestParam(value="words") String words,
+//                                     @RequestParam(value="words") String words,
                                      @RequestParam(value="kinds") int kinds) throws Exception{
+        String word = Jsoup.parse(content).text();
         PostSaveRequestDto postSaveRequestDto = PostSaveRequestDto.builder()
                 .title(title)
                 .content(content)
                 .author(author)
-                .words(words)
+                .words(restTemplateService.getMorpheme(word))
                 .kinds(kinds)
                 .build();
         return new ResponseEntity<Long>(postService.save(postSaveRequestDto),HttpStatus.OK);
