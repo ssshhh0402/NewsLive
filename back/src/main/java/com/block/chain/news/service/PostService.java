@@ -231,9 +231,9 @@ public class PostService {
                 if (! post.getState().equals("SAVE")){                          //SAVE 아니라면(임시저장 상태가 아니라면)
                     if (! subjectList.contains(post.getSubject())) {            //여태까지 찾았던 Subject가 아니라면
                         subjectList.add(post.getSubject());                     //Subject 추가
-                        List<Post> posts1 = new LinkedList<>();
-                        posts1.add(post);
-                        postList.add(posts1);                                   //현재 Post 리스트에 추가
+                        List<Post> subjectPost = new LinkedList<>();
+                        subjectPost.add(post);
+                        postList.add(subjectPost);                                   //현재 Post 리스트에 추가
                     }else{                                                      //추가했었던 Subject라면
                         int idx = subjectList.indexOf(post.getSubject());       //해당 Subject 위치(idx)구하고
                         postList.get(idx).add(post);                            //해당 index의 Postlist에다가 현재 post 추가

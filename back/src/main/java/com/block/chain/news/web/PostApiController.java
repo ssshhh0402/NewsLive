@@ -46,6 +46,8 @@ public class PostApiController {
     @PostMapping("/api/v1/posts")
     public ResponseEntity<Long> save(@RequestBody PostSaveRequestDto requestDto) throws Exception{
         String word = Jsoup.parse(requestDto.getContent()).text();
+        log.info("Post requestDto : {}", requestDto.getAuthor());
+        log.info("Post requestDto : {}", requestDto.getContent());
         log.info(word);
         String results = "";
         try{
