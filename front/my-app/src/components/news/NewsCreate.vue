@@ -1,15 +1,26 @@
 <template>
 <!-- 해결해야할 것 ( 임시저장, 컴플릿 ) -->
-    <div>
+    <v-container>
+        <div cols="3"
+        id="scroll-target"
+                    style="max-height: 80vh"
+                    class="fdfdfd overflow-y-auto"
+        >
         <vue-editor
+            
             id="editor"
             useCustomImageHandler
             @image-added="handleImageAdded"
-            v-model="content"></vue-editor>
+            v-model="content"
+            v-scroll:#scroll-target="onScroll"
+            ></vue-editor>
+        <br>
+        </div>
         <!--완성된 기사 미리 보기로 설정하기. // 뉴스 타이틀을 가지고 왔어... 그리고? 어떻게 보내줘야하지? -->
         <v-footer absolute="absolute" class="font-weight-medium">
             <v-row>
-                <v-col class="text-left" cols="6">
+                 <v-col class="text-left" cols="2"></v-col>
+                <v-col class="text-left" cols="4">
                     <v-btn text="text" @click.stop="dialog.preview = true">
                         <v-icon>mdi-history</v-icon>
                         <strong>미리보기</strong>
@@ -20,14 +31,16 @@
                         <strong>임시 저장</strong>
                     </v-btn>
                 </v-col>
-                <v-col class="text-right" cols="6">
+                <v-col class="text-right" cols="4">
                     <v-btn
                         class="mr-4"
                         rounded="rounded"
                         color="black"
                         dark="dark"
-                        @click="goComplete()">Complete</v-btn>
+                        @click.stop="dialog.complete = true"
+                        >Complete</v-btn>
                 </v-col>
+                 <v-col class="text-left" cols="2"></v-col>
             </v-row>
         </v-footer>
         <v-dialog v-model="dialog.preview" max-width="1000">
@@ -43,8 +56,88 @@
                 </div>
             </v-card>
         </v-dialog>
-    </div>
-
+        <v-dialog v-model="dialog.complete" max-width="700">
+                   <v-card >
+                       <v-container>
+                       <v-row >
+                           <v-card-title>카테고리를 선택해주세요.</v-card-title>
+                            <v-spacer></v-spacer>
+                            <v-btn icon="icon" dark="dark" @click="completeBack()" class="mr-2">
+                                <v-icon color="black darken-2">mdi-close</v-icon>
+                            </v-btn>
+                        </v-row>
+                            <v-divider></v-divider>
+                      <v-row >
+                      <v-col cols="4">
+                      <div class="text-center" @click="checkBox(0)" >
+                      <v-avatar size="100px"><div class="font_color font-weight-bold" v-if="checkNum===0">OK</div><v-img v-else src="../../assets/econo.jpg"></v-img></v-avatar>
+                            <div class="mt-2 white--text  text--lighten-1 font-weight-bold "
+                              style="font-size:20px;"> 경제
+                            </div>
+                            경제
+                      </div>
+                      </v-col>
+                      <v-col cols="4">
+                          <div class="text-center" @click="checkBox(1)">
+                          <v-avatar size="100px" ><div class="font_color font-weight-bold" v-if="checkNum===1">OK</div><v-img v-else src="../../assets/sport.png"></v-img></v-avatar>
+                            <div
+                              class="mt-2  white--text  text--lighten-1 font-weight-bold "
+                              style="font-size:20px;">  스포츠
+                            </div>
+                            스프츠
+                          </div>
+                      </v-col>
+                      <v-col cols="4">
+                          <div class="text-center" @click="checkBox(2)">
+                          <v-avatar size="100px" ><div class="font_color font-weight-bold" v-if="checkNum===2">OK</div><v-img v-else src="../../assets/social1.jpg"></v-img></v-avatar>
+                            <div 
+                              class=" mt-2 white--text  text--lighten-1 font-weight-bold "
+                              style="font-size:20px;">  사회
+                            </div>
+                            사회
+                          </div>
+                      </v-col>
+                      <v-col cols="4">
+                          <div class="text-center" @click="checkBox(3)">
+                          <v-avatar size="100px" ><div class="font_color font-weight-bold" v-if="checkNum===3">OK</div><v-img v-else src="../../assets/stock.jpg"></v-img></v-avatar>
+                            <div 
+                              class=" mt-2 white--text  text--lighten-1 font-weight-bold "
+                              style="font-size:20px;"> 증시
+                            </div>
+                            증시
+                          </div>
+                      </v-col>
+                      <v-col cols="4">
+                          <div class="text-center" @click="checkBox(4)">
+                          <v-avatar size="100px" ><div class="font_color font-weight-bold" v-if="checkNum===4">OK</div><v-img v-else src="../../assets/it.jpg"></v-img></v-avatar>
+                            <div 
+                              class=" mt-2 white--text  text--lighten-1 font-weight-bold "
+                              style="font-size:20px;"> I T
+                            </div>
+                            IT
+                          </div>
+                      </v-col>
+                      <v-col cols="4">
+                          <div class="text-center" @click="checkBox(5)">
+                          <v-avatar size="100px" ><div class="font_color font-weight-bold" v-if="checkNum===5">OK</div><v-img v-else src="../../assets/entertain.jpg"></v-img></v-avatar>
+                            <div 
+                              class=" mt-2 white--text  text--lighten-1 font-weight-bold "
+                              style="font-size:20px;"> 연예
+                            </div>
+                            연애
+                          </div>
+                      </v-col>
+                    </v-row>
+                    <v-divider></v-divider>
+                    <v-row>
+                        <v-col>
+                            <v-btn>유사 기사를 찾으시겠습니까?</v-btn>
+                        </v-col>
+                    </v-row>
+                    </v-container>
+             </v-card>
+        </v-dialog>
+    </v-container>
 </template>
 <script>
     import dedent from 'dedent'
@@ -60,9 +153,11 @@
             return {
                 dialog: {
                     preview: false,
-                    Grammer: false
+                    complete: false
                 },
-                picture: null,
+                checkNum: -1,
+                selected: {},
+                picture: "NO",
                 Title: " ",
                 Email: " ",
                 // <strong class="ql-font-serif ql-size-large" style="color: rgb(230, 0,
@@ -90,6 +185,9 @@
             }
         },
         methods: {
+            checkBox(num){
+            this.checkNum = num;
+            },
             goTempStore() {
                 this.Email = this.$store.state.UserInfo.kakao_account.email
                 const start = this.content.indexOf('255);">',2) + '255);">'.length;
@@ -106,13 +204,22 @@
                             banner: this.picture
                     })
                     .then(response => {
-                        console.log(response)
+                       console.log(response)
                     })
                     .catch(() => {
                     })
             },
         previewBack() {
             this.dialog.preview = false;
+        },
+        completeBack()
+        {
+            this.dialog.complete = false;    
+        },
+        goComplete()
+        {
+            // /
+            
         },
         handleImageAdded: function (file, Editor, cursorLocation) {
             var formData = new FormData();
@@ -133,7 +240,7 @@
                         .link
                         Editor
                         .insertEmbed(cursorLocation, 'image', url);
-                    if(this.picture== null)
+                    if(this.picture== "NO")
                     {
                         this.picture = url;
                     }
@@ -156,5 +263,17 @@
         display: flex;
         justify-content: center;
         align-items: center;
+    }
+    .fdfdfd{
+        overflow-y: scroll;
+    }
+    .fdfdfd::-webkit-scrollbar {
+        display: none;
+    }
+    .font_color{
+    background: linear-gradient(to right, #fbcac9, #8ca6ce);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 35px;
     }
 </style>

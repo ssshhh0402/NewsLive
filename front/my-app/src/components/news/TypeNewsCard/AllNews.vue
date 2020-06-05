@@ -1,7 +1,6 @@
 <template>
     <v-container>
         <v-hover v-slot:default="{ hover }">
-            
                 <v-card
                     height="500"
                     width="870"
@@ -120,22 +119,8 @@
             {
                 this.dialog=false;
             },
-            goFollow(){
-                const author = "ehdgus190@naver.com";
-                const email = this.$store.state.UserInfo.kakao_account.email;
-                axios
-                .put(API_BASE_URL+'/api/v1/user/follow',{
-                    fromUserEmail:email,
-                    toUserEmail:author,
-                })
-                .then(response=>{
-                    console.log(response);
-                })
-                .catch(e=>{
-                    console.error(e);
-                })
-                
-
+            goFollow()
+            {
             },
             getAllNews(){
                     axios
