@@ -1,18 +1,19 @@
 <template>
     <v-container>
-        <v-hover v-slot:default="{ hover }">
-            
+                <v-hover v-slot:default="{ hover }">
+
                 <v-card
-                    height="500"
-                    width="870"
+                    height="300"
+                    width="80%"
                     light="light"
                     align-center="align-center"
                     :elevation="hover ? 16 : 2"
-                    class="mx-auto">
+                    class="mx-auto"
+                    >
                      <v-img
                  class="white--text align-end"
-                 height="500px"
-                 src= "../../../assets/backnews.jpg"
+                 height="100%"
+                 src= "../../../../assets/backnews.jpg"
                 >
                 
                     <v-list-item>
@@ -96,12 +97,14 @@
                 </v-card-actions>
                 </v-container>
             </v-card>
+            
         </v-dialog>
     </v-container>
 </template>
+
 <script>
     import axios from "axios"; 
-    import { API_BASE_URL } from "../../../config";
+    import { API_BASE_URL } from "../../../../config";
     export default {
         data() {
             return {
