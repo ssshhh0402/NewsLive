@@ -1,6 +1,10 @@
 <template>
   <div >
-      <div class="mt-2 font-weight-bold text-center" style="font-size:29px;">  뉴스 피드
+      <div class=" mt-3 text-center" >  
+         <span
+              class=" test font-weight-bold "
+              style="font-size:35px;">News Feed
+          </span>
       </div>
           <NewsFeed></NewsFeed>
       </div>
@@ -17,4 +21,9 @@ export default {
 
 <style>
 
+.test {
+  background: linear-gradient(to right, #fbcac9, #8ca6ce);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 </style>

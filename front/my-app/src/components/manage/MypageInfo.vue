@@ -1,14 +1,12 @@
 <template>
     <div>
         <div class= "back_g" style="height:380px">
-            <h2 class= "text-center">
-                <br>
-                내 정보
-            </h2>
-        <v-card  class="mx-auto" align-center="align-center"  width="80%">
+            <br>
+            <br><br>
+        <v-card class=" mx-auto" align-center="align-center"  width="80%">
         <div class="text-center">
-            <v-avatar size ="100px">
-                <v-img class="img-center" height="100px" width="100px" :src="UserInfo.kakao_account.profile.profile_image_url"><v-avatar></v-avatar></v-img>
+            <v-avatar class="img-center" size ="100px">
+                <v-img  :src="UserInfo.kakao_account.profile.profile_image_url"><v-avatar></v-avatar></v-img>
             </v-avatar>
             <br>이름: {{UserInfo.kakao_account.profile.nickname}}
             <br>이메일: {{UserInfo.kakao_account.email}} 
@@ -20,7 +18,12 @@
         <v-row> 
             <v-col cols="1"></v-col>
             <v-col class="mr-2" cols="5">
-             <span> 작업중인 기사 </span>
+                <div class=" mt-3 text-center" >  
+                        <span
+                            class=" test font-weight-bold "
+                            style="font-size:35px;">-ING
+                        </span>
+                    </div>
              <v-data-table
                 :headers="headers"
                 :items="alldonations"
@@ -30,7 +33,12 @@
              </v-data-table>   
             </v-col>
             <v-col  cols="5">
-             <span> 완료된 기사 </span>
+                <div class=" mt-3 text-center" >  
+                    <span
+                        class=" test font-weight-bold "
+                        style="font-size:35px;">COMPlETE
+                    </span>
+                </div>
              <v-data-table
                 :headers="headers"
                 :items="alldonations"
@@ -104,6 +112,11 @@
     width: 100%;
     padding:5vw;
 } 
+.test {
+  background: linear-gradient(to right, #fbcac9, #8ca6ce);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 .back_g{
 		background: #654ea3;  /* fallback for old browsers */
 		background: -webkit-linear-gradient(to right, #eaafc8, #654ea3);  /* Chrome 10-25, Safari 5.1-6 */
@@ -111,7 +124,7 @@
     }
     .img-center {
         margin-top: 3px;
-        left: 50%;
+        left: 3.3%;
         -ms-transform: translate(-50%, -50%);
         transform: translate(-50%, -50%);
     }
