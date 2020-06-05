@@ -102,7 +102,8 @@
                             author: this.Email,
                             content : this.content,
                             title : this.Title,
-                            kinds: 0
+                            kinds: 0,
+                            banner: this.picture
                     })
                     .then(response => {
                         console.log(response)

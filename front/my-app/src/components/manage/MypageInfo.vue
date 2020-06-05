@@ -1,11 +1,15 @@
 <template>
-    <div >
-        <div class= "bk" style="height:380px">
-        <h2 class= "mt-3 text-center">내 정보
-        </h2>
-        <v-card align-center="align-center"   >
+    <div>
+        <div class= "back_g" style="height:380px">
+            <h2 class= "text-center">
+                <br>
+                내 정보
+            </h2>
+        <v-card  class="mx-auto" align-center="align-center"  width="80%">
         <div class="text-center">
-            <v-img  align-center height="100px" width="100px" :src="UserInfo.kakao_account.profile.profile_image_url"></v-img>
+            <v-avatar size ="100px">
+                <v-img class="img-center" height="100px" width="100px" :src="UserInfo.kakao_account.profile.profile_image_url"><v-avatar></v-avatar></v-img>
+            </v-avatar>
             <br>이름: {{UserInfo.kakao_account.profile.nickname}}
             <br>이메일: {{UserInfo.kakao_account.email}} 
             <br>성별: {{UserInfo.kakao_account.gender}}
@@ -38,15 +42,10 @@
             </v-col> 
         </v-row>
         
-        <!-- <v-container>
-           
-            </v-data-table>
-            </v-container> -->
          </div>
     </div>
 </template>
 <script>
-    import axios from "axios";
     export default {
         data() {
             return {
@@ -83,21 +82,9 @@
         },
         mounted()
         {
-            this.getMyNews();
         },
         methods: {
-            getMyNews() {
-                console.log("Mypage",this.alldonations);
-              axios
-                  .get('http://k02b2041.p.ssafy.io:8080/api/v1/posts')
-                  .then(res => {
-                      this.alldonations = res.data
-                      console.log("res",res)
-                  })
-                  .catch((err) => {
-                      alert(err)
-                  })
-           },
+            
         },
         
     }
@@ -117,4 +104,15 @@
     width: 100%;
     padding:5vw;
 } 
+.back_g{
+		background: #654ea3;  /* fallback for old browsers */
+		background: -webkit-linear-gradient(to right, #eaafc8, #654ea3);  /* Chrome 10-25, Safari 5.1-6 */
+		background: linear-gradient(to right, #eaafc8, #654ea3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    }
+    .img-center {
+        margin-top: 3px;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+    }
 </style>

@@ -1,5 +1,5 @@
 <template>
-    <v-toolbar max-height="65" color="purple" dark="dark">
+    <v-toolbar class ="back_g" max-height="65"  dark> 
         <v-toolbar-title>NEWS</v-toolbar-title>
         <v-divider class="mx-4" vertical="vertical"></v-divider>
         <span class="subheading" @click = goHome(); >My Home</span>
@@ -97,3 +97,9 @@
         }
     }
 </script>
+<style >
+.back_g{
+		background: #654ea3;  /* fallback for old browsers */
+		background: -webkit-linear-gradient(to right, #eaafc8, #654ea3);  /* Chrome 10-25, Safari 5.1-6 */
+		background: linear-gradient(to right, #eaafc8, #654ea3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	}</style>

@@ -2,6 +2,7 @@ import Vue from 'vue'
 import store from "../store";
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import HomeNav from '../views/HomeNav.vue'
 import News from '../views/News.vue'
 import Mypage from '../views/Mypage.vue'
 import SnsNews from '../views/SnsNews.vue'
@@ -22,6 +23,11 @@ Vue.use(VueRouter)
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/homenav',
+    name: 'HomeNav',
+    component: HomeNav
   },
   {
     path: '/SnsNews',
