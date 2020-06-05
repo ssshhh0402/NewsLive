@@ -23,9 +23,11 @@ public class FollowResponseDto {
             follower.add(followerUser.getFromUser().getEmail());
         }
 
+
         for (Follow followingUser : followings) {
             following.add(followingUser.getToUser().getEmail());
         }
+
 
         this.follower = follower;
         this.following = following;
