@@ -23,16 +23,49 @@
             </v-row>
         </v-img>
 		<br>  
-		<div class ="mt-2 mb-9">
-        <div class="hand">
-			<img src="images/hand.png" alt="손">
+		<div class ="Homebody mt-2 mb-9">
+			<div class=" leaflet" >
+					<div class="page1">
+					<div class="page-face" data-page="1">	
+						<ul class="menu-list">
+							<li class="menu-item">
+								<figure class="menu-item-photo" style="background-image: url(images/econo.jpg)"></figure>
+								<div class="menu-item-info">
+									<p class="member-name">경 제</p>
+									<p class="member-info">1 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita corrupti excepturi asperiores.</p>
+								</div>
+								<button class="back-btn">← Back</button>
+							</li>
+							<li class="menu-item">
+								<figure class="menu-item-photo" style="background-image: url(images/social1.jpg)"></figure>
+								<div class="menu-item-info">
+									<p class="member-name">정 치</p>
+									<p class="member-info">1 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita corrupti excepturi asperiores.</p>
+								</div>
+								<button class="back-btn">← Back</button>
+							</li>
+							<li class="menu-item">
+								<figure class="menu-item-photo" style="background-image: url(images/entertain.jpg)"></figure>
+								<div class="menu-item-info">
+									<p class="member-name">사 회</p>
+									<p class="member-info">1 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita corrupti excepturi asperiores.</p>
+								</div>
+								<button class="back-btn">← Back</button>
+							</li>
+						</ul>
+					</div>
+				</div>
+			
+				<div class="page3">
+					<div class="page-face">	
+
+					</div>
+				</div>
+			</div>
 		</div>
+		<!-- <div class ="Homebody mt-2 mb-9">
 			<div class=" leaflet" >
 				<div class="page" data-page="1">
-					<div class="page-face cover-page">
-						<p>News Card</p>
-						<h1 class="menu-header-title">The News Live</h1>
-					</div>
 					<div class="page-face">
 						<ul class="menu-list">
 							<li class="menu-item">
@@ -112,11 +145,11 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> -->
+	
 	</div>
-       <br>     <br>   <br>
+		<br>
   </div>
-  
 </template>
 <script >
 
@@ -143,6 +176,157 @@
     }
 </script>
 <style>
+.Homebody{
+	perspective: 1500px;
+}
+.leaflet {
+	position: relative;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	width: 30vw;
+	height: 30vw;
+	margin: auto;
+	transform-style: preserve-3d;
+	transition: 1s;
+	cursor: pointer;
+	animation: start-ani 1s forwards;
+}
+.page1 {
+	transform: rotateY(-130deg);
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	font-size: 3rem;
+	box-shadow: rgba(0, 0, 0, 0.2) 0 5px 5px;
+	transform-style: preserve-3d;
+	transition: 1s;
+}
+.page2 {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	font-size: 3rem;
+	box-shadow: rgba(0, 0, 0, 0.2) 0 5px 5px;
+	transform-style: preserve-3d;
+	transition: 1s;
+}
+.page3 {
+	transform: rotateY(170deg);
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	font-size: 3rem;
+	box-shadow: rgba(0, 0, 0, 0.2) 0 5px 5px;
+	transform-style: preserve-3d;
+	transition: 1s;
+}
+
+.page:nth-child(1) {
+	z-index: 2;
+	transform-origin: left;
+}
+.page:nth-child(3) {
+	z-index: 1;
+	transform-origin: right;
+}
+
+.page-face {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: rgb(218, 204, 152);
+	/* 페이지 색깔.  */
+	/* backface-visibility: hidden; */
+	transform-style: preserve-3d;
+}
+.page-face:nth-child(2) {
+	transform: rotateY(180deg);
+}
+.page:nth-child(1) .page-face:nth-child(2),
+.page:nth-child(2) .page-face:nth-child(1),
+.page:nth-child(3) .page-face:nth-child(2) {
+	background: rgb(214, 212, 212);
+}
+/* .cover-page {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	font-size: 1.5rem;
+}
+.cover-page::before {
+	content: '';
+	display: block;
+	position: absolute;
+	left: 10px;
+	right: 10px;
+	top: 10px;
+	bottom: 10px;
+	border: 1px solid tan;
+} */
+.menu-header-title {
+	font-family: 'Courgette', cursive;
+}
+.menu-list {
+	font-size: 0.7rem;
+}
+.menu-item {
+	display: flex;
+	align-items: center;
+	position: relative;
+	padding: 2em;
+	transition: 0.5s;
+}
+.back-btn {
+	display: none;
+	position: absolute;
+	right: 10px;
+	top: 10px;
+}
+.current-menu .back-btn {
+	display: inline-block;
+}
+.menu-item-photo {
+	width: 20%;
+	padding-bottom: 20%;
+	flex-shrink: 0;
+	border-radius: 50%;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: cover;
+}
+.menu-item-info {
+	flex: 1;
+	margin-left: 1em;
+}
+.member-name {
+	font-size: 1rem;
+	font-weight: bold;
+}
+.close-btn {
+	display: none;
+	position: absolute;
+	top: -2rem;
+	right: 10px;
+	font-size: 1.2rem;
+	color: #fff;
+	text-shadow: rgba(0, 0, 0, 0.3) 0 1px 0;
+	backface-visibility: hidden;
+}
+.leaflet-opened .close-btn {
+	display: inline-block;
+}
+
 
 </style>
 
