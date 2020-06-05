@@ -76,7 +76,8 @@
                 <!--주제별 기사 -->
                 <!--유저 기사 -->
             <Article v-if="count !=1" :CardList="CardList" :count="count"></Article>
-            <AllNews v-else></AllNews>
+            <!-- <AllNews v-else></AllNews> -->
+            <SubjectNews></SubjectNews>
             </div>
         </v-col>
         <v-col cols="2">
@@ -87,11 +88,13 @@
 
 <script>
     import Article from "./Article.vue"
-    import AllNews from "./TypeNewsCard/AllNews.vue"
+    // import AllNews from "./TypeNewsCard/AllNews.vue"
+    import SubjectNews from "./TypeNewsCard/SubjectNews.vue"
     export default {
         components: {
             Article,
-            AllNews
+            SubjectNews
+            // AllNews
         },
         data() {
             return {
