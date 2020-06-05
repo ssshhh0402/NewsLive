@@ -28,9 +28,9 @@ public class PostApiController {
         return new ResponseEntity<List<PostListResponseDto>>(postService.findAllDesc(),HttpStatus.OK);
     }
 
-    @GetMapping("/api/v1/posts/user/{userId}")
-    public ResponseEntity<List<PostListResponseDto>>findAllByUser(@PathVariable Long userId){
-        return new ResponseEntity<List<PostListResponseDto>>(postService.findByUserId(userId), HttpStatus.OK);
+    @GetMapping("/api/v1/posts/user/{userEmail}")
+    public ResponseEntity<List<PostListResponseDto>>findAllByUser(@PathVariable String userEmail){
+        return new ResponseEntity<List<PostListResponseDto>>(postService.findByUserEmail(userEmail), HttpStatus.OK);
     }
     @GetMapping("/api/v1/posts/{postId}")
     public ResponseEntity<PostResponseDto> findById(@PathVariable Long postId){

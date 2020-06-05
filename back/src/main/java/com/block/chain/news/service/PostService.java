@@ -196,8 +196,8 @@ public class PostService {
         }
     }
 
-    public List<PostListResponseDto> findByUserId(Long userId) {
-        User user=userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("잘못된 요청입니다"));
+    public List<PostListResponseDto> findByUserEmail(String userEmail) {
+        User user=userRepository.findByEmail(userEmail).orElseThrow(() -> new IllegalArgumentException("잘못된 요청입니다"));
         List<Post> posts = postRepository.findAllByAuthor(user.getEmail());
         List<PostListResponseDto> result = new LinkedList<>();
         for (Post post : posts){

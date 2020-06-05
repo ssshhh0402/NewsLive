@@ -22,13 +22,13 @@ public class ReportApiController {
     @PostMapping("/api/v1/report/{postId}/")
     public ResponseEntity<Long> report(@PathVariable Long postId,
                                        @RequestBody ReportRequestDto reportRequestDto){
-        return new ResponseEntity<Long>(reportService.report(postId, reportRequestDto.getUserId(), reportRequestDto.getContents()), HttpStatus.OK);
+        return new ResponseEntity<Long>(reportService.report(postId, reportRequestDto.getUserEmail(), reportRequestDto.getContents()), HttpStatus.OK);
     }
 
     @PutMapping("/api/v1/report/{reportId}/")
     public ResponseEntity<Long> agree(@PathVariable Long reportId,
                                       @RequestBody ReportAgreeRequestDto reportAgreeRequestDto){
-        return new ResponseEntity<Long>(reportService.agree(reportId, reportAgreeRequestDto.getUserId(), reportAgreeRequestDto.getAgree()), HttpStatus.OK);
+        return new ResponseEntity<Long>(reportService.agree(reportId, reportAgreeRequestDto.getUserEmail(), reportAgreeRequestDto.getAgree()), HttpStatus.OK);
     }
 
 }

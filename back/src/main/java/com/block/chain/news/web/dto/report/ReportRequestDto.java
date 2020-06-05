@@ -5,12 +5,12 @@ import lombok.Getter;
 
 @Getter
 public class ReportRequestDto {
-    private Long userId;
+    private String userEmail;
     private String contents;
 
     @Builder
-    public ReportRequestDto(Long userId, String contents){
-        this.userId = userId;
+    public ReportRequestDto(String userEmail, String contents){
+        this.userEmail = userEmail;
         this.contents = contents;
     }
 }

@@ -6,12 +6,12 @@ import lombok.Getter;
 @Getter
 public class ReportAgreeRequestDto {
     private int agree;
-    private Long userId;
+    private String userEmail;
 
 
     @Builder
-    public ReportAgreeRequestDto(int agree, Long userId){
+    public ReportAgreeRequestDto(int agree, String userEmail){
         this.agree = agree;
-        this.userId = userId;
+        this.userEmail = userEmail;
     }
 }
