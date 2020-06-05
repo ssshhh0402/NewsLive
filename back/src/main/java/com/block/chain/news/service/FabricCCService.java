@@ -1,7 +1,8 @@
-package com.block.project.springboot.service;
+package com.block.chain.news.service;
 
-import com.block.project.springboot.domain.fabric.*;
-import com.block.project.springboot.web.dto.fabric.*;
+import com.block.chain.news.domain.fabric.FabricClient;
+import com.block.chain.news.domain.fabric.*;
+import com.block.chain.news.web.dto.fabric.*;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import lombok.NoArgsConstructor;
@@ -62,10 +63,6 @@ public class FabricCCService {
     private ChannelClient channelClient;
     private Channel channel;
     private JsonParser jsonParser = new JsonParser();
-
-//    public FabricCCService() {
-//        loadChannel();
-//    }
 
     private boolean requestToLedger(String fcn, String[] args){
         try {
