@@ -7,7 +7,10 @@
       <v-col cols="12" md="2"></v-col>
       <v-col cols="12" md="4">
         <div align="left" class="mt-7">
-        <span  class="blue--text font-weight-bold " style="font-size:40px;">The News Live</span>
+		<span
+			class=" test font-weight-bold "
+			style="font-size:35px;">The News Live
+		</span>
         <br><br>  
           <div align="left" class="gray font-weight-bold mt-6" style="font-size:19px;">
           <div class="h1"><strong>최근 기사 <span class="h5"><strong>~~~~~ </strong></span></strong></div>
@@ -20,7 +23,6 @@
             color="deep-sky"
             dark
             large
-            @click="goIntro"
           > 
           <div class="mb-2 mr-2 font-weight-bold ">블록체인, 뉴스확인하시겠어요?</div> 
           <v-avatar></v-avatar>
@@ -30,7 +32,6 @@
             color="deep-sky"
             dark
             large
-            @click="goBlockChain"
           > 
           <div class="mb-2">더뉴스라이브를 소개 페이지 가기</div> 
           <v-avatar></v-avatar>
@@ -78,33 +79,6 @@
 	<br>
 	<div class="back_g" style="height:570px">
 		<br>
-		
-		
-			<!-- <ul class="menu-list">
-				<ul>
-					
-					<button class="back-btn">← Back</button>
-				</ul>
-				<li class="menu-item">
-					<figure class="menu-item-photo" style="background-image: url(images/social1.jpg)"></figure>
-					<div class="menu-item-info">
-						<p class="member-name">정 치</p>
-						<p class="member-info">1 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita corrupti excepturi asperiores.</p>
-					</div>
-					<button class="back-btn">← Back</button>
-				</li>
-				<li class="menu-item">
-					<figure class="menu-item-photo" style="background-image: url(images/entertain.jpg)"></figure>
-					<div class="menu-item-info">
-						<p class="member-name">사 회</p>
-						<p class="member-info">1 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita corrupti excepturi asperiores.</p>
-					</div>
-					<button class="back-btn">← Back</button>
-				</li>
-			</ul>
-		</div> -->
-
-
 	</div>
 	<div style="background: (58, 76, 168); height:570px">
 		
@@ -131,6 +105,11 @@
 		background: #654ea3;  /* fallback for old browsers */
 		background: -webkit-linear-gradient(to right, #eaafc8, #654ea3);  /* Chrome 10-25, Safari 5.1-6 */
 		background: linear-gradient(to right, #eaafc8, #654ea3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	}
+	.test {
+		background: linear-gradient(to right, #fbcac9, #8ca6ce);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
 	}
 
 	</style>

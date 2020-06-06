@@ -78,30 +78,64 @@
 					</div>
 			</v-col>
 		</v-row>
-        </div>
+    	</div>
+		<Catalogy v-if="dialog==true"
+			:allNews="allNews"
+		></Catalogy>
     </div>
 </template>
-    <script >
+	<script >
+		import axios from "axios";
+        import { API_BASE_URL } from "../config";
+		import Catalogy from "./Catalogy.vue"
 		export default {
-			components: {},
+			components: {
+				Catalogy
+			},
 			data() {
 				return {
                     search: null,
-                    number :-1 
-                    };
+					number :-1,
+					EachNewsList:{},
+					allNews:{},
+					dialog: false
+					};
 			},
-			created() {},
+			 created() 
+            {
+                this.getData();
+            },
 			methods: {
 				goSearch(content) {
 					console.log(content)
                 },
                 goRouter(num){
-                    console.log(num)
-                }
-                
-                
-
-                
+					if( this.number == num)
+					{
+						this.dialog =!this.dialog ;
+					}
+					else if( this.number == -1)
+					{
+						this.dialog =!this.dialog ;
+						this.number= num 
+						this.allNews= this.EachNewsList[num].posts
+					}
+					else{
+						this.number= num 
+						this.allNews= this.EachNewsList[num].posts
+						console.log(this.allNews)	
+					}
+				},
+				getData() {
+                    axios
+                        .get(API_BASE_URL + "/api/v1/posts/kinds")
+                        .then(response => {
+                            this.EachNewsList = response.data;
+                            console.log("전체 리스트",this.EachNewsList);
+                        })
+                        .catch(() => {})
+                },
+	
 			}
 		}
     </script>
