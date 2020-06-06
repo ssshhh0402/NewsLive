@@ -7,12 +7,11 @@
                     class="fdfdfd overflow-y-auto"
         >
         <vue-editor
-            
             id="editor"
             useCustomImageHandler
             @image-added="handleImageAdded"
             v-model="content"
-            v-scroll:#scroll-target="onScroll"
+            v-scroll:#scroll-target
             ></vue-editor>
         <br>
         </div>
@@ -26,7 +25,7 @@
                         <strong>미리보기</strong>
                     </v-btn>
                     &nbsp;
-                    <v-btn @click="goTempStore()" text="text">
+                    <v-btn @click="goTempStore(1)" text="text">
                         <v-icon>mdi-message-text</v-icon>
                         <strong>임시 저장</strong>
                     </v-btn>
@@ -38,6 +37,7 @@
                         color="black"
                         dark="dark"
                         @click.stop="dialog.complete = true"
+                        @click= goTempStore(2)
                         >Complete</v-btn>
                 </v-col>
                  <v-col class="text-left" cols="2"></v-col>
@@ -58,7 +58,22 @@
         </v-dialog>
         <v-dialog v-model="dialog.complete" max-width="700">
                    <v-card >
-                       <v-container>
+                       <v-container v-if ="ResponseChk==false" >
+                            <v-img src="https://cdn.dribbble.com/users/1319489/screenshots/3773110/earth-gif-loop.gif"></v-img>   
+                            <v-divider></v-divider>
+                            <v-row>
+                                <v-col class ="text-center">
+                                    <v-btn
+                                    class="mr-4"
+                                    rounded="rounded"
+                                    color="black"
+                                    dark="dark"
+                                    @click="completeBack()"
+                                    >Cancel</v-btn>
+                            </v-col>
+                            </v-row>
+                       </v-container>
+                       <v-container v-else>
                        <v-row >
                            <v-card-title>카테고리를 선택해주세요.</v-card-title>
                             <v-spacer></v-spacer>
@@ -129,17 +144,48 @@
                       </v-col>
                     </v-row>
                     <v-divider></v-divider>
-                    <v-row>
-                        <v-col>
-                            <v-btn>유사 기사를 찾으시겠습니까?</v-btn>
-                        </v-col>
-                    </v-row>
+                        <v-card-title v-if="SimilarData.length==0" >유사기사가 없습니다.</v-card-title>
+                        <v-card-title v-else>유사기사가 {{SimilarData.length}}개 있습니다.</v-card-title>
+                    <v-divider></v-divider>
+                        <v-row >
+                            <v-col class ="text-center">
+                                  <v-carousel style="height:325px" hide-delimiters show-arrows-on-hover> 
+                                    <v-carousel-item  v-for="k in SimilarData.length" :key="k"> 
+                                        <v-card v-for="(list,index) in SimilarData" :key="index" @click="goSubjected(list.subject.subjectId)">
+                                            <NewsSimilarCard v-bind:title="list.posts[0].title" v-bind:img="list.posts[0].banner" v-bind:content="list.posts[0].content"></NewsSimilarCard>
+                                            <span v-if="subJectedIDChk">유사기사로 선택되었습니다.</span>
+                                            <span v-else>유사기사를 선택해주세요.</span>
+                                        </v-card>
+                                    </v-carousel-item>
+                                  </v-carousel>
+                            </v-col>                        
+                        </v-row>
+                        <v-divider></v-divider>
+                        <v-row>
+                            <v-col class ="text-center">
+                                <v-btn
+                                class="mr-4"
+                                rounded="rounded"
+                                color="black"
+                                dark="dark"
+                                @click="GoComplete()"
+                                >Complete</v-btn>
+                                <v-btn
+                                class="mr-4"
+                                rounded="rounded"
+                                color="black"
+                                dark="dark"
+                                @click="completeBack()"
+                                >Cancel</v-btn>
+                            </v-col>
+                        </v-row>
                     </v-container>
              </v-card>
         </v-dialog>
     </v-container>
 </template>
 <script>
+    import NewsSimilarCard from './TypeNewsCard/NewsDetail/NewsSimilarCard.vue'
     import dedent from 'dedent'
     import {VueEditor} from "vue2-editor";
     import axios from "axios"; 
@@ -147,7 +193,8 @@
     export default {
         name: "newscreate",
         components: {
-            VueEditor
+            VueEditor,
+            NewsSimilarCard
         },
         data() {
             return {
@@ -155,7 +202,13 @@
                     preview: false,
                     complete: false
                 },
-                checkNum: -1,
+                subJectedIDChk:false,
+                subJectedID: "", //selected 10개 string  
+                ResponseChk:false,
+                similar:false,
+                SimilarData:{},
+                PostID :-1,
+                checkNum: -1, // selecedId 
                 selected: {},
                 picture: "NO",
                 Title: " ",
@@ -188,39 +241,74 @@
             checkBox(num){
             this.checkNum = num;
             },
-            goTempStore() {
-                this.Email = this.$store.state.UserInfo.kakao_account.email
-                const start = this.content.indexOf('255);">',2) + '255);">'.length;
-                const end = this.content.indexOf("</");
-                this.Title =this.content.substr(start,end-start).trim(); 
-                console.log("이메일", this.Email );
-                console.log("제목", this.Title );
-                axios
+            goSubjected(num1){
+                this.subJectedIDChk= !this.subJectedIDChk; 
+                this.subJectedID = num1; 
+            },
+            goTempStore(num) {
+                // PostID가 -1이라는 것은 처음 들어온 것. 
+                // num ==1 이면 임시저장, num==2이면 complete
+                if(num ==1 || this.PostID == -1) //임시저장이거나, 처음 들어온거라면.  
+                {
+                    this.Email = this.$store.state.UserInfo.kakao_account.email
+                    const start = this.content.indexOf('255);">',2) + '255);">'.length;
+                    const end = this.content.indexOf("</");
+                    this.Title =this.content.substr(start,end-start).trim(); 
+                    console.log("이메일", this.Email );
+                    console.log("제목", this.Title );
+                    axios
                     .post(API_BASE_URL + "/api/v1/posts", {
                             author: this.Email,
                             content : this.content,
                             title : this.Title,
-                            kinds: 0,
                             banner: this.picture
                     })
                     .then(response => {
                        console.log(response)
-                    })
+                       this.PostID = response.data; 
+                       console.log("PostId",this.PostID)
+                        if(num == 2) // 2번째꺼라면, 
+                        {
+                            this.goSimilar();
+                        } 
+                   })
                     .catch(() => {
                     })
+                }
             },
-        previewBack() {
-            this.dialog.preview = false;
-        },
-        completeBack()
-        {
-            this.dialog.complete = false;    
-        },
-        goComplete()
-        {
-            // /
-            
-        },
+            previewBack() {
+                this.dialog.preview = false;
+            },
+            completeBack()
+            {
+                this.dialog.complete = false;    
+            },
+            goSimilar(){
+                 axios
+                    .get(API_BASE_URL + "/api/v1/posts/suggestion/" + this.PostID)
+                    .then(response => {
+                        this.ResponseChk = true,
+                        this.SimilarData = response.data.subjectItems;
+                        console.log("유사기사데이터", this.SimilarData);
+                    })
+                    .catch(() => {
+                    })    
+            },
+            GoComplete()
+            {
+                axios
+                    .put(API_BASE_URL + "/api/v1/posts/" + this.PostID,{
+                        subjectId: this.subJectedID,
+                        kinds: this.checkNum
+                    })
+                    .then(response => {
+                       alert("기사 작성이 완료되었습니다.")
+                       console.log("기사작성완료",response);
+                       this.$router.push({path:'/'})
+                    })
+                    .catch(() => {
+                    })    
+            },
         handleImageAdded: function (file, Editor, cursorLocation) {
             var formData = new FormData();
             formData.append("image", file);
