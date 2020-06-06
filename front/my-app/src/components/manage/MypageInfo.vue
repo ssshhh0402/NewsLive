@@ -26,7 +26,7 @@
                     </div>
              <v-data-table
                 :headers="headers"
-                :items="alldonations"
+                :items="savePost"
                 :items-per-page="10"
                 :search="search"
                 >
@@ -41,7 +41,7 @@
                 </div>
              <v-data-table
                 :headers="headers"
-                :items="alldonations"
+                :items="otherPost"
                 :items-per-page="10"
                 :search="search"
                 :backgroud-color="gray"
@@ -54,6 +54,7 @@
     </div>
 </template>
 <script>
+    import axios from 'axios';
     export default {
         data() {
             return {
@@ -64,24 +65,20 @@
                         text: '유저ID',
                         align: 'center',
                         sortable: false,
-                        value: 'user'
+                        value: 'author'
                     }, {
                         text: '기사 제목 ',
-                        value: 'pointUser',
+                        value: 'title',
                         align: 'center',
                     },
                     {
                         text: '작성 날짜',
-                        value: 'createdAt',
+                        value: 'createDate',
                         sortable: false
-                    },
-                    {
-                        text: '수정 여부',
-                        value: 'pointUser',
-                        align: 'center',
                     }
                 ],
-                alldonations:[{}]
+                otherPost:[{}],
+                savePost:[{}],
             }
         },
         created() {
@@ -90,9 +87,22 @@
         },
         mounted()
         {
+            this.getPosts();
         },
         methods: {
-            
+            getPosts(){
+                const email = this.$store.state.UserInfo.kakao_account.email;
+                axios
+                .get('http://k02b2041.p.ssafy.io:8080/api/v1/posts/user/'+email)
+                .then(response=>{
+                    console.log(response);
+                    this.otherPost = response.data.otherPost;
+                    this.savePost = response.data.savedPost;
+                })
+                .catch(e=>{
+                    console.error(e);
+                })
+            }
         },
         
     }

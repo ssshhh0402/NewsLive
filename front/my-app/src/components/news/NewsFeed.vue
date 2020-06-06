@@ -71,37 +71,70 @@
         </v-col>
         <!-- 여기가 가운데 라인. -->
         <v-col cols="8">
-            <div class="fdfdfd" id="scroll-target" style="max-height: 700px">
+            <div class="fdfdfd" id="scroll-target" style="max-height: 70vh">
                 <!--모든기사-->
                 <!--주제별 기사 -->
                 <!--유저 기사 -->
             <Article v-if="count !=1" :CardList="CardList" :count="count"></Article>
             <!-- <AllNews v-else></AllNews> -->
-            <SubjectNews></SubjectNews>
+            <!-- 유사기사가 있으면 -->
+            <div v-for="(item, index) in CardList" v-bind:key="index">
+            <SubjectNews v-if="item.posts.length>1" v-bind:posts="item.posts" v-bind:topic="item.topics"></SubjectNews>
+            <!-- 없으면 그냥 하나 짜리-->
+            <AllNews v-else v-bind:post="item.posts[0]"></AllNews>
+            </div>
             </div>
         </v-col>
-        <v-col cols="2">
-            유저 정보
+        <v-col cols="2"
+
+        >
+        <span
+              class=" test font-weight-bold "
+              style="font-size:20px;">Followings
+          </span>
+            <div
+                        id="scroll-target"
+                    style="height: 35vh"
+                    class="overflow-y-auto"
+            >
+                <v-list-item-group v-model="item" color="primary"
+                v-scroll:#scroll-target="onScroll"
+                >
+                    <v-list-item
+                    v-for="(item, i) in follows"
+                    :key="i"
+                    >
+                    <v-list-item-content>
+                        <v-list-item-title v-text="item"></v-list-item-title>
+                    </v-list-item-content>
+                    </v-list-item>
+                </v-list-item-group>
+            </div>
+            <div>
+                광고
+            </div>
         </v-col>
     </v-row>
 </template>
 
 <script>
     import Article from "./Article.vue"
-    // import AllNews from "./TypeNewsCard/AllNews.vue"
+    import AllNews from "./TypeNewsCard/AllNews.vue"
     import SubjectNews from "./TypeNewsCard/SubjectNews.vue"
+    import axios from "axios";
     export default {
         components: {
             Article,
-            SubjectNews
-            // AllNews
+            SubjectNews,
+            AllNews
         },
         data() {
             return {
-                CardList: [],
+                CardList: null,
                 user: Object,
                 fixxElem: 0,
                 count: 1,
+                follows: [],
             };
         },
         methods: {
@@ -109,6 +142,20 @@
              allarticle()
              {
                  this.count=1;
+                 const email = this.$store.state.UserInfo.kakao_account.email;
+                 //여기서 axios호출
+                axios
+                .get('http://k02b2041.p.ssafy.io:8080/api/v1/posts/following/'+email)
+                .then(response=>{
+                    // console.log(response.data);
+                    this.CardList = response.data;
+                    console.log("23123213wee");
+                    console.log(this.CardList);
+                })
+                .catch(e=>{
+                    console.error(e);
+                })
+                 //변수 CardList에 담고 v-for 돌면서 두가지를 그리면 되겠다.
              },
              Ascatelog()
              {
@@ -117,11 +164,28 @@
              Asuser()
              {
                  this.count=3;
+             },
+             getFollwers(){
+                 //follwer가져오기
+                const email = this.$store.state.UserInfo.kakao_account.email;
+                axios
+                .get("http://k02b2041.p.ssafy.io:8080/api/v1/user/follow/"+email)
+                .then(response=>{
+                    console.log(response.data);
+                    this.follows = response.data.following;
+                })
+
              }
         },
         created() 
         {
         },
+        mounted(){
+
+            console.log("뉴스피드")
+            this.allarticle();
+            this.getFollwers();
+        }
     };
 </script>
 <style>
@@ -131,4 +195,9 @@
     .fdfdfd::-webkit-scrollbar {
         display: none;
     }
+    .test {
+  background: linear-gradient(to right, #fbcac9, #8ca6ce);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 </style>
