@@ -1,5 +1,6 @@
 package com.block.chain.news.service;
 
+import com.block.chain.news.domain.follow.FollowRepository;
 import com.block.chain.news.domain.postList.PostList;
 import com.block.chain.news.domain.postList.PostListRepository;
 import com.block.chain.news.domain.post.Post;
@@ -35,6 +36,7 @@ public class PostService {
     private final SubjectRepository subjectRepository;
     private final SubjectListRepository subjectListRepository;
     private final FollowService followService;
+    private final FollowRepository followRepository;
 
     @Transactional(readOnly = true)
     public List<PostEveryResponseDto> findAllDesc(){
