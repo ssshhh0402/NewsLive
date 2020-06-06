@@ -17,12 +17,10 @@
                     <v-list-item>
                         <v-list-item-avatar color="yellow">Best</v-list-item-avatar>
                         <v-list-item-content>
-                            <v-list-item-title class="headline mt-3 mb-0 ">"ㅎㅇ"</v-list-item-title>
-                            <v-list-item-subtitle ma-0="ma-0">by Manager</v-list-item-subtitle>
+                            <v-list-item-title class="headline mt-3 mb-0 ">{{post.title}}</v-list-item-title>
+                            <v-list-item-subtitle ma-0="ma-0">{{post.author}}</v-list-item-subtitle>
                         </v-list-item-content>
                         <v-spacer></v-spacer>
-                        <v-icon label="follow" @click="goFollow()">mdi-bell-ring
-                        </v-icon>(Follow)
                     </v-list-item>
                     <v-card-text>
                         <v-row>
@@ -30,15 +28,7 @@
                         </v-row>
                     </v-card-text>
                     <v-card-actions>
-                        <v-btn text="text" color="deep-purple accent-4">
-                            Read
-                        </v-btn>
-
-                        <v-btn text="text" color="deep-purple accent-4">
-                            Bookmark
-                        </v-btn>
                         <v-spacer></v-spacer>
-                        ㅎㅇㅎㅇ
                         <!-- | {{CardList.registeredAt.slice(0,10)}} | {{CardList.category}} 돕기 | -->
                         <v-btn icon="icon">
                             <v-icon>mdi-heart</v-icon>
@@ -102,6 +92,7 @@
     import axios from "axios"; 
     import { API_BASE_URL } from "../../../config";
     export default {
+        props:['post'],
         data() {
             return {
                dialog: false,
@@ -113,14 +104,14 @@
         mounted()
         {
             this.getAllNews();
+            console.log(this.post);
         },
         methods: {
             Back()
             {
                 this.dialog=false;
             },
-            goFollow()
-            {
+            getFollow(){
             },
             getAllNews(){
                     axios
