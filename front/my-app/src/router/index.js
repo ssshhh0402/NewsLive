@@ -2,7 +2,7 @@ import Vue from 'vue'
 import store from "../store";
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import HomeNav from '../views/HomeNav.vue'
+import SubHome from "../views/SubHome.vue";
 import News from '../views/News.vue'
 import Mypage from '../views/Mypage.vue'
 import SnsNews from '../views/SnsNews.vue'
@@ -34,12 +34,12 @@ Vue.use(VueRouter)
     {
       path: "/catalogy",
       name: "Catalogy",
-      component: Catalogy
+      component: Catalogy,
     },
     {
-      path: "/homenav",
-      name: "HomeNav",
-      component: HomeNav,
+      path: "/subhome",
+      name: "SubHome",
+      component: SubHome,
     },
     {
       path: "/SnsNews",
