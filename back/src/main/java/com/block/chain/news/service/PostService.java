@@ -36,6 +36,8 @@ public class PostService {
     private final SubjectRepository subjectRepository;
 
 
+    private final FabricCCService fabricCCService;
+
     @Transactional(readOnly = true)
     public List<PostEveryResponseDto> findAllDesc(){
         List<Post> postList =postRepository.findAllByStateNot("SAVE");
@@ -69,6 +71,8 @@ public class PostService {
         return post.getPostId();
     }
 
+
+    @Transactional
     public SuggestionResponseDto getSuggestion(Long postId){
         List<SubjectItem> suggestions = suggestion(postId);
         return new SuggestionResponseDto(suggestions);
@@ -171,7 +175,6 @@ public class PostService {
         return postId;
     }
 
-
     @Transactional
     public List<SubjectListResponseDto> getSubject(){
         List<Subject> subjects = subjectRepository.findAll();
@@ -207,7 +210,7 @@ public class PostService {
     }
 
     public List<FollowingPostResponseDto> getFollowers(String email){
-        User user = userRepository.findByEmail(email).orElseThrow(() -> new IllegalArgumentException("잘못된 요청입니닫닫"));
+        User user = userRepository.findByEmail(email).orElseThrow(() -> new IllegalArgumentException("잘못된 요청입니다."));
         List<FollowingPostResponseDto> resultSet = new LinkedList<>();
         List<String> followResponseDto = new FollowResponseDto(user).getFollowing();
         for (String userEmail : followResponseDto){
@@ -245,5 +248,12 @@ public class PostService {
             resultSet.add(newOne);
         }
         return resultSet;
+    }
+
+    public void click(Long postId) {
+        Post post = postRepository.findById(postId)
+                .orElseThrow(() ->new IllegalArgumentException("잘못된 기사를 선택하셨습니다"));
+
+//        fabricCCService.clickNews(post.getAuthor(), postId.toString());
     }
 }

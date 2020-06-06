@@ -1,4 +1,7 @@
 <template>
+<!-- 팔로우 아이콘 추가하기 -->
+<!-- 링크로 이동하기  -->
+<!--  -->
     <v-row > 
         <v-col cols="2" >
             <div v-if="this.$store.state.isSigned== true" class="fdfdfd">
@@ -8,7 +11,7 @@
              </v-avatar>
             </div>
              <br>
-            <div class="text-center">내 정보</div>
+            <div class="font-weight-bold text-center">내 정보</div>
            
             <v-list dense="dense">
                 
@@ -50,19 +53,31 @@
                         <v-list-item-title>글 보기</v-list-item-title>
                     </v-list-item>
                     <v-divider></v-divider>
-
                 </v-list>
             </div>
+            <br> 
+            <br>
+             <div class="font-weight-bold text-center">기사 </div>
+             <v-list dense="dense">
+                    <v-list-item class="mb-2">
+                        <v-list-item-icon>
+                            <v-icon>mdi-account</v-icon>
+                        </v-list-item-icon>
+                        <v-list-item-title @click="allarticle()" >모든 기사보기</v-list-item-title>
+                    </v-list-item>
+                   
+                    <v-divider></v-divider>
+                </v-list>
         </v-col>
-        
+        <!-- 여기가 가운데 라인. -->
         <v-col cols="8">
-            <div class="fdfdfd"
-                id="scroll-target"
-                style="max-height: 700px"
-                >
-                <!-- 여기 수정이 필요한대 어떻게 수정을 해야하지?  -->
-                <!-- 주제에 따라서 카드 내용이 다르잖아?  -->
-            <Article :CardList="CardList"></Article>
+            <div class="fdfdfd" id="scroll-target" style="max-height: 700px">
+                <!--모든기사-->
+                <!--주제별 기사 -->
+                <!--유저 기사 -->
+            <Article v-if="count !=1" :CardList="CardList" :count="count"></Article>
+            <!-- <AllNews v-else></AllNews> -->
+            <SubjectNews></SubjectNews>
             </div>
         </v-col>
         <v-col cols="2">
@@ -73,18 +88,36 @@
 
 <script>
     import Article from "./Article.vue"
+    // import AllNews from "./TypeNewsCard/AllNews.vue"
+    import SubjectNews from "./TypeNewsCard/SubjectNews.vue"
     export default {
         components: {
-            Article
+            Article,
+            SubjectNews
+            // AllNews
         },
         data() {
             return {
                 CardList: [],
                 user: Object,
-                fixxElem: 0
+                fixxElem: 0,
+                count: 1,
             };
         },
         methods: {
+            //여기에서 뉴스 기사를 가져와야겠구나 . 
+             allarticle()
+             {
+                 this.count=1;
+             },
+             Ascatelog()
+             {
+                 this.count=2;
+             },
+             Asuser()
+             {
+                 this.count=3;
+             }
         },
         created() 
         {
@@ -92,12 +125,10 @@
     };
 </script>
 <style>
-    
     .fdfdfd{
         overflow-y: scroll;
     }
     .fdfdfd::-webkit-scrollbar {
         display: none;
     }
-    
 </style>

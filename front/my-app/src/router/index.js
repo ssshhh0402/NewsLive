@@ -2,9 +2,11 @@ import Vue from 'vue'
 import store from "../store";
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import HomeNav from '../views/HomeNav.vue'
 import News from '../views/News.vue'
 import Mypage from '../views/Mypage.vue'
 import SnsNews from '../views/SnsNews.vue'
+import Advertisement from '../views/Advertisement.vue'
 
 Vue.use(VueRouter)
   // const rejectAuthUser = (to, from, next) => {
@@ -21,6 +23,11 @@ Vue.use(VueRouter)
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/homenav',
+    name: 'HomeNav',
+    component: HomeNav
   },
   {
     path: '/SnsNews',
@@ -62,10 +69,31 @@ Vue.use(VueRouter)
         path: "newscreate",
         name: 'newscreate',
         component: () => import("../components/news/NewsCreate.vue")
+      },
+      {
+        path: "newsdetail/:id",
+        name: 'newsdetail',
+        props: true,
+        component: () => import("../components/news/NewsDetail.vue")
       }
     ],
     redirect: () => {
       return "/news/newscreate";
+    }
+  },
+  {
+    path: "/advertisement",
+    name: "advertisement",
+    component: Advertisement,
+    children: [
+      {
+        path: "adcreate",
+        name: 'adcreate',
+        component: () => import("../components/advertisement/AdCreate.vue")
+      }
+    ],
+    redirect: () => {
+      return "/advertisement/adcreate";
     }
   }
   

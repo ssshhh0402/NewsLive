@@ -1,63 +1,59 @@
 <template>
     <div>
-        <h2 class= "mt-3 text-center">내 정보
-        </h2>
-        <v-row class ="mb-3">
-            <v-card class="mx-auto " max-width="434" tile="tile">
-                <v-img
-                    height="100%"
-                    src="https://cdn.vuetifyjs.com/images/cards/server-room.jpg">
-                    <v-row align="end" class="fill-height">
-                        <v-col align-self="start" class="pa-0" cols="12">
-                            <v-avatar class="profile" color="grey" size="164" tile="tile">
-                                <v-img :src="UserInfo.kakao_account.profile.profile_image_url"></v-img>
-                                {{}}
-                            </v-avatar>
-                        </v-col>
-                        <v-col class="py-0">
-                            <v-list-item color="rgba(0, 0, 0, .4)" dark="dark">
-                                <v-list-item-content>
-                                    <v-list-item-title class="title">이름:
-                                       {{UserInfo.kakao_account.profile.nickname}}
-                                    </v-list-item-title>
-                                    <v-list-item-subtitle>이메일:
-                                       {{UserInfo.kakao_account.email}}<br> 
-                                       성별: {{UserInfo.kakao_account.gender}}
-                                    </v-list-item-subtitle>
-                                </v-list-item-content>
-                            </v-list-item>
-                        </v-col>
-                    </v-row>
-                </v-img>
-            </v-card>
-        </v-row>
-    <div class="fff" style="background:rgb(200, 200, 200); height:570px">
+        <div class= "back_g" style="height:380px">
+            <br>
+            <br><br>
+        <v-card class=" mx-auto" align-center="align-center"  width="80%">
+        <div class="text-center">
+            <v-avatar class="img-center" size ="100px">
+                <v-img  :src="UserInfo.kakao_account.profile.profile_image_url"><v-avatar></v-avatar></v-img>
+            </v-avatar>
+            <br>이름: {{UserInfo.kakao_account.profile.nickname}}
+            <br>이메일: {{UserInfo.kakao_account.email}} 
+            <br>성별: {{UserInfo.kakao_account.gender}}
+        </div>
+        </v-card>
+        </div>
+        <div class="fff" style="height:570px ">
         <v-row> 
-            <v-col cols="6">
-             <span> 임시 저장 기사 </span>
+            <v-col cols="1"></v-col>
+            <v-col class="mr-2" cols="5">
+                <div class=" mt-3 text-center" >  
+                        <span
+                            class=" test font-weight-bold "
+                            style="font-size:35px;">-ING
+                        </span>
+                    </div>
              <v-data-table
                 :headers="headers"
                 :items="alldonations"
                 :items-per-page="10"
                 :search="search"
                 >
-                
-         </v-data-table>   
-                </v-col>
-            <v-col cols="6">
-             <span> 완료된 기사 </span>
+             </v-data-table>   
+            </v-col>
+            <v-col  cols="5">
+                <div class=" mt-3 text-center" >  
+                    <span
+                        class=" test font-weight-bold "
+                        style="font-size:35px;">COMPlETE
+                    </span>
+                </div>
+             <v-data-table
+                :headers="headers"
+                :items="alldonations"
+                :items-per-page="10"
+                :search="search"
+                :backgroud-color="gray"
+             >
+             </v-data-table>
             </v-col> 
         </v-row>
         
-        <!-- <v-container>
-           
-            </v-data-table>
-            </v-container> -->
          </div>
     </div>
 </template>
 <script>
-    import axios from "axios";
     export default {
         data() {
             return {
@@ -94,21 +90,9 @@
         },
         mounted()
         {
-            this.getMyNews();
         },
         methods: {
-            getMyNews() {
-                console.log("Mypage",this.alldonations);
-              axios
-                  .get('http://k02b2041.p.ssafy.io:8080/api/v1/posts')
-                  .then(res => {
-                      this.alldonations = res.data
-                      console.log("res",res)
-                  })
-                  .catch((err) => {
-                      alert(err)
-                  })
-           },
+            
         },
         
     }
@@ -119,5 +103,29 @@
         justify-content: center;
         align-items: center;
     }
-    
+   .bk{
+    background: #7F7FD5;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+    height: 90vh;
+    width: 100%;
+    padding:5vw;
+} 
+.test {
+  background: linear-gradient(to right, #fbcac9, #8ca6ce);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.back_g{
+		background: #654ea3;  /* fallback for old browsers */
+		background: -webkit-linear-gradient(to right, #eaafc8, #654ea3);  /* Chrome 10-25, Safari 5.1-6 */
+		background: linear-gradient(to right, #eaafc8, #654ea3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    }
+    .img-center {
+        margin-top: 3px;
+        left: 3.3%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+    }
 </style>

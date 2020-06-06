@@ -1,7 +1,6 @@
 <template>
-    <div>
+    <v-container>
         <v-hover v-slot:default="{ hover }">
-            <v-container>
                 <v-card
                     height="500"
                     width="870"
@@ -9,6 +8,12 @@
                     align-center="align-center"
                     :elevation="hover ? 16 : 2"
                     class="mx-auto">
+                     <v-img
+                 class="white--text align-end"
+                 height="500px"
+                 src= "../../../assets/backnews.jpg"
+                >
+                
                     <v-list-item>
                         <v-list-item-avatar color="yellow">Best</v-list-item-avatar>
                         <v-list-item-content>
@@ -17,7 +22,7 @@
                         </v-list-item-content>
                         <v-spacer></v-spacer>
                         <v-icon label="follow" @click="goFollow()">mdi-bell-ring
-                        </v-icon>
+                        </v-icon>(Follow)
                     </v-list-item>
                     <v-card-text>
                         <v-row>
@@ -46,60 +51,68 @@
                             <v-icon>mdi-share-variant</v-icon>
                         </v-btn>
                     </v-card-actions>
+                    </v-img>
                 </v-card>
-
-            </v-container>
         </v-hover>
-        <v-dialog v-model="dialog" max-height="450px" max-width="400px">
-            <v-card max-width="420px">
+        <v-dialog v-model="dialog"  max-width="440px">
+            <v-card >
+               
+                <v-container>
                 <v-row>
-                    <v-spacer></v-spacer>
-                    <v-btn icon="icon" dark="dark" @click="Back()" class="mr-3">
-                        <v-icon color="black darken-2">mdi-close</v-icon>
-                    </v-btn>
-                </v-row>
-                <v-list-item class="text-center bold">
+                <v-list-item class="text-center bold ">
                     <v-list-item-title >
                         기사 신고하기
                     </v-list-item-title>
-
+                     <v-spacer></v-spacer>
+                    <v-btn icon="icon" dark="dark" @click="Back()" >
+                        <v-icon color="black darken-2">mdi-close</v-icon>
+                    </v-btn>
                 </v-list-item>
+                </v-row>
                 <v-divider></v-divider>
                 <v-card-text>
                     <v-row align="center">
-                        <v-checkbox v-model="selected" label="편파적인 기사" value="편파적인 기사"></v-checkbox>
+                        <v-checkbox v-model="selected[0]" label="편파적인 기사" value="편파적인 기사"></v-checkbox>
                     </v-row>
                     <v-row align="center">
-                        <v-checkbox v-model="selected" label="부정확한 기사" value="부정확한 기사"></v-checkbox>
+                        <v-checkbox v-model="selected[1]" label="부정확한 기사" value="부정확한 기사"></v-checkbox>
                     </v-row>
                     <v-row align="center">
-                        <v-checkbox v-model="selected" label="부적절한 표현(인격 모독)" value="부적절한 표현(인격 모독)"></v-checkbox>
+                        <v-checkbox v-model="selected[2]" label="부적절한 표현(인격 모독)" value="부적절한 표현(인격 모독)"></v-checkbox>
                     </v-row>
 
                     <v-row align="center">
                         <v-checkbox
                             v-model="includeFiles"
                             hide-details="hide-details"
-                            class="shrink mr-2 mt-0"></v-checkbox>
-                        <v-text-field label="기타" class="mr-4"></v-text-field>
+                            class="shrink mr-1 mt-1 "></v-checkbox>
+                        <v-text-field class="mr-2" label="기타" ></v-text-field>
                     </v-row>
                 </v-card-text>
                 <v-divider></v-divider>
                 <v-card-actions class="justify-center">
-                    <v-btn class="mr-4 " rounded="rounded" color="black" dark="dark">신 고 하 기</v-btn>
+                    <v-btn rounded="rounded" color="black" dark="dark">신 고 하 기</v-btn>
                 </v-card-actions>
+                </v-container>
             </v-card>
         </v-dialog>
-    </div>
+    </v-container>
 </template>
 <script>
+    import axios from "axios"; 
+    import { API_BASE_URL } from "../../../config";
     export default {
         data() {
             return {
                dialog: false,
-               selected: false,
+               selected:{
+               },
                includeFiles:''
             }
+        },
+        mounted()
+        {
+            this.getAllNews();
         },
         methods: {
             Back()
@@ -108,7 +121,16 @@
             },
             goFollow()
             {
-            }
+            },
+            getAllNews(){
+                    axios
+                    .get(API_BASE_URL + "/api/v1/posts")
+                    .then(response => {
+                        console.log("jw",response)
+                    })
+                    .catch(() => {
+                    })
+                }
         },
     };
 </script>
