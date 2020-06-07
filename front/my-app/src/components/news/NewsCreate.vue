@@ -289,16 +289,21 @@
                     .then(response => {
                         this.ResponseChk = true,
                         this.SimilarData = response.data.subjectItems;
-                        // console.log("유사기사데이터", this.SimilarData);
                     })
                     .catch(() => {
                     })    
             },
             GoComplete()
             {
+                var jj = this.subJectedID
+                console.log(this.subJectedID)
+                if(!this.subJectedID)
+                {
+                    jj = -1;
+                }
                 axios
                     .put(API_BASE_URL + "/api/v1/posts/" + this.PostID,{
-                        subjectId: this.subJectedID,
+                        subjectId: jj,
                         kinds: this.checkNum
                     })
                     .then(response => {

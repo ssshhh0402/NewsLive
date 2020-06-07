@@ -113,7 +113,7 @@
                 this.dialog=false;
             },
             goFollow(){
-                const author = "ehdgus190@naver.com";
+                const author = post.author;
                 const email = this.$store.state.UserInfo.kakao_account.email;
                 axios
                 .put(API_BASE_URL+'/api/v1/user/follow',{
