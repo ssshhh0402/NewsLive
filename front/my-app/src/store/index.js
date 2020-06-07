@@ -9,6 +9,7 @@ export default new Vuex.Store({
         isSigned: false,
         isManager: false,
         UserInfo : {},
+        FollowInfo :{}
     },
     mutations: {
         setIsSigned(state, isSigned) {
@@ -26,9 +27,27 @@ export default new Vuex.Store({
         setUserInfo(state,sGet)
         {
           state.UserInfo = sGet;
+        },
+        setFollowInfo(state,followInfo)
+        {
+            state.FollowInfo = followInfo
+            console.log(state.FollowInfo )
         }
     },
     actions: {
+        getFollowInfo({commit})
+        {
+            const email = this.state.UserInfo.kakao_account.email;
+            axios
+            .get(API_BASE_URL + "/api/v1/user/follow/" + email)
+            .then(response => {
+                var follows = response.data.following;
+                console.log(follows);
+                commit("setFollowInfo", follows)
+            }).catch(e => {
+                console.error(e);
+            })
+        },
         getMemberInfo({commit}) {
             let token = localStorage.getItem("access_token1");
             // console.log("token=" , token);
@@ -85,14 +104,6 @@ export default new Vuex.Store({
                 console.log('Not logged in.');
                 return;
             }
-            
-            // window.Kakao.Auth.logout({
-            //     success: function (authObj) {
-            //         window.Kakao.init('/');
-            //         window.Kakao.API.request({url: '/v1/user/unlink'});
-            //         console.log(authObj)
-            //     }
-            // })
         }
     },
     modules: {}

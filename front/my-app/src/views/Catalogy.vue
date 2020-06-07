@@ -19,7 +19,7 @@
                     v-if="(page-1)*5<=index && index<(page-1)*5 +5"
                     @click="goDetail(index)"
                     >
-                    <div class="div-bc">
+                    <div>
                         <v-row>
                             <v-col cols="8"
                             style="text-align:start;padding-left:35px">
@@ -30,7 +30,6 @@
                            
                             <div 
                             style="margin-top:1vw; width:95%;">
-                                <!-- <h4 style ="color:gray;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">{{list.topics}}</h4> -->
                                 <v-chip
                                 class="ma-2"
                                 text-color="black"
