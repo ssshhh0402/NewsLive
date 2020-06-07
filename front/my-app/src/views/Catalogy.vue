@@ -13,7 +13,6 @@
                     style="margin-bottom:10px"
                     height="20vh"
                     width="100%"
-                    light="light"
                     align-center="align-center"
                     class="mx-auto"
                     :elevation="hover ? 16 : 2"
@@ -23,7 +22,7 @@
                         <v-row>
                             <v-col cols="4">
                         <v-img
-                            class="white--text align-end"
+                            class="align-end"
                             height="15vh"
                             width="100%"
                             v-bind:src="list.banner==='NO'?require('../assets/newsBK2.png'):list.banner"

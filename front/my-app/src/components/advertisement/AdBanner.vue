@@ -28,8 +28,6 @@ import axios from 'axios';
             axios
             .get('http://k02b2041.p.ssafy.io:8080/api/v1/advertisement/')
             .then(response=>{
-                console.log("23123213213321");
-                console.log(response.data);
                 this.slides = response.data;
             })
             .catch(e=>{
