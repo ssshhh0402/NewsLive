@@ -14,7 +14,6 @@
                  src= "../../../assets/backnews.jpg"
                  @click="goDetail()"
                 >
-                
                     <v-list-item>
                         <v-list-item-avatar color="yellow">Best</v-list-item-avatar>
                         <v-list-item-content>
@@ -28,13 +27,13 @@
                             <v-img></v-img>
                         </v-row>
                     </v-card-text>
-                    <v-card-actions>
+                    <v-card-actions >
                         <v-spacer></v-spacer>
                         <!-- | {{CardList.registeredAt.slice(0,10)}} | {{CardList.category}} 돕기 | -->
-                        <v-btn v-if ="followChk==false" icon="icon" @click="goFollow()">
+                        <v-btn v-if ="followChk==false" icon="icon"  @click.stop=" goFollow()">
                             <v-icon>mdi-lightbulb-outline </v-icon>
                         </v-btn>
-                        <v-btn v-if ="followChk==true" icon="icon" @click="goUnFollow()">
+                        <v-btn v-if ="followChk==true" icon="icon" @click.stop="goUnFollow()">
                             <v-icon>mdi-lightbulb</v-icon>
                         </v-btn>
                         
@@ -113,6 +112,10 @@
             console.log("븅",this.post);
         },
         methods: {
+            ctxStop(e) {
+        	    e.preventDefault();
+            }
+            ,
             Back()
             {
                 this.dialog=false;
@@ -136,14 +139,14 @@
                  this.$router.push({name:'newsdetail',params: { id: this.post.postId }})
             },
             goUnFollow() //언팔로우. 
-            {
+            { 
+                    //params: { id: this.allNews[index].postId }
+                    // {
+                    // fromUserEmail: this.Myemail,
+                    // toUserEmail: this.post.author
+                    // }
                 axios
-                .delete(API_BASE_URL+"/api/v1/user/unFollow",
-                {
-                    
-                    fromUserEmail: this.Myemail,
-                    toUserEmail: this.post.author
-                })
+                .delete(API_BASE_URL+"/api/v1/user/unFollow?fromUser="+this.Myemail +"&toUser="+this.post.author)
                 .then(response=>{
                     this.followChk= false;
                     console.log("언팔로우 성공 !!!");

@@ -8,9 +8,12 @@
                 <!-- <span  class="blue--text font-weight-bold " style="font-size:40px;">The News Live</span> -->
                 <br><br>  
                   <div align="left" class="gray font-weight-bold mt-3" style="font-size:19px;">
-                  <div class="h1"><strong>최근 기사 <span class="h5"><strong>보러가기</strong></span></strong></div>
+                  <div class="h1 text-center "><strong>최근 기사 <span class="h5"><strong>보러가기</strong></span></strong></div>
                   </div> 
                   <br> 
+				  <v-divider></v-divider>
+				  <v-divider></v-divider>
+				  <v-divider></v-divider>
                   <v-divider></v-divider>
                   <v-btn 
                     class=" mt-4"

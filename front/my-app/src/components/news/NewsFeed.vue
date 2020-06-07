@@ -128,7 +128,12 @@
                     </v-list-item>
                 </v-list-item-group>
             </div>
+            <span
+            class=" test font-weight-bold "
+            style="font-size:20px;">Ad
+            </span> 
             <div class="text-center" style="height:35vh">
+
                 <AdBanner></AdBanner>
             </div>
         </v-col>
