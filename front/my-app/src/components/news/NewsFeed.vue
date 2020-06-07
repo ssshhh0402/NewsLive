@@ -175,6 +175,7 @@
                 .get(API_BASE_URL+"/api/v1/posts")
                 .then(response=>{
                     this.AllCardList = response.data;
+                    // console.log(this.AllCardList);
                     // console.log("AllNews",this.AllCardList);
                 })
              },
@@ -190,9 +191,9 @@
                     // console.log(this.FollowCardList.length )
                     if(this.FollowCardList.length == 0)
                     {
-                        this.Ban =this.FollowCardList.length;
                         this.Change =true; //모든뉴스 보여주기. 
                     }
+                    this.Ban =this.FollowCardList.length;
                 })
                 .catch(e=>{
                     console.error(e);
