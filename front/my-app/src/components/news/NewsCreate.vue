@@ -254,8 +254,8 @@
                     const start = this.content.indexOf('255);">',2) + '255);">'.length;
                     const end = this.content.indexOf("</");
                     this.Title =this.content.substr(start,end-start).trim(); 
-                    console.log("이메일", this.Email );
-                    console.log("제목", this.Title );
+                    // console.log("이메일", this.Email );
+                    // console.log("제목", this.Title );
                     axios
                     .post(API_BASE_URL + "/api/v1/posts", {
                             author: this.Email,
@@ -264,9 +264,9 @@
                             banner: this.picture
                     })
                     .then(response => {
-                       console.log(response)
+                    //    console.log(response)
                        this.PostID = response.data; 
-                       console.log("PostId",this.PostID)
+                    //    console.log("PostId",this.PostID)
                         if(num == 2) // 2번째꺼라면, 
                         {
                             this.goSimilar();
@@ -289,7 +289,7 @@
                     .then(response => {
                         this.ResponseChk = true,
                         this.SimilarData = response.data.subjectItems;
-                        console.log("유사기사데이터", this.SimilarData);
+                        // console.log("유사기사데이터", this.SimilarData);
                     })
                     .catch(() => {
                     })    
@@ -303,7 +303,7 @@
                     })
                     .then(response => {
                        alert("기사 작성이 완료되었습니다.")
-                       console.log("기사작성완료",response);
+                    //    console.log("기사작성완료",response);
                        this.$router.push({path:'/'})
                     })
                     .catch(() => {

@@ -91,7 +91,7 @@ export default {
             axios
                 .get('http://k02b2041.p.ssafy.io:8080/api/v1/posts/'+this.id)
                 .then(response=>{
-                    console.log(response.data);
+                    // console.log(response.data);
                     this.content = response.data.content;
                     this.title = response.data.title;
                     this.author = response.data.author;
@@ -99,9 +99,7 @@ export default {
                     this.simmilar = response.data.simmilar;
                     this.created = response.data.created;
                 })
-                .catch(e=>{
-                    console.error(e);
-                })
+                
         },
         onScroll (e) {
         this.offsetTop = e.target.scrollTop

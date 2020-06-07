@@ -2,7 +2,6 @@
     <div>
 		<div class= "mt-5">
 		   <v-row>
-              <!-- font-family = 'Open Sans' -->
               <v-col cols="12" md="2"></v-col>
               <v-col cols="12" md="4">
                 <div align="left" class="mt-7">
@@ -20,7 +19,7 @@
                     v-bind:key="item.id"
                     dark
                     large
-                    @click="goIntro"
+                    @click="goIntro(item)"
                   > 
                   <div class="mb-2 mr-2 font-weight-bold ">{{item.title}}</div> 
                 </v-btn>
@@ -32,29 +31,29 @@
                 <v-carousel-item v-for="k in 4" :key="k"> 
                     <v-row >
                 <v-hover v-slot:default="{ hover }">
-                  <v-card
-                    light="light"
-                    align-center="align-center"
-                    :elevation="hover ? 16 : 2"
-                    class="mx-auto">
-                    <v-img
-                      class="white--text align-end"
-                      height="500px"
-                      src= "../assets/backnews.jpg"
-                    >
-                    <v-card-text>
-                      
-                    </v-card-text>
-                    <v-card-actions>
-                      <v-btn text="text" color="deep-purple accent-4">
-                        Read
-                      </v-btn>
-                      <v-btn text="text" color="deep-purple accent-4">
-                        Bookmark
-                      </v-btn>
-                    </v-card-actions>
-                    </v-img>
-                  </v-card>
+					<v-card
+						light="light"
+						align-center="align-center"
+						:elevation="hover ? 16 : 2"
+						class="mx-auto">
+						<v-img
+						class="white--text align-end"
+						height="500px"
+						src= "../assets/backnews.jpg"
+						>
+						<v-card-text>
+						
+						</v-card-text>
+						<v-card-actions>
+						<v-btn text="text" color="deep-purple accent-4">
+							Read
+						</v-btn>
+						<v-btn text="text" color="deep-purple accent-4">
+							Bookmark
+						</v-btn>
+						</v-card-actions>
+						</v-img>
+					</v-card>
               </v-hover>
                     </v-row>
                 </v-carousel-item>
@@ -89,17 +88,32 @@
 				goSearch(content) {
 					console.log(content)
 				},
+				goIntro(obj)
+				{
+					console.log("작업필요 SubHome으로오세요 ")
+				}
+				,
 				getRecent(){
 					axios
 					.get('http://k02b2041.p.ssafy.io:8080/api/v1/posts/desc')
 					.then(response=>{
-						console.log("getRecent()",response.data);
+						// console.log("getRecent()",response.data);
 						this.posts = response.data;
 					})
 					.catch(e=>{
 						console.error(e);
 					})
 				},
+				breakpointObject() {
+					// Use in computed property
+					switch (this.vuetify.breakpoint.name) {
+						case 'xs': return '220px'
+						case 'sm': return '400px'
+						case 'md': return '500px'
+						case 'lg': return '600px'
+						case 'xl': return '800px'
+					}
+				}
 			}
 		}
     </script>

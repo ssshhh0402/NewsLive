@@ -39,10 +39,6 @@ export default {
     components:{
         NewsCard,
     },
-    mounted(){
-        console.log("---------------");
-        console.log(this.posts);
-    }
 }
 </script>
 <style>

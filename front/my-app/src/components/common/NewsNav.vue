@@ -64,9 +64,7 @@
                 localStorage.setItem("access_token1", data.access_token)
                 scope.$store.dispatch("getMemberInfo");
             },
-            onFailure(data) {
-                console.log(data)
-                console.log("failure")
+            onFailure() {
             },
             goHome(){
                 this.$router.push({path:'/'})
