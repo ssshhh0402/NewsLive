@@ -105,10 +105,7 @@
                includeFiles:''
             }
         },
-        mounted()
-        {
-            this.getAllNews();
-        },
+        
         methods: {
             Back()
             {
@@ -122,24 +119,8 @@
                     fromUserEmail:email,
                     toUserEmail:author,
                 })
-                .then(response=>{
-                    console.log(response);
-                })
-                .catch(e=>{
-                    console.error(e);
-                })
-                
-
             },
-            getAllNews(){
-                    axios
-                    .get(API_BASE_URL + "/api/v1/posts")
-                    .then(response => {
-                        console.log("jw",response)
-                    })
-                    .catch(() => {
-                    })
-                }
+            
         },
     };
 </script>

@@ -31,7 +31,7 @@ export default new Vuex.Store({
     actions: {
         getMemberInfo({commit}) {
             let token = localStorage.getItem("access_token1");
-            console.log("token=" , token);
+            // console.log("token=" , token);
             if (!token) {
                 return;
             } else {
@@ -61,11 +61,7 @@ export default new Vuex.Store({
                             role: role1,
                             picture: picture2
                         })
-                        .then(response => {
-                            console.log("굳", response)
-                        })
-                        .catch(() => {
-                        })
+                        
                 },
                     fail: function (error) {
                         console.log(JSON.stringify(error));

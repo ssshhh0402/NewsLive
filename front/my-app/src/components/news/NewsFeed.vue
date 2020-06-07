@@ -1,7 +1,4 @@
 <template>
-<!-- 팔로우 아이콘 추가하기 -->
-<!-- 링크로 이동하기  -->
-<!--  -->
     <v-row > 
         <v-col cols="2" >
             <div v-if="this.$store.state.isSigned== true" class="fdfdfd">
@@ -63,26 +60,45 @@
                         <v-list-item-icon>
                             <v-icon>mdi-account</v-icon>
                         </v-list-item-icon>
-                        <v-list-item-title @click="allarticle()" >모든 기사보기</v-list-item-title>
+                        <v-list-item-title ><v-btn text  @click="goType(1)">모든 기사보기</v-btn></v-list-item-title>
                     </v-list-item>
-                   
+                    <v-divider></v-divider>
+                    <v-list-item class="mb-2">
+                        <v-list-item-icon>
+                            <v-icon>mdi-account</v-icon>
+                        </v-list-item-icon>
+                        <v-list-item-title ><v-btn text @click="goType(2)"> 팔로우 기사보기</v-btn></v-list-item-title>
+                    </v-list-item>
                     <v-divider></v-divider>
                 </v-list>
         </v-col>
         <!-- 여기가 가운데 라인. -->
         <v-col cols="8">
             <div class="fdfdfd" id="scroll-target" style="max-height: 70vh">
-                <!--모든기사-->
-                <!--주제별 기사 -->
-                <!--유저 기사 -->
-            <Article v-if="count !=1" :CardList="CardList" :count="count"></Article>
-            <!-- <AllNews v-else></AllNews> -->
-            <!-- 유사기사가 있으면 -->
-            <div v-for="(item, index) in CardList" v-bind:key="index">
-            <SubjectNews v-if="item.posts.length>1" v-bind:posts="item.posts" v-bind:topic="item.topics"></SubjectNews>
-            <!-- 없으면 그냥 하나 짜리-->
-            <AllNews v-else v-bind:post="item.posts[0]"></AllNews>
-            </div>
+            
+            <!--모든 뉴스 -->
+            <v-row v-if="Change==true" >
+                <v-col>
+                <div v-for="(item, index) in AllCardList" v-bind:key="index" >
+                    <AllNews v-bind:post="item"></AllNews>    
+                </div>
+                </v-col>
+            </v-row>
+            <v-row v-else>
+                <v-col v-if ="Ban>=1">
+                    <div v-for="(item, index) in FollowCardList" v-bind:key="index">
+                    <SubjectNews v-if="item.posts.length>1" v-bind:posts="item.posts" v-bind:topic="item.topics"></SubjectNews>            
+                    <!-- 없으면 그냥 하나 짜리 -->
+                    <AllNews v-else v-bind:post="item.posts[0]"></AllNews>
+                    </div>
+                </v-col>
+                <v-col v-else class="text-center">
+                    <br>
+                    <br>
+                    <br>
+                    팔로우 기사가 없습니다. 
+                </v-col>
+            </v-row>
             </div>
         </v-col>
         <v-col cols="2"
@@ -94,11 +110,11 @@
           </span>
             <div
                         id="scroll-target"
-                    style="height: 35vh"
+                    style="height: 28vh"
                     class="overflow-y-auto"
             >
-                <v-list-item-group v-model="item" color="primary"
-                v-scroll:#scroll-target="onScroll"
+                <v-list-item-group color="primary"
+                v-scroll:#scroll-target
                 >
                     <v-list-item
                     v-for="(item, i) in follows"
@@ -110,79 +126,95 @@
                     </v-list-item>
                 </v-list-item-group>
             </div>
-            <div>
-                광고
+            <div class="text-center" style="height:35vh">
+                <AdBanner></AdBanner>
             </div>
         </v-col>
     </v-row>
 </template>
 
 <script>
-    import Article from "./Article.vue"
+    import { API_BASE_URL } from "../../config";
     import AllNews from "./TypeNewsCard/AllNews.vue"
+    import AdBanner from "../advertisement/AdBanner.vue";
     import SubjectNews from "./TypeNewsCard/SubjectNews.vue"
     import axios from "axios";
     export default {
         components: {
-            Article,
             SubjectNews,
-            AllNews
+            AllNews,
+            AdBanner
         },
         data() {
             return {
-                CardList: null,
+                AllCardList: null, 
+                FollowCardList: null,
                 user: Object,
+                Change: false, 
+                Ban : 0, 
                 fixxElem: 0,
-                count: 1,
                 follows: [],
             };
         },
         methods: {
-            //여기에서 뉴스 기사를 가져와야겠구나 . 
+             goType(num)
+             {
+                if( num ==1)
+                {
+                    this.Change = true;    //모든 기사
+                }
+                else if(num ==2)
+                {
+                    this.Change = false;   // 팔로우 기사.
+                }
+             },
              allarticle()
              {
-                 this.count=1;
+                 // 신호를 줘야한다.
+                 axios
+                .get(API_BASE_URL+"/api/v1/posts")
+                .then(response=>{
+                    this.AllCardList = response.data;
+                    // console.log("AllNews",this.AllCardList);
+                })
+             },
+             followarticle()
+             {
                  const email = this.$store.state.UserInfo.kakao_account.email;
-                 //여기서 axios호출
                 axios
-                .get('http://k02b2041.p.ssafy.io:8080/api/v1/posts/following/'+email)
+                .get(API_BASE_URL+"/api/v1/posts/following/"+email)
                 .then(response=>{
                     // console.log(response.data);
-                    this.CardList = response.data;
-                    console.log("23123213wee");
-                    console.log(this.CardList);
+                    this.FollowCardList = response.data;
+                    // console.log("FollowNews",this.FollowCardList);
+                    // console.log(this.FollowCardList.length )
+                    if(this.FollowCardList.length == 0)
+                    {
+                        this.Ban =this.FollowCardList.length;
+                        this.Change =true; //모든뉴스 보여주기. 
+                    }
                 })
                 .catch(e=>{
                     console.error(e);
                 })
                  //변수 CardList에 담고 v-for 돌면서 두가지를 그리면 되겠다.
              },
-             Ascatelog()
-             {
-                 this.count=2;
-             },
-             Asuser()
-             {
-                 this.count=3;
-             },
              getFollwers(){
                  //follwer가져오기
                 const email = this.$store.state.UserInfo.kakao_account.email;
                 axios
-                .get("http://k02b2041.p.ssafy.io:8080/api/v1/user/follow/"+email)
+                .get(API_BASE_URL+"/api/v1/user/follow/"+email)
                 .then(response=>{
-                    console.log(response.data);
+                    // console.log(response.data);
                     this.follows = response.data.following;
                 })
-
              }
         },
         created() 
         {
         },
         mounted(){
-
-            console.log("뉴스피드")
+            this.followarticle();
             this.allarticle();
             this.getFollwers();
         }
