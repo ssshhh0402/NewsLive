@@ -180,7 +180,7 @@
              },
              followarticle()
              {
-                 const email = this.$store.state.UserInfo.kakao_account.email;
+                const email = this.$store.state.UserInfo.kakao_account.email;
                 axios
                 .get(API_BASE_URL+"/api/v1/posts/following/"+email)
                 .then(response=>{
@@ -205,8 +205,8 @@
                 axios
                 .get(API_BASE_URL+"/api/v1/user/follow/"+email)
                 .then(response=>{
-                    // console.log(response.data);
                     this.follows = response.data.following;
+
                 })
              }
         },
