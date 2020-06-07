@@ -206,8 +206,8 @@
                 axios
                 .get(API_BASE_URL+"/api/v1/user/follow/"+email)
                 .then(response=>{
-                    // console.log(response.data);
                     this.follows = response.data.following;
+
                 })
              }
         },
