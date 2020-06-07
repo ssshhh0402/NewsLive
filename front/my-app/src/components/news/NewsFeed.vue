@@ -136,6 +136,7 @@
 <script>
     import { API_BASE_URL } from "../../config";
     import AllNews from "./TypeNewsCard/AllNews.vue"
+    import AdBanner from "../advertisement/AdBanner.vue";
     import SubjectNews from "./TypeNewsCard/SubjectNews.vue"
     import axios from "axios";
     export default {
