@@ -32,10 +32,11 @@
               <v-col cols="12" md="5" >
 				<div  class = "mt-7">
                 <v-carousel  hide-delimiters show-arrows-on-hover interval="4000"> 
-                <v-carousel-item v-for="k in 4" :key="k"> 
+                <v-carousel-item v-for="k in len" :key="k"> 
                     <v-row >
                 <v-hover v-slot:default="{ hover }">
 					<v-card
+						v-if ="len!=0"
 						light="light"
 						align-center="align-center"
 						:elevation="hover ? 16 : 2"
@@ -43,7 +44,7 @@
 						<v-img
 						class="white--text align-end"
 						height="500px"
-						v-bind:src="posts[selected].banner ==='NO'?require('../assets/newsBK2.png'):posts[selected].banner">
+						v-bind:src="posts[selected].banner ==='NO'  ?require('../assets/newsBK2.png'):posts[selected].banner">
 						<v-card-text>
 						
 						</v-card-text>
@@ -129,7 +130,7 @@
 					selected : 0,
 					search: null,
 					posts: [],
-
+					len:0
 				};
 			}, 
 			mounted(){
@@ -150,6 +151,8 @@
 					.then(response=>{
 						// console.log("getRecent()",response.data);
 						this.posts = response.data;
+						console.log("posts 확인",this.posts.length)
+						this.len = this.posts.length;
 					})
 					.catch(e=>{
 						console.error(e);

@@ -107,10 +107,6 @@
                Myemail : this.$store.state.UserInfo.kakao_account.email
             }
         },
-        created()
-        {
-            console.log("븅",this.post);
-        },
         methods: {
             ctxStop(e) {
         	    e.preventDefault();
@@ -132,6 +128,7 @@
                     this.followChk= true;
                     console.log("팔로우 성공 !!!");
                     this.$store.dispatch("getFollowInfo");
+                    this.$store.dispatch("getAllInfo");
                 })
                
             },
@@ -140,19 +137,22 @@
             },
             goUnFollow() //언팔로우. 
             { 
-                    //params: { id: this.allNews[index].postId }
-                    // {
-                    // fromUserEmail: this.Myemail,
-                    // toUserEmail: this.post.author
-                    // }
-                axios
-                .delete(API_BASE_URL+"/api/v1/user/unFollow?fromUser="+this.Myemail +"&toUser="+this.post.author)
-                .then(response=>{
+        
+               axios
+                .delete(API_BASE_URL+"/api/v1/user/unFollow",
+                {params:{
+                    
+                    fromUser: this.Myemail,
+                    toUser: this.post.author
+                }})
+                 .then(response=>{
                     this.followChk= false;
                     console.log("언팔로우 성공 !!!");
-                })    
-            }
-   
+                    this.$store.dispatch("getFollowInfo");
+                    this.$store.dispatch("getAllInfo");
+                   
+                })
+            },
         },
     };
 </script>
