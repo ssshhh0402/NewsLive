@@ -14,6 +14,7 @@
                  class="white--text align-end"
                  height="100%"
                  src= "../../../../assets/backnews.jpg"
+                 @click="goDetail()"
                 >
                 
                     <v-list-item>
@@ -120,7 +121,9 @@
                     toUserEmail:author,
                 })
             },
-            
+            goDetail(){
+                 this.$router.push({name:'newsdetail',params: { id: this.post.postId }})
+            }
         },
     };
 </script>

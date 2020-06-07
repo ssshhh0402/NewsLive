@@ -12,6 +12,7 @@
                  class="white--text align-end"
                  height="500px"
                  src= "../../../assets/backnews.jpg"
+                 @click="goDetail()"
                 >
                 
                     <v-list-item>
@@ -131,6 +132,9 @@
                 })
                
             },
+            goDetail(){
+                 this.$router.push({name:'newsdetail',params: { id: this.post.postId }})
+            },
             goUnFollow() //언팔로우. 
             {
                 axios
@@ -146,6 +150,7 @@
                 })    
             }
    
+>>>>>>> front/my-app/src/components/news/TypeNewsCard/AllNews.vue
         },
     };
 </script>
