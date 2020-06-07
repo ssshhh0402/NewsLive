@@ -60,7 +60,7 @@
                         <v-list-item-icon>
                             <v-icon>mdi-account</v-icon>
                         </v-list-item-icon>
-                        <v-list-item-title ><v-btn text  @click="goType(1)">모든 기사보기</v-btn></v-list-item-title>
+                        <v-list-item-title ><v-btn text @click="goType(1)">모든 기사보기</v-btn></v-list-item-title>
                     </v-list-item>
                     <v-divider></v-divider>
                     <v-list-item class="mb-2">
@@ -78,9 +78,8 @@
             
             <!--모든 뉴스 -->
             <v-row v-if="Change==true" >
-                <v-col>
-                <div v-for="(item, index) in AllCardList" v-bind:key="index" >
-                <!--v-bind:src="posts[selected].banner ==='NO'?require('../assets/newsBK2.png'):posts[selected].banner"  -->
+                <v-col v-if="!flag">
+                <div  v-for="(item, index) in AllCardList" v-bind:key="index" >
                     <AllNews v-bind:post="item" ></AllNews>    
                 </div>
                 </v-col>
@@ -154,12 +153,19 @@
         },
         computed: {
             follows: function(){
+                this.goff();
                 return this.$store.state.FollowInfo;
+                
+            },
+            AllCardList: function(){
+                var fdfd =this.$store.state.AllInfo
+                console.log("computed", fdfd )
+                return this.$store.state.AllInfo;
             }
         },
         data() {
             return {
-                AllCardList: null, 
+                flag: false, 
                 FollowCardList: null,
                 user: Object,
                 Change: false, 
@@ -168,6 +174,12 @@
             };
         },
         methods: {
+             goff(){
+                 this.flag= true;
+                setTimeout(function () {
+                    this.flag =false;
+                }.bind(this), 0.1);
+             },
              goType(num)
              {
                 if( num ==1)
@@ -181,17 +193,7 @@
              },
              allarticle()
              {
-                 const email = this.$store.state.UserInfo.kakao_account.email;
-                 const url = API_BASE_URL+"/api/v1/posts/EveryThing/"+email
-                 console.log("URL : " , url);
-                 axios
-                .get(API_BASE_URL+"/api/v1/posts/EveryThing/"+email)
-                .then(response=>{
-                    this.AllCardList = response.data;
-                    // console.log(this.AllCardList);
-                    // console.log("AllNews",this.AllCardList);
-                })
-            
+                  this.$store.dispatch("getAllInfo")
              },
              followarticle()
              {

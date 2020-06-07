@@ -9,7 +9,8 @@ export default new Vuex.Store({
         isSigned: false,
         isManager: false,
         UserInfo : {},
-        FollowInfo :{}
+        FollowInfo :{},
+        AllInfo:{}
     },
     mutations: {
         setIsSigned(state, isSigned) {
@@ -32,9 +33,29 @@ export default new Vuex.Store({
         {
             state.FollowInfo = followInfo
             console.log(state.FollowInfo )
+        },
+        setAllInfo(state, allInfo) {
+            state.AllInfo = allInfo
+            console.log("mutation",state.AllInfo)
         }
     },
     actions: {
+        
+        getAllInfo({ commit }) {
+            const email = this.state.UserInfo.kakao_account.email;
+            const url = API_BASE_URL + "/api/v1/posts/EveryThing/" + email
+            console.log("URL : ", url);
+            axios
+                .get(API_BASE_URL + "/api/v1/posts/EveryThing/" + email)
+                .then(response => {
+                    var allInfo = response.data;
+                    console.log("allInfo", allInfo);
+                    commit("setAllInfo", allInfo)
+                }).catch(e => {
+                    console.error(e);
+                })
+        }
+        ,
         getFollowInfo({commit})
         {
             const email = this.state.UserInfo.kakao_account.email;
