@@ -65,10 +65,57 @@
     	</div>
 	<br>
 	<div class="back_g" style="height:570px">
-		<br>
+		<v-row >
+      <v-col cols="6" >
+        <v-img style="top:15%" src="../assets/newsRegi.gif"></v-img>
+      </v-col>
+      <v-col cols="6">
+                <v-card
+                  class="mx-auto"
+                  style="top:30%"
+                  max-width="80%"
+                >
+                  <v-card-text>
+                    <p class="display-1 text--primary">
+                      블록체인 News 기록
+                    </p>
+                    <div class="text--primary" style="font-size:14px">
+                      News Live에 작성되는 모든 기사들은 <strong>Hyperledger 블록체인 네트워크</strong>에 기록됩니다.<br><br>
+                      또한, 수정, 삭제 등의 조작 <strong>모두 기록</strong>됩니다.<br><br>
+                      따라서 기자는 기사 작성에 있어 신중해야 하며, 이를 통해 구독자로 부터 평가를 받게 됩니다.<br><br>
+                      이를 통해 사용자는 <strong>신뢰할 수 있는 기사</strong>를 제공받을 수 있습니다.
+                    </div>
+                  </v-card-text>
+                </v-card>
+      </v-col>
+		</v-row>
 	</div>
 	<div style="background: (58, 76, 168); height:570px">
-		
+		<v-row >
+      <v-col cols="6" >
+                        <v-card
+                  class="mx-auto"
+                  style="top:30%"
+                  max-width="80%"
+                >
+                  <v-card-text>
+                    <p class="display-1 text--primary">
+                      블록체인을 통한 광고 수익 분배
+                    </p>
+                    <div class="text--primary" style="font-size:14px">
+                      기자들은 기사가 블록체인에 저장되어 제약을 받게 됩니다. 하지만 <strong>광고 수익을 분배</strong> 받습니다.<br><br>
+                      구독자들이 기사를 클릭할 때마다 <strong>기사의 조회수가 블록체인에 기록</strong>됩니다.<br><br>
+                      이렇게 쌓인 기사의 조회수를 통해 <strong>광고료를 비율에 따라 지급</strong>받습니다.<br><br>
+                      <br>
+                      *1개의 계정은 1개의 기사에 1번의 조회수를 늘릴 수 있도록 제한했습니다.
+                    </div>
+                  </v-card-text>
+                </v-card>
+      </v-col>
+      <v-col cols="6">
+        <v-img style="top:15%" src="../assets/adDivide.gif"></v-img>
+      </v-col>
+		</v-row>
 	</div>
 </div>
 </template>

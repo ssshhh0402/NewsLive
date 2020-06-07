@@ -94,7 +94,7 @@
           </span>
             <div
                         id="scroll-target"
-                    style="height: 35vh"
+                    style="height: 28vh"
                     class="overflow-y-auto"
             >
                 <v-list-item-group v-model="item" color="primary"
@@ -110,23 +110,25 @@
                     </v-list-item>
                 </v-list-item-group>
             </div>
-            <div>
-                광고
+            <div class="text-center" style="height:35vh">
+                <AdBanner></AdBanner>
             </div>
         </v-col>
     </v-row>
 </template>
 
 <script>
-    import Article from "./Article.vue"
-    import AllNews from "./TypeNewsCard/AllNews.vue"
-    import SubjectNews from "./TypeNewsCard/SubjectNews.vue"
+    import Article from "./Article.vue";
+    import AllNews from "./TypeNewsCard/AllNews.vue";
+    import SubjectNews from "./TypeNewsCard/SubjectNews.vue";
+    import AdBanner from "../advertisement/AdBanner.vue";
     import axios from "axios";
     export default {
         components: {
             Article,
             SubjectNews,
-            AllNews
+            AllNews,
+            AdBanner
         },
         data() {
             return {
