@@ -150,7 +150,6 @@
                 })    
             }
    
->>>>>>> front/my-app/src/components/news/TypeNewsCard/AllNews.vue
         },
     };
 </script>
