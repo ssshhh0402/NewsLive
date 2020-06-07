@@ -175,12 +175,13 @@
                 .get(API_BASE_URL+"/api/v1/posts")
                 .then(response=>{
                     this.AllCardList = response.data;
+                    // console.log(this.AllCardList);
                     // console.log("AllNews",this.AllCardList);
                 })
              },
              followarticle()
              {
-                 const email = this.$store.state.UserInfo.kakao_account.email;
+                const email = this.$store.state.UserInfo.kakao_account.email;
                 axios
                 .get(API_BASE_URL+"/api/v1/posts/following/"+email)
                 .then(response=>{
@@ -190,9 +191,9 @@
                     // console.log(this.FollowCardList.length )
                     if(this.FollowCardList.length == 0)
                     {
-                        this.Ban =this.FollowCardList.length;
                         this.Change =true; //모든뉴스 보여주기. 
                     }
+                    this.Ban =this.FollowCardList.length;
                 })
                 .catch(e=>{
                     console.error(e);
@@ -205,8 +206,8 @@
                 axios
                 .get(API_BASE_URL+"/api/v1/user/follow/"+email)
                 .then(response=>{
-                    // console.log(response.data);
                     this.follows = response.data.following;
+
                 })
              }
         },

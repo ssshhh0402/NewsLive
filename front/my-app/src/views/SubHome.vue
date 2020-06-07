@@ -91,12 +91,12 @@
 	</div>
 	<div style="background: (58, 76, 168); height:570px">
 		<v-row >
-      <v-col cols="6" >
-                        <v-card
-                  class="mx-auto"
-                  style="top:30%"
-                  max-width="80%"
-                >
+			<v-col cols="5" >
+					<v-card
+				class="mx-auto"
+				style="top:30%"
+				max-width="80%"
+			>
                   <v-card-text>
                     <p class="display-1 text--primary">
                       블록체인을 통한 광고 수익 분배
@@ -110,10 +110,10 @@
                     </div>
                   </v-card-text>
                 </v-card>
-      </v-col>
-      <v-col cols="6">
-        <v-img style="top:15%" src="../assets/adDivide.gif"></v-img>
-      </v-col>
+     			</v-col>
+			<v-col cols="6">
+				<v-img style="top:15%" src="../assets/adDivide.gif"></v-img>
+			</v-col>
 		</v-row>
 	</div>
 </div>
