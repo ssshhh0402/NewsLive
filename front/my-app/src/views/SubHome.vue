@@ -5,23 +5,24 @@
               <v-col cols="12" md="2"></v-col>
               <v-col cols="12" md="4">
                 <div align="left" class="mt-7">
-                <span  class="blue--text font-weight-bold " style="font-size:40px;">The News Live</span>
+                <!-- <span  class="blue--text font-weight-bold " style="font-size:40px;">The News Live</span> -->
                 <br><br>  
-                  <div align="left" class="gray font-weight-bold mt-6" style="font-size:19px;">
-                  <div class="h1"><strong>최근 기사 <span class="h5"><strong>보러가기 -> </strong></span></strong></div>
+                  <div align="left" class="gray font-weight-bold mt-3" style="font-size:19px;">
+                  <div class="h1"><strong>최근 기사 <span class="h5"><strong>보러가기</strong></span></strong></div>
                   </div> 
                   <br> 
                   <v-divider></v-divider>
                   <v-btn 
-                    class=" mt-5 bk"
+                    class=" mt-4"
+					style="background-color:white;"
                     width="80%"
-                    v-for="item in posts"
-                    v-bind:key="item.id"
+                    v-for="(item,idx) in posts"
+                    v-bind:key="idx"
                     dark
                     large
-                    @click="goIntro(item)"
+					@click="selectImage(idx)"
                   > 
-                  <div class="mb-2 mr-2 font-weight-bold ">{{item.title}}</div> 
+                  <div class="test mb-2 mr-2 font-weight-bold " style="font-size:18px " >{{item.title}}</div> 
                 </v-btn>
                 </div>
               </v-col> 
@@ -39,8 +40,7 @@
 						<v-img
 						class="white--text align-end"
 						height="500px"
-						src= "../assets/backnews.jpg"
-						>
+						v-bind:src="posts[selected].banner ==='NO'?require('../assets/newsBK2.png'):posts[selected].banner">
 						<v-card-text>
 						
 						</v-card-text>
@@ -123,6 +123,7 @@
 		export default {
 			data() {
 				return {
+					selected : 0,
 					search: null,
 					posts: [],
 
@@ -135,9 +136,9 @@
 				goSearch(content) {
 					console.log(content)
 				},
-				goIntro(obj)
+				selectImage(idx)
 				{
-					console.log("작업필요 SubHome으로오세요 ")
+					this.selected = idx
 				}
 				,
 				getRecent(){
