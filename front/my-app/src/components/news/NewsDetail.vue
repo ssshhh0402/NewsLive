@@ -4,7 +4,7 @@
         <v-col cols="9">
             <v-card
                 class="mx-auto"
-                height="80vh"
+                height="70vh"
             >
                 <v-card-text> 
                     <h1>{{title}}</h1>
@@ -19,7 +19,7 @@
                     <v-divider class="divider"></v-divider>
                 <v-container
                     id="scroll-target"
-                    style="max-height: 63vh"
+                    style="max-height: 50vh"
                     class="overflow-y-auto"
                 >
                     <div
@@ -44,7 +44,7 @@
         </v-col>
         <v-col cols="3"
         id="scroll-target"
-                    style="max-height: 80vh"
+                    style="max-height: 70vh"
                     class="overflow-y-auto"
         >
             <div v-if="length==0">
@@ -61,7 +61,7 @@
             <div v-else
             v-scroll:#scroll-target="onScroll"
             >
-            <NewsDetailCard v-for="item in simmilar" v-bind:key="item.postId" v-bind:title="item.title" v-bind:img="item.banner"></NewsDetailCard>
+            <NewsDetailCard v-for="item in simmilar" v-bind:id="item.postId" v-bind:key="item.postId" v-bind:title="item.title" v-bind:img="item.banner"></NewsDetailCard>
             </div>
         </v-col>
     </v-row>
@@ -136,5 +136,8 @@ p{
 }
 span{
     margin:5px;
+}
+img{
+    height: auto;
 }
 </style>

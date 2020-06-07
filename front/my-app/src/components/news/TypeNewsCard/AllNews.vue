@@ -12,6 +12,7 @@
                  class="white--text align-end"
                  height="500px"
                  src= "../../../assets/backnews.jpg"
+                 @click="goDetail()"
                 >
                 
                     <v-list-item>
@@ -30,9 +31,13 @@
                     <v-card-actions>
                         <v-spacer></v-spacer>
                         <!-- | {{CardList.registeredAt.slice(0,10)}} | {{CardList.category}} 돕기 | -->
-                        <v-btn icon="icon">
-                            <v-icon>mdi-heart</v-icon>
+                        <v-btn v-if ="followChk==false" icon="icon" @click="goFollow()">
+                            <v-icon>mdi-lightbulb-outline </v-icon>
                         </v-btn>
+                        <v-btn v-if ="followChk==true" icon="icon" @click="goUnFollow()">
+                            <v-icon>mdi-lightbulb</v-icon>
+                        </v-btn>
+                        
                         <v-btn icon="icon">
                             <v-icon @click.stop="dialog = true">mdi-bell-sleep
                             </v-icon>
@@ -95,20 +100,55 @@
         props:['post'],
         data() {
             return {
+               followChk : this.post.followChk,
                dialog: false,
                selected:{
                },
-               includeFiles:''
+               includeFiles:'',
+               Myemail : this.$store.state.UserInfo.kakao_account.email
             }
         },
-       
+        created()
+        {
+            console.log("븅",this.post);
+        },
         methods: {
             Back()
             {
                 this.dialog=false;
             },
-            getFollow(){
+            goFollow()
+            {
+                 axios
+                .put(API_BASE_URL+"/api/v1/user/follow",
+                {
+                    fromUserEmail: this.Myemail,
+                    toUserEmail: this.post.author
+                })
+                .then(response=>{
+                    this.followChk= true;
+                    console.log("팔로우 성공 !!!");
+                    this.$store.dispatch("getFollowInfo");
+                })
+               
             },
+            goDetail(){
+                 this.$router.push({name:'newsdetail',params: { id: this.post.postId }})
+            },
+            goUnFollow() //언팔로우. 
+            {
+                axios
+                .delete(API_BASE_URL+"/api/v1/user/unFollow",
+                {
+                    
+                    fromUserEmail: this.Myemail,
+                    toUserEmail: this.post.author
+                })
+                .then(response=>{
+                    this.followChk= false;
+                    console.log("언팔로우 성공 !!!");
+                })    
+            }
    
         },
     };

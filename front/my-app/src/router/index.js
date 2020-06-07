@@ -87,6 +87,12 @@ Vue.use(VueRouter)
           props: true,
           component: () => import("../components/news/NewsDetail.vue"),
         },
+        {
+          path: "loading/:id",
+          name: "loading",
+          props:true,
+          component:()=>import("../components/common/LoadingPage.vue"),
+        }
       ],
       redirect: () => {
         return "/news/newscreate";
