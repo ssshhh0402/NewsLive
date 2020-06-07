@@ -13,7 +13,6 @@
                     style="margin-bottom:10px"
                     height="20vh"
                     width="100%"
-                    light="light"
                     align-center="align-center"
                     class="mx-auto"
                     hover
@@ -78,7 +77,6 @@ export default {
    props:["allNews"],
    components : {
   },
-<<<<<<< HEAD
   created(){
       console.log(this.allNews)
       console.log(this.allNews.length/5)
@@ -95,13 +93,10 @@ export default {
           return selectedWords;
       }
   },
-=======
-  
->>>>>>> 08a4a1513952d11f41ba11d502c969ecfd41cf6d
+
   data () {
       return {
         page: 1,
-        topicList : []
       }
     },
 };
