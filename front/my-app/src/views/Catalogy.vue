@@ -38,12 +38,11 @@
                             class=" test font-weight-bold "
                             style="font-size:25px;">{{list.title}}
                         </span>
-                        <v-card style="margin-top:1vw; width:88%;">
-                <v-card-text>
-            <h3>keywords</h3>
-            <h4>{{list.topics.length>=50?list.topics.slice(0,50)+"...":list.topics}}</h4>
-                </v-card-text>
-            </v-card>
+                        <div style="margin-top:1vw; width:88%;">
+                        <h3>주제어 </h3>
+                        <h4 style ="color:gray">{{list.topics.length>=50?list.topics.slice(0,50)+"...":list.topics}}</h4>
+                        </div>
+                        
                         </v-col>
                         </v-row>
                     </div>
