@@ -101,11 +101,7 @@
                includeFiles:''
             }
         },
-        mounted()
-        {
-            this.getAllNews();
-            console.log(this.post);
-        },
+       
         methods: {
             Back()
             {
@@ -113,15 +109,7 @@
             },
             getFollow(){
             },
-            getAllNews(){
-                    axios
-                    .get(API_BASE_URL + "/api/v1/posts")
-                    .then(response => {
-                        console.log("jw",response)
-                    })
-                    .catch(() => {
-                    })
-                }
+   
         },
     };
 </script>

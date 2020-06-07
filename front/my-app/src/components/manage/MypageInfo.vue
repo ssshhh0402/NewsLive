@@ -27,7 +27,7 @@
              <v-data-table
                 :headers="headers"
                 :items="savePost"
-                :items-per-page="10"
+                :items-per-page="5"
                 :search="search"
                 >
              </v-data-table>   
@@ -42,9 +42,8 @@
              <v-data-table
                 :headers="headers"
                 :items="otherPost"
-                :items-per-page="10"
+                :items-per-page="5"
                 :search="search"
-                :backgroud-color="gray"
              >
              </v-data-table>
             </v-col> 
@@ -83,7 +82,7 @@
         },
         created() {
             this.UserInfo = this.$store.state.UserInfo
-            console.log(this.UserInfo)
+            // console.log(this.UserInfo)
         },
         mounted()
         {
@@ -95,12 +94,12 @@
                 axios
                 .get('http://k02b2041.p.ssafy.io:8080/api/v1/posts/user/'+email)
                 .then(response=>{
-                    console.log(response);
+                    // console.log(response);
                     this.otherPost = response.data.otherPost;
                     this.savePost = response.data.savedPost;
                 })
                 .catch(e=>{
-                    console.error(e);
+                    // console.error(e);
                 })
             }
         },

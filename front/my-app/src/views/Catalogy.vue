@@ -67,10 +67,7 @@ export default {
    props:["allNews"],
    components : {
   },
-  created(){
-      console.log(this.allNews)
-      console.log(this.allNews.length/5)
-  },
+  
   data () {
       return {
         page: 1,
