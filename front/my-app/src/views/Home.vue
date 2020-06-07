@@ -114,6 +114,7 @@
 			methods: {
 				goSearch(content) {
 					console.log(content)
+					console.log("검색창  작업필요 SubHome으로오세요 ")
                 },
                 goRouter(num){
 					if( this.number == num)
@@ -129,7 +130,6 @@
 					else{
 						this.number= num 
 						this.allNews= this.EachNewsList[num].posts
-						console.log(this.allNews)	
 					}
 				},
 				getData() {
@@ -137,7 +137,7 @@
                         .get(API_BASE_URL + "/api/v1/posts/kinds")
                         .then(response => {
                             this.EachNewsList = response.data;
-                            console.log("전체 리스트",this.EachNewsList);
+                            // console.log("전체 리스트",this.EachNewsList);
                         })
                         .catch(() => {})
                 },
