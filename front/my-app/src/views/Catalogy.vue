@@ -17,6 +17,7 @@
                     class="mx-auto"
                     hover
                     v-if="(page-1)*5<=index && index<(page-1)*5 +5"
+                    @click="goDetail(index)"
                     >
                     <div class="div-bc">
                         <v-row>
@@ -91,7 +92,10 @@ export default {
               }
           }
           return selectedWords;
-      }
+      },
+      goDetail(index){
+                 this.$router.push({name:'newsdetail',params: { id: this.allNews[index].postId }})
+        }
   },
 
   data () {

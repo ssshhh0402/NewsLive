@@ -12,6 +12,7 @@
                  class="white--text align-end"
                  height="500px"
                  src= "../../../assets/backnews.jpg"
+                 @click="goDetail()"
                 >
                 
                     <v-list-item>
@@ -109,7 +110,9 @@
             },
             getFollow(){
             },
-   
+               goDetail(){
+                 this.$router.push({name:'newsdetail',params: { id: this.post.postId }})
+            }
         },
     };
 </script>

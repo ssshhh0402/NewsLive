@@ -3,6 +3,7 @@
   <v-card
     class="mx-auto card-mb"
     max-width="400"
+    @click="goDetail()"
   >
   <div class="div-bc">
     <v-img
@@ -20,8 +21,13 @@
 </template>
 <script>
 export default {
-    props:['title','img'],
-
+    props:['title','img','id'],
+    methods:{
+                  goDetail(){
+                    console.log(this.id);
+                 this.$router.push({name:'loading',params: { id: this.id }});
+            }
+    }
 }
 </script>
 <style>
