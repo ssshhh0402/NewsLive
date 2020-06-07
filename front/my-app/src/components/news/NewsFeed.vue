@@ -80,7 +80,8 @@
             <v-row v-if="Change==true" >
                 <v-col>
                 <div v-for="(item, index) in AllCardList" v-bind:key="index" >
-                    <AllNews v-bind:post="item"></AllNews>    
+                <!--v-bind:src="posts[selected].banner ==='NO'?require('../assets/newsBK2.png'):posts[selected].banner"  -->
+                    <AllNews v-bind:post="item" ></AllNews>    
                 </div>
                 </v-col>
             </v-row>
@@ -104,14 +105,15 @@
         <v-col cols="2"
 
         >
+        <!-- 3번째 줄 -->
         <span
               class=" test font-weight-bold "
               style="font-size:20px;">Followings
           </span>
             <div
-                        id="scroll-target"
-                    style="height: 28vh"
-                    class="overflow-y-auto"
+                id="scroll-target"
+                style="height: 28vh"
+                class="overflow-y-auto"
             >
                 <v-list-item-group color="primary"
                 v-scroll:#scroll-target
@@ -145,6 +147,11 @@
             AllNews,
             AdBanner
         },
+        computed: {
+            follows: function(){
+                return this.$store.state.FollowInfo;
+            }
+        },
         data() {
             return {
                 AllCardList: null, 
@@ -153,7 +160,6 @@
                 Change: false, 
                 Ban : 0, 
                 fixxElem: 0,
-                follows: [],
             };
         },
         methods: {
@@ -170,14 +176,17 @@
              },
              allarticle()
              {
-                 // 신호를 줘야한다.
+                 const email = this.$store.state.UserInfo.kakao_account.email;
+                 const url = API_BASE_URL+"/api/v1/posts/EveryThing/"+email
+                 console.log("URL : " , url);
                  axios
-                .get(API_BASE_URL+"/api/v1/posts")
+                .get(API_BASE_URL+"/api/v1/posts/EveryThing/"+email)
                 .then(response=>{
                     this.AllCardList = response.data;
                     // console.log(this.AllCardList);
                     // console.log("AllNews",this.AllCardList);
                 })
+            
              },
              followarticle()
              {
@@ -185,13 +194,10 @@
                 axios
                 .get(API_BASE_URL+"/api/v1/posts/following/"+email)
                 .then(response=>{
-                    // console.log(response.data);
                     this.FollowCardList = response.data;
-                    // console.log("FollowNews",this.FollowCardList);
-                    // console.log(this.FollowCardList.length )
                     if(this.FollowCardList.length == 0)
                     {
-                        this.Change =true; //모든뉴스 보여주기. 
+                        this.Change =true; 
                     }
                     this.Ban =this.FollowCardList.length;
                 })
@@ -201,18 +207,9 @@
                  //변수 CardList에 담고 v-for 돌면서 두가지를 그리면 되겠다.
              },
              getFollwers(){
-                 //follwer가져오기
-                const email = this.$store.state.UserInfo.kakao_account.email;
-                axios
-                .get(API_BASE_URL+"/api/v1/user/follow/"+email)
-                .then(response=>{
-                    this.follows = response.data.following;
-
-                })
+                console.log("팔로우")
+                this.$store.dispatch("getFollowInfo")
              }
-        },
-        created() 
-        {
         },
         mounted(){
             this.followarticle();

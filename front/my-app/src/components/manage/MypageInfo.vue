@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class= "back_g" style="height:380px">
+        <div class= "back_g" style="height:360px">
             <br>
             <br><br>
         <v-card class=" mx-auto" align-center="align-center"  width="80%">
@@ -14,11 +14,11 @@
         </div>
         </v-card>
         </div>
-        <div class="fff" style="height:570px ">
+        <div style="height:570px ">
         <v-row> 
             <v-col cols="1"></v-col>
             <v-col class="mr-2" cols="5">
-                <div class=" mt-3 text-center" >  
+                <div class=" text-center" >  
                         <span
                             class=" test font-weight-bold "
                             style="font-size:35px;">-ING
@@ -33,7 +33,7 @@
              </v-data-table>   
             </v-col>
             <v-col  cols="5">
-                <div class=" mt-3 text-center" >  
+                <div class=" text-center" >  
                     <span
                         class=" test font-weight-bold "
                         style="font-size:35px;">COMPlETE
