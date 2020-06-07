@@ -108,10 +108,10 @@
               class=" test font-weight-bold "
               style="font-size:20px;">Followings
           </span>
-            <div    
-                id="scroll-target"
-                style="height: 35vh"
-                class="overflow-y-auto"
+            <div
+                        id="scroll-target"
+                    style="height: 28vh"
+                    class="overflow-y-auto"
             >
                 <v-list-item-group color="primary"
                 v-scroll:#scroll-target
@@ -126,8 +126,8 @@
                     </v-list-item>
                 </v-list-item-group>
             </div>
-            <div>
-                광고
+            <div class="text-center" style="height:35vh">
+                <AdBanner></AdBanner>
             </div>
         </v-col>
     </v-row>
@@ -141,7 +141,8 @@
     export default {
         components: {
             SubjectNews,
-            AllNews
+            AllNews,
+            AdBanner
         },
         data() {
             return {
