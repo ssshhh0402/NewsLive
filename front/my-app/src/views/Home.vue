@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="back_g" style="height:390px" >
+        <div class="back_g" style="height:445px" >
                 <v-row justify="center">
                     <v-col align="center">
                         <div align="center" class="gray font-weight-bold mt-9" style="font-size:19px;">

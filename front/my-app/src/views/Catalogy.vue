@@ -10,7 +10,7 @@
                     >
                 <v-card
                  
-                    height="90%"
+                    min-height="20vh"
                     width="100%"
                     align-center="align-center"
                     hover
