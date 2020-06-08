@@ -13,12 +13,12 @@
                      <v-img
                  class="white--text align-end"
                  height="100%"
-                 src= "../../../../assets/backnews.jpg"
+                 v-bind:src="post.banner!=='NO'?post.banner:require('../../../../assets/backnews.jpg')"
                  @click="goDetail()"
                 >
                 
-                    <v-list-item>
-                        <v-list-item-avatar color="yellow">Best</v-list-item-avatar>
+                    <v-list-item style="background-color:white;">
+                        <v-list-item-avatar color="yellow"></v-list-item-avatar>
                         <v-list-item-content>
                             <v-list-item-title class="headline mt-3 mb-0 ">{{post.title}}</v-list-item-title>
                             <v-list-item-subtitle ma-0="ma-0">{{post.author}}</v-list-item-subtitle>

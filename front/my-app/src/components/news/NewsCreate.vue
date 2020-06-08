@@ -90,6 +90,17 @@
                             </v-row>
                        </v-container>
                        <v-container v-else>
+                           <v-row v-if="picture==='NO'">
+                               <v-card-title>대표이미지를 넣어주세요!</v-card-title>
+                                <v-col cols="12" sm="12" md="12">
+                                <v-file-input
+                                    v-model="image"
+                                    accept="image/png, image/jpeg, image/bmp"
+                                    placeholder="Pick an avatar"
+                                    prepend-icon="mdi-camera"
+                                ></v-file-input>
+                            </v-col>
+                           </v-row>
                        <v-row >
                            <v-card-title>카테고리를 선택해주세요.</v-card-title>
                             <v-spacer></v-spacer>
@@ -229,6 +240,7 @@
                 picture: "NO",
                 Title: " ",
                 Email: " ",
+                image:" ",
                 // <strong class="ql-font-serif ql-size-large" style="color: rgb(230, 0,
                 // 0);">always</strong> <p><span class="ql-font-serif" style="color: gray" >*아래에
                 // 기사 내용을 작성해주세요.</span></p><p><br></p>
@@ -354,7 +366,36 @@
                 .catch((err) => {
                     console.log(err);
                 })
+            },
+            BannerImageAdded() {
+            var formData = new FormData();
+            formData.append("image", this.image);
+            axios({
+                url: 'https://api.imgur.com/3/image',
+                method: 'POST',
+                headers: {
+                    'Authorization': 'Client-ID 82c1f7f0d7c077a'
+                },
+                data: formData
+            })
+                .then((result) => {
+                    let url = result
+                        .data
+                        .data
+                        .link
+                    this.picture = url;
+                    console.log(url);
+                })
+                .catch((err) => {
+                    console.log(err);
+                })
             }
+    },
+    watch:{
+        image:function(val){
+            console.log("2131");
+            this.BannerImageAdded();
+        }
     }
 }
 </script>

@@ -12,7 +12,7 @@
       v-bind:src="img==='NO'?require('../../../../assets/newsBK2.png'):img"
     >
       <v-card-title>
-          <v-btn rounded color="black" dark large>{{title}}</v-btn>
+          <v-btn class="del" rounded color="black" dark large>{{title}}</v-btn>
           </v-card-title>
     </v-img>
   </div>
@@ -37,6 +37,13 @@ export default {
 .div-bc{
     background-color: black;
 }
+	.del{
+		width:100%;
+        padding:10px 10px;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+ 	 	overflow: hidden;
+	}
 </style>
       
   
