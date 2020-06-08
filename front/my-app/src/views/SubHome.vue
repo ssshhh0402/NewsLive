@@ -31,10 +31,10 @@
               </v-col> 
               <v-col cols="12" md="5" >
 				<div  class = "mt-7">
-                <v-carousel  hide-delimiters show-arrows-on-hover interval="4000"> 
-                <v-carousel-item v-for="k in len" :key="k"> 
-                    <v-row >
-                <v-hover v-slot:default="{ hover }">
+                <v-carousel  v-model="selected" hide-delimiters show-arrows-on-hover interval="4000"> 
+                	<v-carousel-item v-for="k in len" :key="k"> 
+                    	<v-row >
+                			<v-hover v-slot:default="{ hover }">
 					<v-card
 						v-if ="len!=0"
 						light="light"
@@ -48,14 +48,7 @@
 						<v-card-text>
 						
 						</v-card-text>
-						<v-card-actions>
-						<v-btn text="text" color="deep-purple accent-4">
-							Read
-						</v-btn>
-						<v-btn text="text" color="deep-purple accent-4">
-							Bookmark
-						</v-btn>
-						</v-card-actions>
+						
 						</v-img>
 					</v-card>
               </v-hover>
@@ -156,6 +149,15 @@
 					})
 					.catch(e=>{
 						console.error(e);
+					})
+				},
+				findByTitle(target){
+					console.log(target);
+					axios
+					.get("http://k02b2041.p.ssafy.io/api/v1/posts/find/" + target)
+					.then(response => {
+						this.posts = response.data;
+						this.$forceUpdate();
 					})
 				},
 				breakpointObject() {
