@@ -96,7 +96,7 @@
 			components: {
 				Catalogy,
 				SubHome
-			},
+			},	
 			data() {
 				return {
                     search: null,
