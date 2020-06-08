@@ -79,7 +79,7 @@
 	<div class="back_g" style="height:570px">
 		<v-row >
       <v-col cols="6" >
-        <v-img style="top:15%" src="../assets/newsRegi.gif"></v-img>
+        <v-img style="top:15%; height:50vh" src="../assets/newsRegi.gif"></v-img>
       </v-col>
       <v-col cols="6">
                 <v-card
@@ -125,7 +125,7 @@
                 </v-card>
      			</v-col>
 			<v-col cols="6">
-				<v-img style="top:15%" src="../assets/adDivide.gif"></v-img>
+				<v-img style="top:15%; height:50vh" src="../assets/adDivide.gif"></v-img>
 			</v-col>
 		</v-row>
 	</div>

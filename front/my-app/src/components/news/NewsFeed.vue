@@ -201,7 +201,6 @@
                 else if(num ==2)
                 {
                     this.followarticle();
-                    this.Change = false;   // 팔로우 기사.
                 }
              },
              allarticle()
@@ -216,10 +215,7 @@
                 .get(API_BASE_URL+"/api/v1/posts/following/"+email)
                 .then(response=>{
                     this.FollowCardList = response.data;
-                    if(this.FollowCardList.length == 0)
-                    // {
-                        // this.Change =true; 
-                    // }
+                    this.Change = false;
                     this.Ban =this.FollowCardList.length;
                 })
                 .catch(e=>{
