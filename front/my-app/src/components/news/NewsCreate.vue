@@ -2,10 +2,26 @@
 <!-- 해결해야할 것 ( 임시저장, 컴플릿 ) -->
     <v-container>
         <div cols="3"
-        id="scroll-target"
+                    id="scroll-target"
                     style="max-height: 80vh"
                     class="fdfdfd overflow-y-auto"
         >
+             <div style="height:100px" >
+                <v-row justify="center">
+                    <v-col cols="1"></v-col>
+                    <v-col cols="8" align="center">
+                           <br>
+                            <v-text-field
+                            v-model="Title"
+                            label="기사 제목을 입력해주세요."
+                            ></v-text-field>
+                    </v-col>
+                         <v-col cols="1"></v-col>
+                </v-row>
+                   
+            </div>    
+            <br>
+                    
         <vue-editor
             id="editor"
             useCustomImageHandler
@@ -139,7 +155,7 @@
                               class=" mt-2 white--text  text--lighten-1 font-weight-bold "
                               style="font-size:20px;"> 연예
                             </div>
-                            연애
+                            연예
                           </div>
                       </v-col>
                     </v-row>
@@ -217,7 +233,6 @@
                 // 0);">always</strong> <p><span class="ql-font-serif" style="color: gray" >*아래에
                 // 기사 내용을 작성해주세요.</span></p><p><br></p>
                 content: dedent `
-                <h1 class="ql-align-center"><span class="ql-font-serif" style="background-color: rgb(240, 102, 102); color: rgb(255, 255, 255);"> News Title </span></h1>
                 <p><br></p><p><strong class="ql-font-serif ql-size-large" style="background-color: gray; color: rgb(255, 255, 255)">News SubTitle 입력</strong></p><p><br></p>
                 <p><strong class=" ql-size-middle">CONTENTS 작성란입니다. </strong><u style="color:gray"> (*영상 및 사진 첨부 가능)</u> </p>
                 <p class="ql-font-serif" style="color: rgb(230, 0, 0);"></p>
@@ -251,9 +266,7 @@
                 if(num ==1 || this.PostID == -1) //임시저장이거나, 처음 들어온거라면.  
                 {
                     this.Email = this.$store.state.UserInfo.kakao_account.email
-                    const start = this.content.indexOf('255);">',2) + '255);">'.length;
-                    const end = this.content.indexOf("</");
-                    this.Title =this.content.substr(start,end-start).trim(); 
+                     
                     // console.log("이메일", this.Email );
                     // console.log("제목", this.Title );
                     axios

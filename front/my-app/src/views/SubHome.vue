@@ -2,7 +2,7 @@
     <div>
 		<div class= "mt-5">
 		   <v-row>
-              <v-col cols="12" md="2"></v-col>
+              <v-col cols="12" md="1"></v-col>
               <v-col cols="12" md="4">
                 <div align="left" class="mt-7">
                 <!-- <span  class="blue--text font-weight-bold " style="font-size:40px;">The News Live</span> -->
@@ -14,21 +14,22 @@
 				  <v-divider></v-divider>
 				  <v-divider></v-divider>
 				  <v-divider></v-divider>
-                  <v-divider></v-divider>
+                  <v-divider class= "mb-5"></v-divider>
                   <v-btn 
-                    class=" mt-4"
+                    class="del mt-4"
 					style="background-color:white;"
-                    width="80%"
+                    width="100%"
                     v-for="(item,idx) in posts"
                     v-bind:key="idx"
                     dark
                     large
 					@click="selectImage(idx)"
                   > 
-                  <div class="test mb-2 mr-2 font-weight-bold " style="font-size:18px " >{{item.title}}</div> 
+                  <div class=" test mb-2 mr-2 font-weight-bold " style="width:100% font-size:18px " >{{item.title}}</div> 
                 </v-btn>
                 </div>
               </v-col> 
+			  <v-col cols="12" md="1"></v-col>
               <v-col cols="12" md="5" >
 				<div  class = "mt-7">
                 <v-carousel  hide-delimiters show-arrows-on-hover interval="4000"> 
@@ -183,13 +184,19 @@
 		-webkit-text-fill-color: transparent;
 	}
 	.bk{
-    background: #7F7FD5;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-    height: 90vh;
-    width: 100%;
-    padding:5vw;
-}
+		background: #7F7FD5;  /* fallback for old browsers */
+		background: -webkit-linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);  /* Chrome 10-25, Safari 5.1-6 */
+		background: linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+		height: 90vh;
+		width: 100%;
+		padding:5vw;
+	}	
+	.del{
+		width:100%;
+        padding:10px 10px;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+ 	 	overflow: hidden;
+	}
 
 	</style>

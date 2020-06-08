@@ -1,6 +1,7 @@
 <template>
   <div >
       <div class=" mt-3 text-center" >  
+        <br>
          <span
               class=" test font-weight-bold "
               style="font-size:35px;">News Feed

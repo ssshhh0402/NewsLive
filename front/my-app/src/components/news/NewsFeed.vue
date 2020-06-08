@@ -1,5 +1,5 @@
 <template>
-    <v-row > 
+    <v-row >         
         <v-col cols="2" >
             <div v-if="this.$store.state.isSigned== true" class="fdfdfd">
             <div class="text-center">
@@ -14,7 +14,7 @@
                 
                 <v-list-item class="mb-2">
                     <v-list-item-icon>
-                       <v-icon>mdi-account</v-icon>
+                       <v-icon> mdi-account-circle</v-icon>
                     </v-list-item-icon>
                     <v-list-item-title>{{this.$store.state.UserInfo.kakao_account.profile.nickname}}님,   안녕하세요!</v-list-item-title>
                 </v-list-item>
@@ -58,7 +58,7 @@
              <v-list dense="dense">
                     <v-list-item class="mb-2">
                         <v-list-item-icon>
-                            <v-icon>mdi-account</v-icon>
+                            <v-icon>mdi-account-multiple</v-icon>
                         </v-list-item-icon>
                         <v-list-item-title ><v-btn text @click="goType(1)">모든 기사보기</v-btn></v-list-item-title>
                     </v-list-item>
@@ -74,6 +74,17 @@
         </v-col>
         <!-- 여기가 가운데 라인. -->
         <v-col cols="8">
+            <v-row>
+                <v-col cols ="2"></v-col>
+                <v-col cols ="8">
+                <v-divider></v-divider>
+                <v-divider></v-divider>
+                <v-divider></v-divider>
+                <v-divider></v-divider>
+                </v-col>
+                <v-col cols ="2"></v-col>
+
+            </v-row>
             <div class="fdfdfd" id="scroll-target" style="max-height: 70vh">
             
             <!--모든 뉴스 -->
@@ -100,6 +111,7 @@
                 </v-col>
             </v-row>
             </div>
+
         </v-col>
         <v-col cols="2"
 
@@ -128,12 +140,12 @@
                 </v-list-item-group>
             </div>
             <span
-            class=" test font-weight-bold "
+            class="test font-weight-bold "
             style="font-size:20px;">Ad
             </span> 
-            <div class="text-center" style="height:35vh">
-
-                <AdBanner></AdBanner>
+            <div class="text-center" style="height:35vh">     
+            <br>
+                    <AdBanner></AdBanner>
             </div>
         </v-col>
     </v-row>
