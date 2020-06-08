@@ -11,7 +11,7 @@
                     >
                 <v-card
                     style="margin-bottom:10px"
-                    height="20vh"
+                    min-height="20vh"
                     width="100%"
                     align-center="align-center"
                     class="mx-auto"
