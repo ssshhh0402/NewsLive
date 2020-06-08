@@ -108,10 +108,6 @@
             }
         },
         methods: {
-            ctxStop(e) {
-        	    e.preventDefault();
-            }
-            ,
             Back()
             {
                 this.dialog=false;

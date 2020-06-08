@@ -98,6 +98,7 @@
                                     accept="image/png, image/jpeg, image/bmp"
                                     placeholder="Pick an avatar"
                                     prepend-icon="mdi-camera"
+                                    value ="image"
                                 ></v-file-input>
                             </v-col>
                            </v-row>
@@ -329,7 +330,9 @@
                 axios
                     .put(API_BASE_URL + "/api/v1/posts/" + this.PostID,{
                         subjectId: jj,
-                        kinds: this.checkNum
+                        kinds: this.checkNum,
+                        banner: this.picture
+
                     })
                     .then(response => {
                        alert("기사 작성이 완료되었습니다.")

@@ -9,6 +9,8 @@ Vue.config.productionTip = false
 new Vue({
   beforeCreate() {
     this.$store.dispatch("getMemberInfo");
+    // this.$store.dispatch("getAllInfo");
+    // this.$store.dispatch("getFollowInfo");
   },
   router,
   store,
