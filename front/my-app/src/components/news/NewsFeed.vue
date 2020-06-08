@@ -180,7 +180,7 @@
                 flag: false, 
                 FollowCardList: null,
                 user: Object,
-                Change: false, 
+                Change: true, 
                 Ban : 0, 
                 fixxElem: 0,
             };
@@ -200,11 +200,13 @@
                 }
                 else if(num ==2)
                 {
+                    this.followarticle();
                     this.Change = false;   // 팔로우 기사.
                 }
              },
              allarticle()
              {
+                  this.followarticle();
                   this.$store.dispatch("getAllInfo")
              },
              followarticle()
@@ -215,9 +217,9 @@
                 .then(response=>{
                     this.FollowCardList = response.data;
                     if(this.FollowCardList.length == 0)
-                    {
-                        this.Change =true; 
-                    }
+                    // {
+                        // this.Change =true; 
+                    // }
                     this.Ban =this.FollowCardList.length;
                 })
                 .catch(e=>{
