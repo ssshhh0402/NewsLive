@@ -13,9 +13,8 @@
                             <v-text-field
                                 v-model="search"
                                 clearable="clearable"
-                                flat="flat"
-                                solo-inverted="solo-inverted"
-                                hide-details="hide-details"
+                                flat
+                                solo
                                 background-color="white"
                                 label="뉴스 검색 및 유저 검색"
                                 @keyup.enter="goSearch(search)"></v-text-field>
@@ -79,10 +78,10 @@
 			</v-col>
 		</v-row>
     	</div>
-		<Catalogy v-if="dialog==true"
+		<Catalogy v-if="dialog"
 			:allNews="allNews"
 		></Catalogy>
-		<SubHome v-else ></SubHome>
+		<SubHome v-else ref="subHome"></SubHome>
 		<br>
 		<br>
     </div>
@@ -112,9 +111,18 @@
                 this.getData();
             },
 			methods: {
-				goSearch(content) {
-					console.log(content)
-					console.log("검색창  작업필요 SubHome으로오세요 ")
+				goSearch(newContent) {
+					console.log(newContent);
+					if (event.keyCode == 13){
+						this.search = newContent;
+						if (this.search.length == 0){
+							this.$refs.subHome.getRecent();
+							this.$refs.subHome.$forceUpdate();
+						}else{
+						console.log("여기는 Home : " + this.search);
+						this.$refs.subHome.findByTitle(this.search);
+						}
+					}
                 },
                 goRouter(num){
 					if( this.number == num)
