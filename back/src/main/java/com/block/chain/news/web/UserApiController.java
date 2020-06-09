@@ -55,6 +55,7 @@ public class UserApiController {
         log.info("UnFollow");
 
         return new ResponseEntity<String>(followService.unFollow(fromUser, toUser), HttpStatus.OK);
+
     }
 
     @GetMapping("/api/v1/fabric/account/{email}")
