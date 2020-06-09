@@ -113,7 +113,7 @@
                       <v-row >
                       <v-col cols="4">
                       <div class="text-center" @click="checkBox(0)" >
-                      <v-avatar size="100px"><div class="font_color font-weight-bold" v-if="checkNum===0">OK</div><v-img v-else src="../../assets/econo.jpg"></v-img></v-avatar>
+                      <v-avatar size="100px"><div class="font_color font-weight-bold" v-if="checkNum===0">OK</div><v-img v-else src="https://image.flaticon.com/icons/svg/3028/3028819.svg"></v-img></v-avatar>
                             <div class="mt-2 white--text  text--lighten-1 font-weight-bold "
                               style="font-size:20px;"> 경제
                             </div>
@@ -122,7 +122,7 @@
                       </v-col>
                       <v-col cols="4">
                           <div class="text-center" @click="checkBox(1)">
-                          <v-avatar size="100px" ><div class="font_color font-weight-bold" v-if="checkNum===1">OK</div><v-img v-else src="../../assets/sport.png"></v-img></v-avatar>
+                          <v-avatar size="100px" ><div class="font_color font-weight-bold" v-if="checkNum===1">OK</div><v-img v-else src="https://image.flaticon.com/icons/svg/3022/3022568.svg"></v-img></v-avatar>
                             <div
                               class="mt-2  white--text  text--lighten-1 font-weight-bold "
                               style="font-size:20px;">  스포츠
@@ -132,7 +132,7 @@
                       </v-col>
                       <v-col cols="4">
                           <div class="text-center" @click="checkBox(2)">
-                          <v-avatar size="100px" ><div class="font_color font-weight-bold" v-if="checkNum===2">OK</div><v-img v-else src="../../assets/social1.jpg"></v-img></v-avatar>
+                          <v-avatar size="100px" ><div class="font_color font-weight-bold" v-if="checkNum===2">OK</div><v-img v-else src="https://image.flaticon.com/icons/svg/927/927313.svg"></v-img></v-avatar>
                             <div 
                               class=" mt-2 white--text  text--lighten-1 font-weight-bold "
                               style="font-size:20px;">  사회
@@ -142,7 +142,7 @@
                       </v-col>
                       <v-col cols="4">
                           <div class="text-center" @click="checkBox(3)">
-                          <v-avatar size="100px" ><div class="font_color font-weight-bold" v-if="checkNum===3">OK</div><v-img v-else src="../../assets/stock.jpg"></v-img></v-avatar>
+                          <v-avatar size="100px" ><div class="font_color font-weight-bold" v-if="checkNum===3">OK</div><v-img v-else src="https://image.flaticon.com/icons/svg/2910/2910311.svg"></v-img></v-avatar>
                             <div 
                               class=" mt-2 white--text  text--lighten-1 font-weight-bold "
                               style="font-size:20px;"> 증시
@@ -152,7 +152,7 @@
                       </v-col>
                       <v-col cols="4">
                           <div class="text-center" @click="checkBox(4)">
-                          <v-avatar size="100px" ><div class="font_color font-weight-bold" v-if="checkNum===4">OK</div><v-img v-else src="../../assets/it.jpg"></v-img></v-avatar>
+                          <v-avatar size="100px" ><div class="font_color font-weight-bold" v-if="checkNum===4">OK</div><v-img v-else src="https://image.flaticon.com/icons/svg/1969/1969986.svg"></v-img></v-avatar>
                             <div 
                               class=" mt-2 white--text  text--lighten-1 font-weight-bold "
                               style="font-size:20px;"> I T
@@ -162,7 +162,7 @@
                       </v-col>
                       <v-col cols="4">
                           <div class="text-center" @click="checkBox(5)">
-                          <v-avatar size="100px" ><div class="font_color font-weight-bold" v-if="checkNum===5">OK</div><v-img v-else src="../../assets/entertain.jpg"></v-img></v-avatar>
+                          <v-avatar size="100px" ><div class="font_color font-weight-bold" v-if="checkNum===5">OK</div><v-img v-else src="https://image.flaticon.com/icons/svg/2913/2913359.svg"></v-img></v-avatar>
                             <div 
                               class=" mt-2 white--text  text--lighten-1 font-weight-bold "
                               style="font-size:20px;"> 연예

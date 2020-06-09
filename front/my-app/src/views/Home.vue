@@ -25,7 +25,7 @@
 				<v-row >
 			<v-col cols="2">
 			<div class="text-center" @click="goRouter(0)" >
-			<v-avatar size="100px" ><v-img src="../assets/econo.jpg"></v-img></v-avatar>
+			<v-avatar size="100px" ><v-img src="https://image.flaticon.com/icons/svg/3028/3028819.svg"></v-img></v-avatar>
 						<div class="mt-2  white--text  text--lighten-1 font-weight-bold "
 							style="font-size:20px;"> 경제
 						</div>
@@ -33,7 +33,7 @@
 			</v-col>
 			<v-col cols="2">
 					<div class="text-center" @click="goRouter(1)">
-					<v-avatar size="100px" ><v-img src="../assets/sport.png"></v-img></v-avatar>
+					<v-avatar size="100px" ><v-img src="https://image.flaticon.com/icons/svg/3022/3022568.svg"></v-img></v-avatar>
 						<div
 							class="mt-2  white--text  text--lighten-1 font-weight-bold "
 							style="font-size:20px;">  스포츠
@@ -42,7 +42,7 @@
 			</v-col>
 			<v-col cols="2">
 					<div class="text-center" @click="goRouter(2)">
-					<v-avatar size="100px" ><v-img src="../assets/social1.jpg"></v-img></v-avatar>
+					<v-avatar size="100px" ><v-img src="https://image.flaticon.com/icons/svg/927/927313.svg"></v-img></v-avatar>
 						<div 
 							class=" mt-2 white--text  text--lighten-1 font-weight-bold "
 							style="font-size:20px;">  사회
@@ -51,7 +51,7 @@
 			</v-col>
 			<v-col cols="2">
 					<div class="text-center" @click="goRouter(3)">
-					<v-avatar size="100px" ><v-img src="../assets/stock.jpg"></v-img></v-avatar>
+					<v-avatar size="100px" ><v-img src="https://image.flaticon.com/icons/svg/2910/2910311.svg"></v-img></v-avatar>
 						<div 
 							class=" mt-2 white--text  text--lighten-1 font-weight-bold "
 							style="font-size:20px;"> 증시
@@ -60,7 +60,7 @@
 			</v-col>
 			<v-col cols="2">
 					<div class="text-center" @click="goRouter(4)">
-					<v-avatar size="100px" ><v-img src="../assets/it.jpg"></v-img></v-avatar>
+					<v-avatar size="100px" ><v-img src="https://image.flaticon.com/icons/svg/1969/1969986.svg"></v-img></v-avatar>
 						<div 
 							class=" mt-2 white--text  text--lighten-1 font-weight-bold "
 							style="font-size:20px;"> I T
@@ -69,7 +69,7 @@
 			</v-col>
 			<v-col cols="2">
 					<div class="text-center" @click="goRouter(5)">
-					<v-avatar size="100px" ><v-img src="../assets/entertain.jpg"></v-img></v-avatar>
+					<v-avatar size="100px" ><v-img src="https://image.flaticon.com/icons/svg/2913/2913359.svg"></v-img></v-avatar>
 						<div 
 							class=" mt-2 white--text  text--lighten-1 font-weight-bold "
 							style="font-size:20px;"> 연예
