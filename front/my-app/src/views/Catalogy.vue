@@ -2,7 +2,6 @@
 <template>
 	<div>
         <br>
-        <!-- <v-hover v-slot:default="{ hover }"> -->
             <v-container>
                 <v-row>
                     <v-col cols="12"
@@ -10,15 +9,15 @@
                     :key="index"
                     >
                 <v-card
-                    style="margin-bottom:10px"
+                 
                     min-height="20vh"
                     width="100%"
                     align-center="align-center"
-                    class="mx-auto"
                     hover
                     v-if="(page-1)*5<=index && index<(page-1)*5 +5"
                     @click="goDetail(index)"
                     >
+                    
                     <div>
                         <v-row>
                             <v-col cols="8"
@@ -27,7 +26,6 @@
                                 class="test font-weight-bold "
                                 style="font-size:25px;">{{list.title}}
                             </span>
-                           
                             <div 
                             style="margin-top:1vw; width:95%;">
                                 <v-chip
@@ -45,7 +43,7 @@
                             <v-col cols="4">
                                 <v-img
                                     class="white--text align-end"
-                                    height="15vh"
+                                    height="90%"
                                     width="100%"
                                     v-bind:src="list.banner==='NO'?require('../assets/newsBK2.png'):list.banner"
                                 >
@@ -59,7 +57,6 @@
                 </v-card>
                 </v-col>
             </v-row>
-            
                  <div class="text-center">
                     <v-pagination
                     v-model="page"
@@ -69,7 +66,6 @@
                     ></v-pagination>
                 </div>       
             </v-container>
-        <!-- </v-hover> -->
 	</div>
 </template>
 <script>

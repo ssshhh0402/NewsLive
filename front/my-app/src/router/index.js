@@ -8,7 +8,6 @@ import Mypage from '../views/Mypage.vue'
 import SnsNews from '../views/SnsNews.vue'
 import Advertisement from '../views/Advertisement.vue'
 import Catalogy from '../views/Catalogy.vue'
-import NewsEach from '../components/common/NewsEach.vue'
 Vue.use(VueRouter)
   // const rejectAuthUser = (to, from, next) => {
   //   let token = localStorage.getItem("access_token")
@@ -24,13 +23,8 @@ Vue.use(VueRouter)
       path: "/",
       name: "Home",
       component: Home,
-    },
-    {
-      path: "/newseach/:id",
-      name: "newseach",
-      props: true,
-      component: NewsEach,
-    },
+    }
+    ,
     {
       path: "/catalogy",
       name: "Catalogy",

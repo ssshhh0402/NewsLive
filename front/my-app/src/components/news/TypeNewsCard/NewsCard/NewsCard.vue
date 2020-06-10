@@ -13,12 +13,12 @@
                      <v-img
                  class="white--text align-end"
                  height="100%"
-                 src= "../../../../assets/backnews.jpg"
+                 v-bind:src="post.banner!=='NO'?post.banner:require('../../../../assets/backnews.jpg')"
                  @click="goDetail()"
                 >
                 
-                    <v-list-item>
-                        <v-list-item-avatar color="yellow">Best</v-list-item-avatar>
+                    <v-list-item style="background-color:white;">
+                        <v-list-item-avatar color="yellow"></v-list-item-avatar>
                         <v-list-item-content>
                             <v-list-item-title class="headline mt-3 mb-0 ">{{post.title}}</v-list-item-title>
                             <v-list-item-subtitle ma-0="ma-0">{{post.author}}</v-list-item-subtitle>
@@ -33,9 +33,16 @@
                     <v-card-actions>
                         <v-spacer></v-spacer>
                         <!-- | {{CardList.registeredAt.slice(0,10)}} | {{CardList.category}} 돕기 | -->
-                        <v-btn icon="icon">
-                            <v-icon>mdi-heart</v-icon>
+                        <!--  -->
+                        <v-btn v-if ="followChk==false" icon="icon"  @click.stop=" goFollow()">
+                            <v-icon>mdi-lightbulb-outline </v-icon>
                         </v-btn>
+                        <v-btn v-if ="followChk==true" icon="icon" @click.stop="goUnFollow()">
+                            <v-icon>mdi-lightbulb</v-icon>
+                        </v-btn>
+
+
+                        <!--  -->
                         <v-btn icon="icon">
                             <v-icon @click.stop="dialog = true">mdi-bell-sleep
                             </v-icon>
@@ -103,6 +110,8 @@
                dialog: false,
                selected:{
                },
+               Myemail : this.$store.state.UserInfo.kakao_account.email,
+               followChk:false,
                includeFiles:''
             }
         },
@@ -112,13 +121,36 @@
             {
                 this.dialog=false;
             },
-            goFollow(){
-                const author = post.author;
-                const email = this.$store.state.UserInfo.kakao_account.email;
-                axios
-                .put(API_BASE_URL+'/api/v1/user/follow',{
-                    fromUserEmail:email,
-                    toUserEmail:author,
+            goFollow()
+            {
+                 axios
+                .put(API_BASE_URL+"/api/v1/user/follow",
+                {
+                    fromUserEmail: this.Myemail,
+                    toUserEmail: this.post.author
+                })
+                .then(response=>{
+                    this.followChk= true;
+                    this.$store.dispatch("getFollowInfo");
+                    this.$store.dispatch("getAllInfo");
+                })
+            },
+             goUnFollow() //언팔로우. 
+            { 
+        
+               axios
+                .delete(API_BASE_URL+"/api/v1/user/unFollow",
+                {params:{
+                    
+                    fromUser: this.Myemail,
+                    toUser: this.post.author
+                }})
+                 .then(response=>{
+                    this.followChk= false;
+                    console.log("언팔로우 성공 !!!");
+                    this.$store.dispatch("getFollowInfo");
+                    this.$store.dispatch("getAllInfo");
+                   
                 })
             },
             goDetail(){

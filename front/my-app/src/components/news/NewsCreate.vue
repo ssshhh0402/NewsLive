@@ -2,10 +2,26 @@
 <!-- 해결해야할 것 ( 임시저장, 컴플릿 ) -->
     <v-container>
         <div cols="3"
-        id="scroll-target"
+                    id="scroll-target"
                     style="max-height: 80vh"
                     class="fdfdfd overflow-y-auto"
         >
+             <div style="height:100px" >
+                <v-row justify="center">
+                    <v-col cols="1"></v-col>
+                    <v-col cols="8" align="center">
+                           <br>
+                            <v-text-field
+                            v-model="Title"
+                            label="기사 제목을 입력해주세요."
+                            ></v-text-field>
+                    </v-col>
+                         <v-col cols="1"></v-col>
+                </v-row>
+                   
+            </div>    
+            <br>
+                    
         <vue-editor
             id="editor"
             useCustomImageHandler
@@ -74,6 +90,18 @@
                             </v-row>
                        </v-container>
                        <v-container v-else>
+                           <v-row v-if="picture==='NO'">
+                               <v-card-title>대표이미지를 넣어주세요!</v-card-title>
+                                <v-col cols="12" sm="12" md="12">
+                                <v-file-input
+                                    v-model="image"
+                                    accept="image/png, image/jpeg, image/bmp"
+                                    placeholder="Pick an avatar"
+                                    prepend-icon="mdi-camera"
+                                    value ="image"
+                                ></v-file-input>
+                            </v-col>
+                           </v-row>
                        <v-row >
                            <v-card-title>카테고리를 선택해주세요.</v-card-title>
                             <v-spacer></v-spacer>
@@ -85,7 +113,7 @@
                       <v-row >
                       <v-col cols="4">
                       <div class="text-center" @click="checkBox(0)" >
-                      <v-avatar size="100px"><div class="font_color font-weight-bold" v-if="checkNum===0">OK</div><v-img v-else src="../../assets/econo.jpg"></v-img></v-avatar>
+                      <v-avatar size="100px"><div class="font_color font-weight-bold" v-if="checkNum===0">OK</div><v-img v-else src="https://image.flaticon.com/icons/svg/3028/3028819.svg"></v-img></v-avatar>
                             <div class="mt-2 white--text  text--lighten-1 font-weight-bold "
                               style="font-size:20px;"> 경제
                             </div>
@@ -94,7 +122,7 @@
                       </v-col>
                       <v-col cols="4">
                           <div class="text-center" @click="checkBox(1)">
-                          <v-avatar size="100px" ><div class="font_color font-weight-bold" v-if="checkNum===1">OK</div><v-img v-else src="../../assets/sport.png"></v-img></v-avatar>
+                          <v-avatar size="100px" ><div class="font_color font-weight-bold" v-if="checkNum===1">OK</div><v-img v-else src="https://image.flaticon.com/icons/svg/3022/3022568.svg"></v-img></v-avatar>
                             <div
                               class="mt-2  white--text  text--lighten-1 font-weight-bold "
                               style="font-size:20px;">  스포츠
@@ -104,7 +132,7 @@
                       </v-col>
                       <v-col cols="4">
                           <div class="text-center" @click="checkBox(2)">
-                          <v-avatar size="100px" ><div class="font_color font-weight-bold" v-if="checkNum===2">OK</div><v-img v-else src="../../assets/social1.jpg"></v-img></v-avatar>
+                          <v-avatar size="100px" ><div class="font_color font-weight-bold" v-if="checkNum===2">OK</div><v-img v-else src="https://image.flaticon.com/icons/svg/927/927313.svg"></v-img></v-avatar>
                             <div 
                               class=" mt-2 white--text  text--lighten-1 font-weight-bold "
                               style="font-size:20px;">  사회
@@ -114,7 +142,7 @@
                       </v-col>
                       <v-col cols="4">
                           <div class="text-center" @click="checkBox(3)">
-                          <v-avatar size="100px" ><div class="font_color font-weight-bold" v-if="checkNum===3">OK</div><v-img v-else src="../../assets/stock.jpg"></v-img></v-avatar>
+                          <v-avatar size="100px" ><div class="font_color font-weight-bold" v-if="checkNum===3">OK</div><v-img v-else src="https://image.flaticon.com/icons/svg/2910/2910311.svg"></v-img></v-avatar>
                             <div 
                               class=" mt-2 white--text  text--lighten-1 font-weight-bold "
                               style="font-size:20px;"> 증시
@@ -124,7 +152,7 @@
                       </v-col>
                       <v-col cols="4">
                           <div class="text-center" @click="checkBox(4)">
-                          <v-avatar size="100px" ><div class="font_color font-weight-bold" v-if="checkNum===4">OK</div><v-img v-else src="../../assets/it.jpg"></v-img></v-avatar>
+                          <v-avatar size="100px" ><div class="font_color font-weight-bold" v-if="checkNum===4">OK</div><v-img v-else src="https://image.flaticon.com/icons/svg/1969/1969986.svg"></v-img></v-avatar>
                             <div 
                               class=" mt-2 white--text  text--lighten-1 font-weight-bold "
                               style="font-size:20px;"> I T
@@ -134,12 +162,12 @@
                       </v-col>
                       <v-col cols="4">
                           <div class="text-center" @click="checkBox(5)">
-                          <v-avatar size="100px" ><div class="font_color font-weight-bold" v-if="checkNum===5">OK</div><v-img v-else src="../../assets/entertain.jpg"></v-img></v-avatar>
+                          <v-avatar size="100px" ><div class="font_color font-weight-bold" v-if="checkNum===5">OK</div><v-img v-else src="https://image.flaticon.com/icons/svg/2913/2913359.svg"></v-img></v-avatar>
                             <div 
                               class=" mt-2 white--text  text--lighten-1 font-weight-bold "
                               style="font-size:20px;"> 연예
                             </div>
-                            연애
+                            연예
                           </div>
                       </v-col>
                     </v-row>
@@ -213,11 +241,11 @@
                 picture: "NO",
                 Title: " ",
                 Email: " ",
+                image:" ",
                 // <strong class="ql-font-serif ql-size-large" style="color: rgb(230, 0,
                 // 0);">always</strong> <p><span class="ql-font-serif" style="color: gray" >*아래에
                 // 기사 내용을 작성해주세요.</span></p><p><br></p>
                 content: dedent `
-                <h1 class="ql-align-center"><span class="ql-font-serif" style="background-color: rgb(240, 102, 102); color: rgb(255, 255, 255);"> News Title </span></h1>
                 <p><br></p><p><strong class="ql-font-serif ql-size-large" style="background-color: gray; color: rgb(255, 255, 255)">News SubTitle 입력</strong></p><p><br></p>
                 <p><strong class=" ql-size-middle">CONTENTS 작성란입니다. </strong><u style="color:gray"> (*영상 및 사진 첨부 가능)</u> </p>
                 <p class="ql-font-serif" style="color: rgb(230, 0, 0);"></p>
@@ -251,9 +279,7 @@
                 if(num ==1 || this.PostID == -1) //임시저장이거나, 처음 들어온거라면.  
                 {
                     this.Email = this.$store.state.UserInfo.kakao_account.email
-                    const start = this.content.indexOf('255);">',2) + '255);">'.length;
-                    const end = this.content.indexOf("</");
-                    this.Title =this.content.substr(start,end-start).trim(); 
+                     
                     // console.log("이메일", this.Email );
                     // console.log("제목", this.Title );
                     axios
@@ -304,7 +330,9 @@
                 axios
                     .put(API_BASE_URL + "/api/v1/posts/" + this.PostID,{
                         subjectId: jj,
-                        kinds: this.checkNum
+                        kinds: this.checkNum,
+                        banner: this.picture
+
                     })
                     .then(response => {
                        alert("기사 작성이 완료되었습니다.")
@@ -341,7 +369,36 @@
                 .catch((err) => {
                     console.log(err);
                 })
+            },
+            BannerImageAdded() {
+            var formData = new FormData();
+            formData.append("image", this.image);
+            axios({
+                url: 'https://api.imgur.com/3/image',
+                method: 'POST',
+                headers: {
+                    'Authorization': 'Client-ID 82c1f7f0d7c077a'
+                },
+                data: formData
+            })
+                .then((result) => {
+                    let url = result
+                        .data
+                        .data
+                        .link
+                    this.picture = url;
+                    console.log(url);
+                })
+                .catch((err) => {
+                    console.log(err);
+                })
             }
+    },
+    watch:{
+        image:function(val){
+            console.log("2131");
+            this.BannerImageAdded();
+        }
     }
 }
 </script>

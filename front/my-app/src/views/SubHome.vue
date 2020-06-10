@@ -2,7 +2,7 @@
     <div>
 		<div class= "mt-5">
 		   <v-row>
-              <v-col cols="12" md="2"></v-col>
+              <v-col cols="12" md="1"></v-col>
               <v-col cols="12" md="4">
                 <div align="left" class="mt-7">
                 <!-- <span  class="blue--text font-weight-bold " style="font-size:40px;">The News Live</span> -->
@@ -14,21 +14,22 @@
 				  <v-divider></v-divider>
 				  <v-divider></v-divider>
 				  <v-divider></v-divider>
-                  <v-divider></v-divider>
+                  <v-divider class= "mb-5"></v-divider>
                   <v-btn 
-                    class=" mt-4"
+                    class="del mt-4"
 					style="background-color:white;"
-                    width="80%"
+                    width="100%"
                     v-for="(item,idx) in posts"
                     v-bind:key="idx"
                     dark
                     large
 					@click="selectImage(idx)"
                   > 
-                  <div class="test mb-2 mr-2 font-weight-bold " style="font-size:18px " >{{item.title}}</div> 
+                  <div class=" test mb-2 mr-2 font-weight-bold " style="width:100% font-size:18px " >{{item.title}}</div> 
                 </v-btn>
                 </div>
               </v-col> 
+			  <v-col cols="12" md="1"></v-col>
               <v-col cols="12" md="5" >
 				<div  class = "mt-7">
                 <v-carousel  v-model="selected" hide-delimiters show-arrows-on-hover interval="4000"> 
@@ -41,10 +42,25 @@
 						align-center="align-center"
 						:elevation="hover ? 16 : 2"
 						class="mx-auto">
+						
 						<v-img
 						class="white--text align-end"
 						height="500px"
-						v-bind:src="posts[selected].banner ==='NO'  ?require('../assets/newsBK2.png'):posts[selected].banner">
+						v-bind:src="posts[selected].banner ==='NO'  ?require('../assets/newsBK2.png'):posts[selected].banner"
+						@click="goDetail(posts[selected].postId)"
+						>
+						<v-expand-transition>
+						<div
+							v-if="hover"
+							class=" d-flex transition-fast-in-fast-out darken-2 v-card--reveal display-2 white--text text-center"
+							style=" height: 100%; background-color:rgb(127, 127, 217, 0.6);"
+						>
+						<strong>
+							   자세히 보기
+						</strong>
+						
+						</div>
+						</v-expand-transition>
 						<v-card-text>
 						
 						</v-card-text>
@@ -63,7 +79,7 @@
 	<div class="back_g" style="height:570px">
 		<v-row >
       <v-col cols="6" >
-        <v-img style="top:15%" src="../assets/newsRegi.gif"></v-img>
+        <v-img style="top:15%; height:50vh" src="../assets/newsRegi.gif"></v-img>
       </v-col>
       <v-col cols="6">
                 <v-card
@@ -109,7 +125,7 @@
                 </v-card>
      			</v-col>
 			<v-col cols="6">
-				<v-img style="top:15%" src="../assets/adDivide.gif"></v-img>
+				<v-img style="top:15%; height:50vh" src="../assets/adDivide.gif"></v-img>
 			</v-col>
 		</v-row>
 	</div>
@@ -136,7 +152,11 @@
 				selectImage(idx)
 				{
 					this.selected = idx
-				}
+				},
+				goDetail(idx){
+					// console.log(idx)
+				 this.$router.push({name:'newsdetail',params: { id: idx }})
+            	}
 				,
 				getRecent(){
 					axios
@@ -185,13 +205,27 @@
 		-webkit-text-fill-color: transparent;
 	}
 	.bk{
-    background: #7F7FD5;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-    height: 90vh;
-    width: 100%;
-    padding:5vw;
+		background: #7F7FD5;  /* fallback for old browsers */
+		background: -webkit-linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);  /* Chrome 10-25, Safari 5.1-6 */
+		background: linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+		height: 90vh;
+		width: 100%;
+		padding:5vw;
+	}	
+	.del{
+		width:100%;
+        padding:10px 10px;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+ 	 	overflow: hidden;
+	}
+	.v-card--reveal {
+  align-items: center;
+  bottom: 0;
+  justify-content: center;
+  opacity: .7;
+  position: absolute;
+  width: 100%;
 }
 
 	</style>
