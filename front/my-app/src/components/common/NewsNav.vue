@@ -1,8 +1,7 @@
 <template>
     <v-toolbar class ="back_g" max-height="65"  dark> 
-        <v-toolbar-title>NEWS</v-toolbar-title>
+        <v-toolbar-title @click=goHome()>NEWS</v-toolbar-title>
         <v-divider class="mx-4" vertical="vertical"></v-divider>
-        <span class="subheading" @click = goHome(); >My Home</span>
         <v-spacer></v-spacer>
         <v-toolbar-items class="hidden-sm-and-down">
             
@@ -39,7 +38,6 @@
                 Logout
             </v-btn>
         </v-toolbar-items>
-        <v-app-bar-nav-icon></v-app-bar-nav-icon>
     </v-toolbar>
 </template>
 <script>
