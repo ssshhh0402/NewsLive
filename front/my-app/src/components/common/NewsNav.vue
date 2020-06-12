@@ -1,8 +1,7 @@
 <template>
     <v-toolbar class ="back_g" max-height="65"  dark> 
-        <v-toolbar-title>NEWS</v-toolbar-title>
+        <v-btn text="text"><v-toolbar-title @click=goHome()>NEWS</v-toolbar-title></v-btn>
         <v-divider class="mx-4" vertical="vertical"></v-divider>
-        <span class="subheading" @click = goHome(); >My Home</span>
         <v-spacer></v-spacer>
         <v-toolbar-items class="hidden-sm-and-down">
             
@@ -31,22 +30,17 @@
                 MyPage
             </v-btn>
             <v-divider vertical="vertical"></v-divider>
-            <v-btn text="text" v-if="$store.state.isSigned" @click = goAd();>
-                AdPage
-            </v-btn>
-            <v-divider vertical="vertical"></v-divider>
             <v-btn v-if="$store.state.isSigned" text="text" @click = goLogout(); >
                 Logout
             </v-btn>
         </v-toolbar-items>
-        <v-app-bar-nav-icon></v-app-bar-nav-icon>
     </v-toolbar>
 </template>
 <script>
     import KakaoLogin from 'vue-kakao-login' 
     export default {
         components: {
-            KakaoLogin
+            KakaoLogin  
         },
         data() {
             return {
@@ -96,8 +90,8 @@
     }
 </script>
 <style >
-.back_g{
-		background: #654ea3;  /* fallback for old browsers */
-		background: -webkit-linear-gradient(to right, #eaafc8, #654ea3);  /* Chrome 10-25, Safari 5.1-6 */
-		background: linear-gradient(to right, #eaafc8, #654ea3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+.back_g{background: #000046;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #1CB5E0, #000046);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #1CB5E0, #000046); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 	}</style>

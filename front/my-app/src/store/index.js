@@ -105,6 +105,9 @@ export default new Vuex.Store({
                             role: role1,
                             picture: picture2
                         })
+                        .then(response=>{
+                            console.log(response.data);
+                        })
                         
                 },
                     fail: function (error) {

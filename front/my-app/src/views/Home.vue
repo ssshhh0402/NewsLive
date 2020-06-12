@@ -5,7 +5,7 @@
                     <v-col align="center">
                         <div align="center" class="gray font-weight-bold mt-9" style="font-size:19px;">
                             <span
-                                class="white--text text--lighten-1 font-weight-bold "
+                                class="white--text text--lighten-1 font-weight-bold context"
                                 style="font-size:40px;">Good News For The World
                             </span>
                         </div>
@@ -25,7 +25,8 @@
 				<v-row >
 			<v-col cols="2">
 			<div class="text-center" @click="goRouter(0)" >
-			<v-avatar size="100px" ><v-img src="https://image.flaticon.com/icons/svg/3028/3028819.svg"></v-img></v-avatar>
+				
+			<v-avatar style="border: inset;" size="100px" ><v-img src="https://image.flaticon.com/icons/svg/3028/3028819.svg"></v-img></v-avatar>
 						<div class="mt-2  white--text  text--lighten-1 font-weight-bold "
 							style="font-size:20px;"> 경제
 						</div>
@@ -33,7 +34,7 @@
 			</v-col>
 			<v-col cols="2">
 					<div class="text-center" @click="goRouter(1)">
-					<v-avatar size="100px" ><v-img src="https://image.flaticon.com/icons/svg/3022/3022568.svg"></v-img></v-avatar>
+					<v-avatar style="border: inset;" size="100px" ><v-img src="https://image.flaticon.com/icons/svg/3022/3022568.svg"></v-img></v-avatar>
 						<div
 							class="mt-2  white--text  text--lighten-1 font-weight-bold "
 							style="font-size:20px;">  스포츠
@@ -42,7 +43,7 @@
 			</v-col>
 			<v-col cols="2">
 					<div class="text-center" @click="goRouter(2)">
-					<v-avatar size="100px" ><v-img src="https://image.flaticon.com/icons/svg/927/927313.svg"></v-img></v-avatar>
+					<v-avatar style="border: inset;" size="100px" ><v-img src="https://image.flaticon.com/icons/svg/927/927313.svg"></v-img></v-avatar>
 						<div 
 							class=" mt-2 white--text  text--lighten-1 font-weight-bold "
 							style="font-size:20px;">  사회
@@ -51,7 +52,7 @@
 			</v-col>
 			<v-col cols="2">
 					<div class="text-center" @click="goRouter(3)">
-					<v-avatar size="100px" ><v-img src="https://image.flaticon.com/icons/svg/2910/2910311.svg"></v-img></v-avatar>
+					<v-avatar style="border: inset;" size="100px" ><v-img src="https://image.flaticon.com/icons/svg/2910/2910311.svg"></v-img></v-avatar>
 						<div 
 							class=" mt-2 white--text  text--lighten-1 font-weight-bold "
 							style="font-size:20px;"> 증시
@@ -60,7 +61,7 @@
 			</v-col>
 			<v-col cols="2">
 					<div class="text-center" @click="goRouter(4)">
-					<v-avatar size="100px" ><v-img src="https://image.flaticon.com/icons/svg/1969/1969986.svg"></v-img></v-avatar>
+					<v-avatar style="border: inset;" size="100px" ><v-img src="https://image.flaticon.com/icons/svg/1969/1969986.svg"></v-img></v-avatar>
 						<div 
 							class=" mt-2 white--text  text--lighten-1 font-weight-bold "
 							style="font-size:20px;"> I T
@@ -69,7 +70,7 @@
 			</v-col>
 			<v-col cols="2">
 					<div class="text-center" @click="goRouter(5)">
-					<v-avatar size="100px" ><v-img src="https://image.flaticon.com/icons/svg/2913/2913359.svg"></v-img></v-avatar>
+					<v-avatar style="border: inset;" size="100px" ><v-img src="https://image.flaticon.com/icons/svg/2913/2913359.svg"></v-img></v-avatar>
 						<div 
 							class=" mt-2 white--text  text--lighten-1 font-weight-bold "
 							style="font-size:20px;"> 연예
@@ -154,10 +155,10 @@
 		}
     </script>
     <style>
-	.back_g{
-		background: #654ea3;  /* fallback for old browsers */
-		background: -webkit-linear-gradient(to right, #eaafc8, #654ea3);  /* Chrome 10-25, Safari 5.1-6 */
-		background: linear-gradient(to right, #eaafc8, #654ea3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	.back_g{background: #000046;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #1CB5E0, #000046);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #1CB5E0, #000046); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 	}
 
 	</style>

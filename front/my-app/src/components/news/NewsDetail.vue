@@ -1,10 +1,10 @@
     <template>
-    <div class="bk">
+    <div class="bk" style="padding-top:10px">
     <v-row class="default-margin">
         <v-col cols="9">
             <v-card
                 class="mx-auto"
-                height="70vh"
+                height="80vh"
             >
                 <v-card-text> 
                     <h1>{{title}}</h1>

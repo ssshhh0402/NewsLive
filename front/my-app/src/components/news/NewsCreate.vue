@@ -246,7 +246,7 @@
                 // 0);">always</strong> <p><span class="ql-font-serif" style="color: gray" >*아래에
                 // 기사 내용을 작성해주세요.</span></p><p><br></p>
                 content: dedent `
-                <p><br></p><p><strong class="ql-font-serif ql-size-large" style="background-color: gray; color: rgb(255, 255, 255)">News SubTitle 입력</strong></p><p><br></p>
+                <p><br></p><p><strong class="ql-size-large" style="background-color: gray; color: rgb(255, 255, 255)">News SubTitle 입력</strong></p><p><br></p>
                 <p><strong class=" ql-size-middle">CONTENTS 작성란입니다. </strong><u style="color:gray"> (*영상 및 사진 첨부 가능)</u> </p>
                 <p class="ql-font-serif" style="color: rgb(230, 0, 0);"></p>
                 <p><br></p><p><br></p><p><br></p><p><br></p>

@@ -3,8 +3,8 @@
       <div class=" mt-3 text-center" >  
         <br>
          <span
-              class=" test font-weight-bold "
-              style="font-size:35px;">News Feed
+              class="  font-weight-bold "
+              style="font-size:35px; color : #000046;">News Feed
           </span>
       </div>
           <NewsFeed></NewsFeed>
@@ -23,8 +23,9 @@ export default {
 <style>
 
 .test {
-  background: linear-gradient(to right, #fbcac9, #8ca6ce);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color : #000046;
+  /* background: linear-gradient(to right, #000046, #1CB5E0); */
+  /* -webkit-background-clip: text; */
+  /* -webkit-text-fill-color: transparent; */
 }
 </style>
