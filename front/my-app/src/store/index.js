@@ -79,10 +79,14 @@ export default new Vuex.Store({
                     url: '/v2/user/me',
                     success: function (res) {
                         commit("setIsSigned", true);
-                        var mail = res.kakao_account.email
+                        alert("로그인에 성공하였습니다.")
+                        var mail = res.kakao_account.email 
                         var id1 = res.id 
+                        if (!mail) {
+                            mail = id1+"@NewsLive.com"
+                        }
                         var name1 = res.kakao_account.profile.nickname
-                        var role1 = "JOURNALIST";
+                        var role1 = "USER";
                         var picture2 = '';
                         if (res.kakao_account.profile.profile_image_url) {
                             picture2 = res.kakao_account.profile.profile_image_url;
