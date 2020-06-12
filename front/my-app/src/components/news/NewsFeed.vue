@@ -118,8 +118,8 @@
         >
         <!-- 3번째 줄 -->
         <span
-              class=" test font-weight-bold "
-              style="font-size:20px;">Followings
+              class=" font-weight-bold "
+              style="font-size:20px; color : #000046;" >Followings
           </span>
             <div
                 id="scroll-target"
@@ -140,8 +140,8 @@
                 </v-list-item-group>
             </div>
             <span
-            class="test font-weight-bold "
-            style="font-size:20px;">Ad
+            class="font-weight-bold "
+            style="font-size:20px;color : #000046;">Ad
             </span> 
             <div class="text-center" style="height:35vh">     
             <br>
@@ -242,9 +242,4 @@
     .fdfdfd::-webkit-scrollbar {
         display: none;
     }
-    .test {
-  background: linear-gradient(to right, #fbcac9, #8ca6ce);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
 </style>

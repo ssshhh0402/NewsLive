@@ -39,7 +39,7 @@ export default {
 }
 	.del{
 		width:100%;
-        padding:10px 10px;
+    padding:10px 10px;
 		text-overflow: ellipsis;
 		white-space: nowrap;
  	 	overflow: hidden;

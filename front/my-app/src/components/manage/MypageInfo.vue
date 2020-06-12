@@ -3,26 +3,69 @@
         <div class= "back_g" style="height:360px">
             <br>
             <br><br>
-        <v-card class=" mx-auto" align-center="align-center"  width="80%">
-        <div class="text-center">
-            <v-avatar class="img-center" size ="100px">
+        <v-card class=" mx-auto"   width="60%">
+        <div >
+            <v-row>
+                <v-col cols="2">
+            <v-avatar  style="margin-top:10px; margin-left:20px;" size ="150px">
                 <v-img  :src="UserInfo.kakao_account.profile.profile_image_url"><v-avatar></v-avatar></v-img>
             </v-avatar>
-            <br>이름: {{UserInfo.kakao_account.profile.nickname}}
-            <br>이메일: {{UserInfo.kakao_account.email}} 
-            <br>성별: {{UserInfo.kakao_account.gender}}
-        </div>
-        </v-card>
-                                            <div class="my-2">
-                                            <v-row justify="center">
-                                        <v-btn
-                                        color="primary"
+                </v-col>
+                <v-col cols="1"></v-col>
+                <v-col cols="4">
+            <p style="font-size:50px; margin-top:20px;">{{UserInfo.kakao_account.profile.nickname}} 
+
+                                    <v-btn
+                                    style="margin-left:20px;"
+                                        color="black"
                                         dark
                                         @click.stop="dialog = true; getAccount();"
                                         >
                                         수익 확인
-                                        </v-btn>
+                                    </v-btn>
 
+
+            </p>
+            <p style="font-size:20px;">{{UserInfo.kakao_account.role}}</p>
+            <p style="font-size:20px;">{{UserInfo.kakao_account.email}}</p>
+            <!-- <p>{{UserInfo.kakao_account.role}}</p> -->
+                </v-col>
+                <v-col cols="4">
+                    <v-row class="text-center" style="margin-top:10px">
+                        <v-col cols="6">
+                            <span
+                                class=" font-weight-bold "
+                                style="font-size:35px; color:#00004;">-ING
+                            </span>
+                        </v-col>
+                        <v-col cols="6">
+                            <span
+                                class=" font-weight-bold "
+                                style="font-size:35px; color:#00004;">COMPLETE
+                            </span>
+                        </v-col >
+                    </v-row>
+                    <v-row class="text-center">
+                        <v-col cols="6">
+                            <span
+                                class=" font-weight-bold "
+                                style="font-size:35px; color:#00004;">{{savePostSize}}
+                            </span>
+                        </v-col>
+                        <v-col cols="6">
+                            <span
+                                class=" font-weight-bold "
+                                style="font-size:35px; color:#00004;">{{otherPostSize}}
+                            </span>
+                        </v-col >
+                    </v-row>
+                </v-col>
+            </v-row>
+        </div>
+        </v-card>
+                                            <div class="my-2" >
+                                            <v-row justify="center" style="margin-top:30px">
+                                        
                                         <v-dialog
                                         v-model="dialog"
                                         max-width="290"
@@ -55,8 +98,8 @@
             <v-col class="mr-2" cols="5">
                 <div class=" text-center" >  
                         <span
-                            class=" test font-weight-bold "
-                            style="font-size:35px;">-ING
+                            class=" font-weight-bold "
+                            style="font-size:35px; color:#00004;">-ING
                         </span>
                     </div>
              <v-data-table
@@ -70,8 +113,8 @@
             <v-col  cols="5">
                 <div class=" text-center" >  
                     <span
-                        class=" test font-weight-bold "
-                        style="font-size:35px;">COMPlETE
+                        class=" font-weight-bold "
+                        style="font-size:35px; color:#00004;">COMPLETE
                     </span>
                 </div>
              <v-data-table
@@ -113,6 +156,8 @@
                 ],
                 otherPost:[{}],
                 savePost:[{}],
+                otherPostSize:0,
+                savePostSize:0,
                 amount: 0,
                 dialog:false,
             }
@@ -133,7 +178,9 @@
                 .then(response=>{
                     // console.log(response);
                     this.otherPost = response.data.otherPost;
+                    this.otherPostSize = response.data.otherPost.length;
                     this.savePost = response.data.savedPost;
+                    this.savePostSize = response.data.savedPost.length;
                 })
                 .catch(e=>{
                     // console.error(e);
@@ -161,28 +208,27 @@
         justify-content: center;
         align-items: center;
     }
-   .bk{
-    background: #7F7FD5;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+   .bk{background: #000046;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #1CB5E0, #000046);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #1CB5E0, #000046); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
     height: 90vh;
     width: 100%;
     padding:5vw;
 } 
-.test {
-  background: linear-gradient(to right, #fbcac9, #8ca6ce);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+.test {background: #000046;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #1CB5E0, #000046);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #1CB5E0, #000046); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 }
 .back_g{
-		background: #654ea3;  /* fallback for old browsers */
-		background: -webkit-linear-gradient(to right, #eaafc8, #654ea3);  /* Chrome 10-25, Safari 5.1-6 */
-		background: linear-gradient(to right, #eaafc8, #654ea3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+background: #000046;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #1CB5E0, #000046);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #1CB5E0, #000046); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     }
     .img-center {
         margin-top: 3px;
-        left: 3.3%;
+        left: 3.4%;
         -ms-transform: translate(-50%, -50%);
         transform: translate(-50%, -50%);
     }

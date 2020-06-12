@@ -23,3 +23,9 @@ export default {
   }),
 };
 </script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap');
+  div {
+  font-family: 'Do Hyeon', 'sans-serif';
+}
+</style>>

@@ -6,6 +6,7 @@
     hide-delimiter-background
     show-arrows-on-hover
     interval="2000"
+    
   >
     <v-carousel-item
       v-for="(slide, i) in slides"

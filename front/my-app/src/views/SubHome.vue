@@ -7,14 +7,14 @@
                 <div align="left" class="mt-7">
                 <!-- <span  class="blue--text font-weight-bold " style="font-size:40px;">The News Live</span> -->
                 <br><br>  
-                  <div align="left" class="gray font-weight-bold mt-3" style="font-size:19px;">
-                  <div class="h1 text-center "><strong>최근 기사 <span class="h5"><strong>보러가기</strong></span></strong></div>
+                  <div align="left" class="gray font-weight-bold mt-3" style="font-size:25px;">
+                  <div class="h1 text-center "><strong>최근 기사</strong></div>
                   </div> 
                   <br> 
 				  <v-divider></v-divider>
 				  <v-divider></v-divider>
 				  <v-divider></v-divider>
-                  <v-divider class= "mb-5"></v-divider>
+                  <v-divider class= "mb-5" style="background-color:black;"></v-divider>
                   <v-btn 
                     class="del mt-4"
 					style="background-color:white;"
@@ -25,7 +25,7 @@
                     large
 					@click="selectImage(idx)"
                   > 
-                  <div class=" test mb-2 mr-2 font-weight-bold " style="width:100% font-size:18px " >{{item.title}}</div> 
+                  <div class="mb-2 mr-2 font-weight-bold " style="color:#021b79; width:100%; font-size:18px " >{{item.title}}</div> 
                 </v-btn>
                 </div>
               </v-col> 
@@ -79,53 +79,56 @@
 	<div class="back_g" style="height:570px">
 		<v-row >
       <v-col cols="6" >
-        <v-img style="top:15%; height:50vh" src="../assets/newsRegi.gif"></v-img>
+        <v-img style="top:15%; height:23vw; width:49vw" src="../assets/newsRegi.gif"></v-img>
       </v-col>
       <v-col cols="6">
-                <v-card
-                  class="mx-auto"
-                  style="top:30%"
-                  max-width="80%"
-                >
-                  <v-card-text>
-                    <p class="display-1 text--primary">
+                <!-- <v-card -->
+                  <!-- class="mx-auto" -->
+                  <!-- style="top:5%" -->
+                  <!-- max-width="80%" -->
+				  <!-- height="25vw" -->
+                <!-- > -->
+                  <!-- <v-card-text > -->
+					<div style="margin-top:6vw color:white; text-align: left; margin-top:7vw;padding-left:13vw;">
+					<p style="font-size:3vw; color:white;">
+						신뢰할 수 있는 기사
+					</p>
+                    <p style="font-size:3vw; color:white;">
                       블록체인 News 기록
                     </p>
-                    <div class="text--primary" style="font-size:14px">
-                      News Live에 작성되는 모든 기사들은 <strong>Hyperledger 블록체인 네트워크</strong>에 기록됩니다.<br><br>
-                      또한, 수정, 삭제 등의 조작 <strong>모두 기록</strong>됩니다.<br><br>
-                      따라서 기자는 기사 작성에 있어 신중해야 하며, 이를 통해 구독자로 부터 평가를 받게 됩니다.<br><br>
+                    <div  style="font-size:15px;  color:white; ">
+                      News Live에 작성되는 모든 기사들은 <strong>Hyperledger 블록체인 네트워크</strong>에 기록됩니다.<br>
+                      또한, 수정, 삭제 등의 조작 <strong>모두 기록</strong>됩니다.<br>
+                      따라서 기자는 기사 작성에 있어 신중해야 하며, 이를 통해 구독자로 부터 평가를 받게 됩니다.<br>
                       이를 통해 사용자는 <strong>신뢰할 수 있는 기사</strong>를 제공받을 수 있습니다.
                     </div>
-                  </v-card-text>
-                </v-card>
+					  </div>
+                  <!-- </v-card-text> -->
+                <!-- </v-card> -->
       </v-col>
 		</v-row>
 	</div>
 	<div style="background: (58, 76, 168); height:570px">
 		<v-row >
-			<v-col cols="5" >
-					<v-card
-				class="mx-auto"
-				style="top:30%"
-				max-width="80%"
-			>
-                  <v-card-text>
-                    <p class="display-1 text--primary">
+			<v-col cols="6" >
+				<div style="margin-top:6vw color:white; text-align: left; margin-top:7vw;padding-left:13vw;">
+                    <p style="font-size:3vw; color:black;">
                       블록체인을 통한 광고 수익 분배
                     </p>
-                    <div class="text--primary" style="font-size:14px">
-                      기자들은 기사가 블록체인에 저장되어 제약을 받게 됩니다. 하지만 <strong>광고 수익을 분배</strong> 받습니다.<br><br>
-                      구독자들이 기사를 클릭할 때마다 <strong>기사의 조회수가 블록체인에 기록</strong>됩니다.<br><br>
-                      이렇게 쌓인 기사의 조회수를 통해 <strong>광고료를 비율에 따라 지급</strong>받습니다.<br><br>
+					<p style="font-size:3vw; color:black;">
+                      공정한 수익의 분배
+                    </p>
+                    <div  style="font-size:15px;  color:black; ">
+                      기자들은 기사가 블록체인에 저장되어 제약을 받게 됩니다. 하지만 <strong>광고 수익을 분배</strong> 받습니다.<br>
+                      구독자들이 기사를 클릭할 때마다 <strong>기사의 조회수가 블록체인에 기록</strong>됩니다.<br>
+                      이렇게 쌓인 기사의 조회수를 통해 <strong>광고료를 비율에 따라 지급</strong>받습니다.<br>
                       <br>
-                      *1개의 계정은 1개의 기사에 1번의 조회수를 늘릴 수 있도록 제한했습니다.
+                      <strong>*1개의 계정은 1개의 기사에 1번의 조회수를 늘릴 수 있도록 제한했습니다.</strong>
                     </div>
-                  </v-card-text>
-                </v-card>
+				</div>
      			</v-col>
 			<v-col cols="6">
-				<v-img style="top:15%; height:50vh" src="../assets/adDivide.gif"></v-img>
+				<v-img style="top:15%; height:23vw; width:49vw" src="../assets/adDivide.gif"></v-img>
 			</v-col>
 		</v-row>
 	</div>
@@ -194,20 +197,21 @@
 		}
     </script>
     <style>
-	.back_g{
-		background: #654ea3;  /* fallback for old browsers */
-		background: -webkit-linear-gradient(to right, #eaafc8, #654ea3);  /* Chrome 10-25, Safari 5.1-6 */
-		background: linear-gradient(to right, #eaafc8, #654ea3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	.back_g{background: #000046;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #1CB5E0, #000046);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #1CB5E0, #000046); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 	}
 	.test {
-		background: linear-gradient(to right, #fbcac9, #8ca6ce);
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
+		background: #000046;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #1CB5E0, #000046);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #1CB5E0, #000046); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 	}
-	.bk{
-		background: #7F7FD5;  /* fallback for old browsers */
-		background: -webkit-linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);  /* Chrome 10-25, Safari 5.1-6 */
-		background: linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	.bk{background: #000046;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #1CB5E0, #000046);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #1CB5E0, #000046); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 		height: 90vh;
 		width: 100%;
 		padding:5vw;
