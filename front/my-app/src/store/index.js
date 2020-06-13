@@ -78,44 +78,54 @@ export default new Vuex.Store({
                 window.Kakao.API.request({
                     url: '/v2/user/me',
                     success: function (res) {
-                        commit("setIsSigned", true);
-                        alert("로그인에 성공하였습니다.")
-                        var mail = res.kakao_account.email 
-                        var id1 = res.id 
-                        if (!mail) {
-                            mail = id1+"@NewsLive.com"
-                        }
+                        
+                        var role1 = "USER"
+                        var mail = res.kakao_account.email
+                        var id1 = res.id
                         var name1 = res.kakao_account.profile.nickname
-                        var role1 = "USER";
+                        if (!mail) {
+                            mail = id1 + "@NewsLive.com"
+                        }
                         var picture2 = '';
                         if (res.kakao_account.profile.profile_image_url) {
                             picture2 = res.kakao_account.profile.profile_image_url;
                         }
-                        else
-                        {
-                            picture2 ="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/450px-No_image_available.svg.png";
-                            res.kakao_account.profile.profile_image_url = picture2;
+                        else {
+                            picture2 = "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/450px-No_image_available.svg.png";
+                            res.kakao_account.profile.profile_image_url = picture2;// 이건 물음표 
                         }
-                        commit("setUserInfo", res);
-       
-                        axios.post(API_BASE_URL + "/api/v1/user", {
-                            email: mail,
-                            id: id1,
-                            name: name1,
-                            role: role1,
-                            picture: picture2
-                        })
-                        .then(response=>{
-                            console.log(response.data);
-                        })
                         
-                },
+                        //////// 유저인지 기자인지 확인. /api/v1/user/find/{email}
+                        axios.get(API_BASE_URL + "/api/v1/user/find/" + mail)
+                            .then(res1 => {
+                                console.log("find ,T/F ",res1)
+                                //유저가 있다면, user인지 저지 인지 가져옴.
+                                if (res1.data == true) {
+                                    axios.get(API_BASE_URL + "/api/v1/user/" + id1)
+                                        .then(res2 => {
+                                            console.log("role정보", res2);
+                                            role1 = res2.data.role;
+                                            axios.post(API_BASE_URL + "/api/v1/user", {
+                                                email: mail,
+                                                id: id1,
+                                                name: name1,
+                                                role: role1,
+                                                picture: picture2
+                                            })
+                                        })
+                                }
+                            })
+                        commit("setIsSigned", true);
+                        alert("로그인에 성공하였습니다.")
+                        commit("setUserInfo", res);
+                    },
                     fail: function (error) {
                         console.log(JSON.stringify(error));
                     }
                 });
             }
         }
+
         , getKakaoLogout({ commit }) {
             commit("logout");
             window.Kakao.API.request({
