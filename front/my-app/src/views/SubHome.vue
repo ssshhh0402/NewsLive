@@ -8,7 +8,7 @@
                 <!-- <span  class="blue--text font-weight-bold " style="font-size:40px;">The News Live</span> -->
                 <br><br>  
                   <div align="left" class="gray font-weight-bold mt-3" style="font-size:25px;">
-                  <div class="h1 text-center "><strong>최근 기사</strong></div>
+                  <div class="h1 text-center" style="text-shadow: 2px 2px 2px gray;" ><strong>최근 기사</strong></div>
                   </div> 
                   <br> 
 				  <v-divider></v-divider>
@@ -17,7 +17,7 @@
                   <v-divider class= "mb-5" style="background-color:black;"></v-divider>
                   <v-btn 
                     class="del mt-4"
-					style="background-color:white;"
+					style="background-color:white; "
                     width="100%"
                     v-for="(item,idx) in posts"
                     v-bind:key="idx"
@@ -31,10 +31,13 @@
               </v-col> 
 			  <v-col cols="12" md="1"></v-col>
               <v-col cols="12" md="5" >
-				<div  class = "mt-7">
-                <v-carousel  v-model="selected" hide-delimiters show-arrows-on-hover interval="4000"> 
-                	<v-carousel-item v-for="k in len" :key="k"> 
-                    	<v-row >
+				<div  class = "mt-7"
+				>
+                <v-carousel  v-model="selected" hide-delimiters show-arrows-on-hover interval="4000" > 
+                	<v-carousel-item v-for="k in len" :key="k" > 
+                    	<v-row 
+							
+						>
                 			<v-hover v-slot:default="{ hover }">
 					<v-card
 						v-if ="len!=0"
@@ -44,6 +47,7 @@
 						class="mx-auto">
 						
 						<v-img
+						style="box-shadow: 0px 0px 20px #000;"
 						class="white--text align-end"
 						height="500px"
 						v-bind:src="posts[selected].banner ==='NO'  ?require('../assets/newsBK2.png'):posts[selected].banner"
@@ -52,12 +56,12 @@
 						<v-expand-transition>
 						<div
 							v-if="hover"
-							class=" d-flex transition-fast-in-fast-out darken-2 v-card--reveal display-2 white--text text-center"
-							style=" height: 100%; background-color:rgb(127, 127, 217, 0.6);"
+							class=" d-flex transition-fast-in-fast-out darken-2 v-card--reveal  text-center"
+							style=" height: 100%; text-shadow: -1px 0 #424242, 0 1px #424242, 1px 0 #424242, 0 -1px #424242;"
 						>
-						<strong>
+						<p style="font-size:5vw;"><strong style="">
 							   자세히 보기
-						</strong>
+						</strong></p>
 						
 						</div>
 						</v-expand-transition>
@@ -76,7 +80,7 @@
             </v-row>
     	</div>
 	<br>
-	<div class="back_g" style="height:570px">
+	<div class="back_g" style="height:570px;box-shadow: 0px 0px 20px #000;">
 		<v-row >
       <v-col cols="6" >
         <v-img style="top:15%; height:23vw; width:49vw" src="../assets/newsRegi.gif"></v-img>
@@ -90,10 +94,10 @@
                 <!-- > -->
                   <!-- <v-card-text > -->
 					<div style="margin-top:6vw color:white; text-align: left; margin-top:7vw;padding-left:13vw;">
-					<p style="font-size:3vw; color:white;">
+					<p style="font-size:3vw; color:white; text-shadow: 2px 2px 2px gray;">
 						신뢰할 수 있는 기사
 					</p>
-                    <p style="font-size:3vw; color:white;">
+                    <p style="font-size:3vw; color:white; text-shadow: 2px 2px 2px gray;">
                       블록체인 News 기록
                     </p>
                     <div  style="font-size:15px;  color:white; ">
@@ -112,10 +116,10 @@
 		<v-row >
 			<v-col cols="6" >
 				<div style="margin-top:6vw color:white; text-align: left; margin-top:7vw;padding-left:13vw;">
-                    <p style="font-size:3vw; color:black;">
+                    <p style="font-size:3vw; color:black; text-shadow: 2px 2px 2px gray;">
                       블록체인을 통한 광고 수익 분배
                     </p>
-					<p style="font-size:3vw; color:black;">
+					<p style="font-size:3vw; color:black; text-shadow: 2px 2px 2px gray;">
                       공정한 수익의 분배
                     </p>
                     <div  style="font-size:15px;  color:black; ">
@@ -127,8 +131,10 @@
                     </div>
 				</div>
      			</v-col>
-			<v-col cols="6">
+			<v-col cols="5">
 				<v-img style="top:15%; height:23vw; width:49vw" src="../assets/adDivide.gif"></v-img>
+			</v-col>
+			<v-col cols="1">
 			</v-col>
 		</v-row>
 	</div>

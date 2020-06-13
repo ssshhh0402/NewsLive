@@ -41,7 +41,7 @@ public class PostService {
     @Transactional(readOnly = true)
     public List<PostFollowerCheckDto> findAllDesc(String email){
         User user = userRepository.findByEmail(email).orElseThrow(() -> new IllegalArgumentException("잘못된 요청입니다"));
-        List<Post> postList =postRepository.findAllByStateNot("SAVE");
+        List<Post> postList =postRepository.findAllByStateNotOrderByPostIdDesc("SAVE");
 
         List<Follow> followings = followRepository.findAllByFromUser(email);
         List<Follow> followers = followRepository.findAllByToUser(email);
@@ -57,7 +57,7 @@ public class PostService {
 
     public List<PostEveryResponseDto> findByTitle(String words){
         List<PostEveryResponseDto> resultSet = new LinkedList<>();
-        List<Post> posts = postRepository.findAllByTitleContaining(words);
+        List<Post> posts = postRepository.findAllByTitleContainingOrderByPostIdDesc(words);
 
         for (Post post: posts){
             resultSet.add(new PostEveryResponseDto(post));
@@ -68,7 +68,7 @@ public class PostService {
     public List<PostEveryResponseDto> findRecent(){
         List<Post> recentPosts = postRepository.findAllByOrderByPostIdDesc();
         List<PostEveryResponseDto> resultSet = new LinkedList<>();
-        int n = recentPosts.size() >= 5? 5 : recentPosts.size();
+        int n = Math.min(recentPosts.size(), 5);
         for (int i = 0; i <n; i++) {
             resultSet.add(new PostEveryResponseDto(recentPosts.get(i)));
         }
@@ -147,7 +147,7 @@ public class PostService {
     public List<KindsResponseDto> findAllByKinds(){
         List<KindsResponseDto> resultSet = new LinkedList<>();
         for (int idx = 0; idx < 6; idx++){
-            List<Post> lists = postRepository.findAllByKindsEqualsAndStateNot(idx,"SAVE");
+            List<Post> lists = postRepository.findAllByKindsEqualsAndStateNotOrderByPostIdDesc(idx,"SAVE");
             KindsResponseDto kindsResponseDto = new KindsResponseDto(idx,lists);
             resultSet.add(kindsResponseDto);
         }
@@ -208,7 +208,7 @@ public class PostService {
     }
 
     public PostListResponseDto findByUserEmail(String userEmail) {
-        List<Post> posts = postRepository.findAllByAuthor(userEmail);
+        List<Post> posts = postRepository.findAllByAuthorOrderByPostIdDesc(userEmail);
         List<Post> savedPost = new LinkedList<>();
         List<Post> otherPost = new LinkedList<>();
         for (Post post : posts){
@@ -232,7 +232,7 @@ public class PostService {
 
         List<String> followResponseDto = new FollowResponseDto(followers, followings).getFollowing();
         for (String userEmail : followResponseDto){
-            List<Post> posts = postRepository.findAllByAuthor(userEmail);
+            List<Post> posts = postRepository.findAllByAuthorOrderByPostIdDesc(userEmail);
             FollowingPostResponseDto followingListResponseDto = new FollowingPostResponseDto(userEmail,posts);
             resultSet.add(followingListResponseDto);
         }
@@ -251,7 +251,7 @@ public class PostService {
         List<List<Post>> postList = new LinkedList<>();
         List<FollowerPostResponseDto> resultSet = new LinkedList<>();
         for (String userEmail : followerList){                             //모든 Follower에 대하여
-            List<Post> posts = postRepository.findAllByAuthorAndStateNot(userEmail,"SAVE");       //해당 Follower가 작성한 Post 가져와서
+            List<Post> posts = postRepository.findAllByAuthorAndStateNotOrderByPostIdDesc(userEmail,"SAVE");       //해당 Follower가 작성한 Post 가져와서
             for (Post post : posts){                                            //하나씩 비교하면서
                 if (! post.getState().equals("SAVE")){                          //SAVE 아니라면(임시저장 상태가 아니라면)
                     if (! subjectList.contains(post.getSubject())) {            //여태까지 찾았던 Subject가 아니라면
@@ -270,6 +270,8 @@ public class PostService {
             FollowerPostResponseDto newOne = new FollowerPostResponseDto(subjectList.get(i).getTitle(), postList.get(i));
             resultSet.add(newOne);
         }
+
+
         return resultSet;
     }
 

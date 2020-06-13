@@ -88,7 +88,7 @@
             <div class="fdfdfd" id="scroll-target" style="max-height: 70vh">
             
             <!--모든 뉴스 -->
-            <v-row v-if="Change==true" >
+            <v-row v-if="Change" >
                 <v-col v-if="!flag">
                 <div  v-for="(item, index) in AllCardList" v-bind:key="index" >
                     <AllNews v-bind:post="item" ></AllNews>    
@@ -96,7 +96,7 @@
                 </v-col>
             </v-row>
             <v-row v-else>
-                <v-col v-if ="Ban>=1">
+                <v-col v-if ="Ban>=1&&!flag">
                     <div v-for="(item, index) in FollowCardList" v-bind:key="index">
                     <SubjectNews v-if="item.posts.length>1" v-bind:posts="item.posts" v-bind:topic="item.topics"></SubjectNews>            
                     <!-- 없으면 그냥 하나 짜리 -->
@@ -119,7 +119,7 @@
         <!-- 3번째 줄 -->
         <span
               class=" font-weight-bold "
-              style="font-size:20px; color : #000046;" >Followings
+              style="font-size:20px; color : #000046; text-shadow: 2px 2px 2px gray;" >Followings
           </span>
             <div
                 id="scroll-target"
@@ -141,11 +141,11 @@
             </div>
             <span
             class="font-weight-bold "
-            style="font-size:20px;color : #000046;">Ad
+            style="font-size:20px;color : #000046; text-shadow: 2px 2px 2px gray;">Ad
             </span> 
             <div class="text-center" style="height:35vh">     
             <br>
-                    <AdBanner></AdBanner>
+            <AdBanner></AdBanner>
             </div>
         </v-col>
     </v-row>
@@ -165,6 +165,9 @@
         },
         computed: {
             follows: function(){
+                if(!this.Change)
+                    this.followarticle();
+
                 this.goff();
                 return this.$store.state.FollowInfo;
                 
@@ -173,10 +176,12 @@
                 var fdfd =this.$store.state.AllInfo
                 console.log("computed", fdfd )
                 return this.$store.state.AllInfo;
-            }
+            },
+            
         },
         data() {
             return {
+                count: 0,
                 flag: false, 
                 FollowCardList: null,
                 user: Object,
@@ -215,8 +220,12 @@
                 .get(API_BASE_URL+"/api/v1/posts/following/"+email)
                 .then(response=>{
                     this.FollowCardList = response.data;
-                    this.Change = false;
+                    if(this.count>1){
+                        this.Change = false;
+                    }
                     this.Ban =this.FollowCardList.length;
+                    this.count += 1;
+                    
                 })
                 .catch(e=>{
                     console.error(e);
@@ -232,6 +241,7 @@
             this.followarticle();
             this.allarticle();
             this.getFollwers();
+            
         }
     };
 </script>
