@@ -38,16 +38,6 @@ public class PostService {
     private final FollowRepository followRepository;
     private final FabricCCService fabricCCService;
 
-//    @Transactional(readOnly = true)
-//    public List<PostEveryResponseDto> findAllDesc(){
-//        List<Post> postList =postRepository.findAllByStateNot("SAVE");
-//        List<PostEveryResponseDto> postResponseDto = new LinkedList<>();
-//        for (Post post : postList){
-//            PostEveryResponseDto postDto = new PostEveryResponseDto(post);
-//            postResponseDto.add(postDto);
-//        }
-//        return postResponseDto;
-//    }
     @Transactional(readOnly = true)
     public List<PostFollowerCheckDto> findAllDesc(String email){
         User user = userRepository.findByEmail(email).orElseThrow(() -> new IllegalArgumentException("잘못된 요청입니다"));
@@ -68,6 +58,7 @@ public class PostService {
     public List<PostEveryResponseDto> findByTitle(String words){
         List<PostEveryResponseDto> resultSet = new LinkedList<>();
         List<Post> posts = postRepository.findAllByTitleContaining(words);
+
         for (Post post: posts){
             resultSet.add(new PostEveryResponseDto(post));
         }

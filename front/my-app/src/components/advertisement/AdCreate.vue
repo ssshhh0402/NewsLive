@@ -3,6 +3,7 @@
       <v-card
     class="mx-auto"
     max-width="100vw"
+    
   >
     <v-card-text>
       <p class="display-1 text--primary text-center">
@@ -104,10 +105,10 @@ export default {
 </script>
 
 <style scoped>
-.bk{
-    background: #7F7FD5;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+.bk{background: #000046;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #1CB5E0, #000046);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #1CB5E0, #000046); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 
     height: 90vh;
     width: 100%;

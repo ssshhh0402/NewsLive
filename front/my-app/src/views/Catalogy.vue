@@ -23,8 +23,8 @@
                             <v-col cols="8"
                             style="text-align:start;padding-left:35px">
                             <span
-                                class="test font-weight-bold "
-                                style="font-size:25px;">{{list.title}}
+                                class="font-weight-bold "
+                                style="color:#000046 ;font-size:25px;">{{list.title}}
                             </span>
                             <div 
                             style="margin-top:1vw; width:95%;">
@@ -102,9 +102,9 @@ export default {
 </script>
 
 <style>
-.test {
-  background: linear-gradient(to right, #fbcac9, #8ca6ce);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+.test {background: #000046;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #1CB5E0, #000046);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #1CB5E0, #000046); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 }
 </style>
