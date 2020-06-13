@@ -30,10 +30,10 @@
                     <v-card-actions >
                         <v-spacer></v-spacer>
                         <!-- | {{CardList.registeredAt.slice(0,10)}} | {{CardList.category}} 돕기 | -->
-                        <v-btn v-if ="followChk==false" icon="icon"  @click.stop=" goFollow()">
+                        <v-btn v-if ="!followChk" icon="icon"  @click.stop=" goFollow()">
                             <v-icon>mdi-lightbulb-outline </v-icon>
                         </v-btn>
-                        <v-btn v-if ="followChk==true" icon="icon" @click.stop="goUnFollow()">
+                        <v-btn v-if ="followChk" icon="icon" @click.stop="goUnFollow()">
                             <v-icon>mdi-lightbulb</v-icon>
                         </v-btn>
                         
@@ -99,7 +99,7 @@
         props:['post'],
         data() {
             return {
-               followChk : this.post.followChk,
+               followChk : this.post.followChk===null||this.post.followChk===undefined?true:this.post.followChk,
                dialog: false,
                selected:{
                },

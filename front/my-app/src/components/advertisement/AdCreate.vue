@@ -6,9 +6,9 @@
     
   >
     <v-card-text>
-      <p class="display-1 text--primary text-center">
+      <h1 class=" text--primary text-center">
         광고 등록 페이지
-      </p>
+      </h1>
       <div class="text--primary">
           <v-form>
     <v-container>
@@ -97,7 +97,11 @@ export default {
                                 // 'content-type': "multipart/form-data"
                             // }
                         // }
-                        )              
+                        )
+                    .then(response=>{
+                      alert('공고 등록 성공했습니다!');
+                      console.log(response.data);
+                    });
         },
     },
     

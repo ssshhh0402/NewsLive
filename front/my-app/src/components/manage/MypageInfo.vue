@@ -186,6 +186,7 @@
                     // console.error(e);
                 })
             },
+            
             getAccount(){
                 const email = this.$store.state.UserInfo.kakao_account.email;
                 axios
