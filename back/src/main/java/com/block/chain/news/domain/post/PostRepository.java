@@ -16,14 +16,16 @@ public interface PostRepository extends JpaRepository<Post, Long>{
     @Query("SELECT p FROM  Post p ORDER BY p.postId DESC")
     List<Post> findAllDesc();
 
-    List<Post> findAllByKindsEqualsAndStateNot(int kinds,String state);
+    List<Post> findAllByKindsEqualsAndStateNotOrderByPostIdDesc(int kinds,String state);
 
-    List<Post> findAllByAuthor(String author);
+    List<Post> findAllByAuthorOrderByPostIdDesc(String author);
 
-    List<Post> findAllByAuthorAndStateNot(String author, String state);
-    List<Post> findAllByStateNot(String state);
+    List<Post> findAllByAuthorAndStateNotOrderByPostIdDesc(String author, String state);
 
-    List<Post> findAllByTitleContaining(String title);
+    List<Post> findAllByStateNotOrderByPostIdDesc(String state);
+
+    List<Post> findAllByTitleContainingOrderByPostIdDesc(String title);
+
     @Query("SELECT p FROM Post p where not (p.state = 'SAVE') ORDER BY p.postId DESC ")
     List<Post> findAllByOrderByPostIdDesc();
 }
