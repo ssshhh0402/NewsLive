@@ -13,10 +13,10 @@
 
             </v-col>
         <v-col cols="4" class="text-center">
-              <v-btn text="text" v-if="$store.state.isSigned" @click = goAd();>
+              <v-btn text="text" style="font-size:15px" v-if="$store.state.isSigned" @click = goAd();>
                 광고등록
             </v-btn>
-            <v-btn text="text" v-if="$store.state.isSigned" @click = goHelp();>
+            <v-btn text="text" style="font-size:15px" v-if="$store.state.isSigned" @click = goHelp();>
                 문의하기
             </v-btn>
         </v-col>
@@ -24,6 +24,15 @@
         </v-row>
     </v-footer>
 </template>
+<script>
+export default {
+    methods:{
+                    goAd(){
+                this.$router.push({path:'/advertisement'})    
+            },
+    }
+}
+</script>
 <style>
 
 a:link {text-decoration: none; color: #333333;}

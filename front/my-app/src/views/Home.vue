@@ -1,12 +1,12 @@
 <template>
     <div>
-        <div class="back_g" style="height:445px" >
+        <div class="back_g" style="height:445px; box-shadow: 0 5px 2px -2px gray;" >
                 <v-row justify="center">
                     <v-col align="center">
                         <div align="center" class="gray font-weight-bold mt-9" style="font-size:19px;">
                             <span
                                 class="white--text text--lighten-1 font-weight-bold context"
-                                style="font-size:40px;">Good News For The World
+                                style="font-size:40px; text-shadow: 2px 2px 2px gray;">Good News For The World
                             </span>
                         </div>
                         <div class="searchbar mt-7 mr-0 mr-md-6" style="max-width: 800px;">
@@ -28,7 +28,7 @@
 				
 			<v-avatar style="border: inset;" size="100px" ><v-img src="https://image.flaticon.com/icons/svg/3028/3028819.svg"></v-img></v-avatar>
 						<div class="mt-2  white--text  text--lighten-1 font-weight-bold "
-							style="font-size:20px;"> 경제
+							style="font-size:20px; text-shadow: 2px 2px 2px gray;"> 경제
 						</div>
 			</div>
 			</v-col>
@@ -37,7 +37,7 @@
 					<v-avatar style="border: inset;" size="100px" ><v-img src="https://image.flaticon.com/icons/svg/3022/3022568.svg"></v-img></v-avatar>
 						<div
 							class="mt-2  white--text  text--lighten-1 font-weight-bold "
-							style="font-size:20px;">  스포츠
+							style="font-size:20px; text-shadow: 2px 2px 2px gray;">  스포츠
 						</div>
 					</div>
 			</v-col>
@@ -46,7 +46,7 @@
 					<v-avatar style="border: inset;" size="100px" ><v-img src="https://image.flaticon.com/icons/svg/927/927313.svg"></v-img></v-avatar>
 						<div 
 							class=" mt-2 white--text  text--lighten-1 font-weight-bold "
-							style="font-size:20px;">  사회
+							style="font-size:20px; text-shadow: 2px 2px 2px gray;">  사회
 						</div>
 					</div>
 			</v-col>
@@ -55,7 +55,7 @@
 					<v-avatar style="border: inset;" size="100px" ><v-img src="https://image.flaticon.com/icons/svg/2910/2910311.svg"></v-img></v-avatar>
 						<div 
 							class=" mt-2 white--text  text--lighten-1 font-weight-bold "
-							style="font-size:20px;"> 증시
+							style="font-size:20px; text-shadow: 2px 2px 2px gray;"> 증시
 						</div>
 					</div>
 			</v-col>
@@ -64,7 +64,7 @@
 					<v-avatar style="border: inset;" size="100px" ><v-img src="https://image.flaticon.com/icons/svg/1969/1969986.svg"></v-img></v-avatar>
 						<div 
 							class=" mt-2 white--text  text--lighten-1 font-weight-bold "
-							style="font-size:20px;"> I T
+							style="font-size:20px; text-shadow: 2px 2px 2px gray;"> I T
 						</div>
 					</div>
 			</v-col>
@@ -73,7 +73,7 @@
 					<v-avatar style="border: inset;" size="100px" ><v-img src="https://image.flaticon.com/icons/svg/2913/2913359.svg"></v-img></v-avatar>
 						<div 
 							class=" mt-2 white--text  text--lighten-1 font-weight-bold "
-							style="font-size:20px;"> 연예
+							style="font-size:20px; text-shadow: 2px 2px 2px gray; "> 연예
 						</div>
 					</div>
 			</v-col>
