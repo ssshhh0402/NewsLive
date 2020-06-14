@@ -259,6 +259,10 @@
             }
         },
         watch: {
+            image:function(val){
+            console.log("2131");
+            this.BannerImageAdded();
+            },
             content: function () {
                 this.content = this
                     .content
@@ -344,23 +348,18 @@
             },
         handleImageAdded: function (file, Editor, cursorLocation) {
             var formData = new FormData();
-            formData.append("image", file);
+            formData.append("imagedata", file);
+            formData.append('access_token', "734557e45c02228f6199d46e3050799a79f54874ae16cb5b3e38a0c67389f376" );
             axios({
-                url: 'https://api.imgur.com/3/image',
+                url: 'https://upload.gyazo.com/api/upload',
                 method: 'POST',
                 headers: {
-                    'Authorization': 'Client-ID 82c1f7f0d7c077a'
+                    Accept: 'application/json'
                 },
                 data: formData
-            })
-                .then((result) => {
-                    console.log(result);
-                    let url = result
-                        .data
-                        .data
-                        .link
-                        Editor
-                        .insertEmbed(cursorLocation, 'image', url);
+            }).then((result) => {
+                    let url = result.data.url;
+                    Editor.insertEmbed(cursorLocation, 'image', url);
                     if(this.picture== "NO")
                     {
                         this.picture = url;
@@ -372,34 +371,26 @@
             },
             BannerImageAdded() {
             var formData = new FormData();
-            formData.append("image", this.image);
+            formData.append("imagedata", file);
+            formData.append('access_token', "734557e45c02228f6199d46e3050799a79f54874ae16cb5b3e38a0c67389f376" );
             axios({
-                url: 'https://api.imgur.com/3/image',
+                url: 'https://upload.gyazo.com/api/upload',
                 method: 'POST',
                 headers: {
-                    'Authorization': 'Client-ID 82c1f7f0d7c077a'
+                    Accept: 'application/json'
                 },
                 data: formData
             })
-                .then((result) => {
-                    let url = result
-                        .data
-                        .data
-                        .link
-                    this.picture = url;
-                    console.log(url);
-                })
-                .catch((err) => {
-                    console.log(err);
-                })
+            .then((result) => {
+                let url = result.data.url;
+                this.picture = url;
+            })
+            .catch((err) => {
+                console.log(err);
+            })
             }
     },
-    watch:{
-        image:function(val){
-            console.log("2131");
-            this.BannerImageAdded();
-        }
-    }
+   
 }
 </script>
 <style>
