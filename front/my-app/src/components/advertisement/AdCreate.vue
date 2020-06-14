@@ -63,14 +63,7 @@
     <v-btn class="btn-center" rounded color="primary" dark @click="registerButtonClick()">등록</v-btn>
     </v-card-actions>
   </v-card>
-  <!-- 이미지 테스트  -->
-  <v-card> 
-      <v-btn> 
-
-        
-      </v-btn>
-    
-  </v-card>     
+  <!-- 이미지 테스트  -->  
   </div>
 </template>
 
@@ -88,6 +81,7 @@ export default {
         }
     },
     methods:{
+        
         registerButtonClick(){
             const email = this.$store.state.UserInfo.kakao_account.email;
             // console.log(email);
