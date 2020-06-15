@@ -37,6 +37,10 @@ export default new Vuex.Store({
         setAllInfo(state, allInfo) {
             state.AllInfo = allInfo
             console.log("mutation",state.AllInfo)
+        },
+        setUserInfoRole(state,role){
+            state.UserInfo.role1 = role;
+            console.log('롤바뀔꼐!!!',state.UserInfo.role1);
         }
     },
     actions: {
