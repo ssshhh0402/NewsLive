@@ -20,13 +20,6 @@
                 </v-list-item>
                 <v-divider></v-divider>
                 <v-list-item class="mb-2">
-                    <v-list-item-icon>
-                        <v-icon>mdi-history</v-icon>
-                    </v-list-item-icon>
-                    <v-list-item-title>마이페이지</v-list-item-title>
-                </v-list-item>
-                <v-divider></v-divider>
-                <v-list-item class="mb-2">
                     <v-icon>mdi-email-open</v-icon> 
                     <span class ="ml-8"> {{this.$store.state.UserInfo.kakao_account.email}}</span>
                 </v-list-item>

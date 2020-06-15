@@ -132,6 +132,8 @@
                 .then(response=>{
                     console.log(response.data);
                     this.dialog=false;
+                    this.$store.commit('setUserInfoRole','JOURNALIST');
+                    // this.$store.state.UserInfo. 여기서 role1을 JUNULIST로 바꾸어야한다.
                     this.goWrite();
                 })
             }
