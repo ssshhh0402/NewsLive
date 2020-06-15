@@ -371,7 +371,7 @@
             },
             BannerImageAdded() {
             var formData = new FormData();
-            formData.append("imagedata", file);
+            formData.append("imagedata", this.image);
             formData.append('access_token', "734557e45c02228f6199d46e3050799a79f54874ae16cb5b3e38a0c67389f376" );
             axios({
                 url: 'https://upload.gyazo.com/api/upload',
